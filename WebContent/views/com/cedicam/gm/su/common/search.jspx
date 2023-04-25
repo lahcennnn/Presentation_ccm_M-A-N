@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+	<f:view>
+<style>
+#searchtab_form td {padding : 2px;}
+.rich-calendar-input {width: 70px;}
+</style>
+			<h:form>
+				<table id="searchtab_main" style="margin-left: 0;">
+					<tr>
+						<td>
+							<table id="searchtab_form">
+								<tr>
+									<td>Date d'échange du </td>
+									<td>:</td>
+									<td>
+										<rich:calendar value="#{suivibean.search.dateEchangeFrom}" datePattern="dd/MM/yyyy" enableManualInput="#{true}"
+												label="" maxlength="#{champ['commun.date.maxLength']}" styleClass="calendar" monthLabels="#{msg['wn.commun.mois.calendrier']}"/>
+										au 
+										<rich:calendar value="#{suivibean.search.dateEchangeTo}" datePattern="dd/MM/yyyy" enableManualInput="#{true}"
+												label="c2" maxlength="#{champ['commun.date.maxLength']}" styleClass="calendar" monthLabels="#{msg['wn.commun.mois.calendrier']}"/>
+									</td>
+									<td></td>
+									<td> de </td>
+									<td>:</td>
+									<td>
+										<input type="text" name="heureEchangeFrom" maxlength="2" size="2" value="#{suivibean.search.heureEchangeFrom}" />
+										: <input type="text" name="minuteEchangeFrom" maxlength="2" size="2" value="#{suivibean.search.minuteEchangeFrom}" />
+									 	à <input type="text" name="heureEchangeTo" maxlength="2" size="2" value="#{suivibean.search.heureEchangeTo}" />
+										: <input type="text" name="minuteEchangeTo" maxlength="2" size="2" value="#{suivibean.search.minuteEchangeTo}" />
+									</td>
+								</tr>
+								<tr>
+									<td>Date conv.référence du </td>
+									<td>:</td>
+									<td>
+										<rich:calendar value="#{suivibean.search.dateConvRefFrom}" datePattern="dd/MM/yyyy" enableManualInput="#{true}"
+											label="c3" maxlength="#{champ['commun.date.maxLength']}" styleClass="calendar" monthLabels="#{msg['wn.commun.mois.calendrier']}"/>
+										
+										au <rich:calendar value="#{suivibean.search.dateConvRefto}" datePattern="dd/MM/yyyy" enableManualInput="#{true}"
+											label="c4" maxlength="#{champ['commun.date.maxLength']}" styleClass="calendar" monthLabels="#{msg['wn.commun.mois.calendrier']}"/>
+									</td>
+									<td></td>
+									<td>Date règlement du </td>
+									<td>:</td>
+									<td>
+										<rich:calendar value="#{suivibean.search.dateRgltFrom}" datePattern="dd/MM/yyyy" enableManualInput="#{true}"
+											label="c5" maxlength="#{champ['commun.date.maxLength']}" styleClass="calendar" monthLabels="#{msg['wn.commun.mois.calendrier']}"/>
+											
+										au <rich:calendar value="#{suivibean.search.dateRgltTo}" datePattern="dd/MM/yyyy" enableManualInput="#{true}"
+											label="c6" maxlength="#{champ['commun.date.maxLength']}" styleClass="calendar" monthLabels="#{msg['wn.commun.mois.calendrier']}"/>
+									</td>
+								</tr>
+								<tr>
+									<td>Réseau</td>
+									<td>:</td>
+									<td>
+										<select name="reseau">
+											<option value=" ">Tous</option>
+											<c:forEach var="item" items="#{refgenebean.reseaux}">
+												<c:choose>
+												  <c:when test="#{item eq suivibean.search.reseau}"><option value="#{item}" selected="selected"><h:outputText value="#{item}"/></option></c:when>
+												  <c:otherwise><option value="#{item}" ><h:outputText value="#{item}"/></option></c:otherwise>
+												</c:choose>
+										    </c:forEach>
+										</select>
+									</td>
+									
+									<td></td>
+									
+									<td>Sens</td>
+									<td>:</td>
+									<td>
+										<select name="sens">
+											<option value=" ">Tous</option>
+											<c:forEach var="item" items="#{refgenebean.sens}">
+												<c:choose>
+												  <c:when test="#{item eq suivibean.search.sens}"><option value="#{item}" selected="selected"><h:outputText value="#{item}"/></option></c:when>
+												  <c:otherwise><option value="#{item}" ><h:outputText value="#{item}"/></option></c:otherwise>
+												</c:choose>
+										    </c:forEach>
+										</select>
+									</td>
+								</tr>
+							
+								<tr>
+									<td>Back office</td>
+									<td>:</td>
+									<td>
+										<select name="backOffice">
+											<option value=" ">Tous</option>
+											<c:forEach var="item" items="#{refgenebean.backOffices}">
+												<c:choose>
+												  <c:when test="#{item eq suivibean.search.backOffice}"><option value="#{item}" selected="selected"><h:outputText value="#{item}"/></option></c:when>
+												  <c:otherwise><option value="#{item}" ><h:outputText value="#{item}"/></option></c:otherwise>
+												</c:choose>
+										    </c:forEach>
+										</select>
+									</td>
+									<td></td>
+									
+									<td>Entité d'échange</td>
+									<td>:</td>
+									<td>
+										<select name="entiteEchange">
+											<option value=" ">Toutes</option>
+											<c:forEach var="item" items="#{entitebean.all}">
+												<c:choose>
+												  <c:when test="#{item.entiteEchange eq suivibean.search.entiteEchange}">
+												  	<option value="#{item.entiteEchange}" selected="selected"><h:outputText value="#{item.libelleLong}"/></option>
+												  </c:when>
+												  <c:otherwise>
+												  	<option value="#{item.entiteEchange}" ><h:outputText value="#{item.libelleLong}"/></option>
+												  </c:otherwise>
+												</c:choose>
+										    </c:forEach>
+										</select>
+									</td>
+								</tr>
+							
+								<tr>
+									<td>Chef de file / membre princ.</td>
+									<td>:</td>
+									<td>
+										<select name="chefDeFile">
+											<option value=" ">Tous</option>
+											<c:forEach var="item" items="#{entitebean.all}">
+												<c:choose>
+												  <c:when test="#{item.entiteEchange eq suivibean.search.chefDeFile}">
+												  	<option value="#{item.entiteEchange}" selected="selected"><h:outputText value="#{item.libelleLong}"/></option>
+												  </c:when>
+												  <c:otherwise>
+												  	<option value="#{item.entiteEchange}" ><h:outputText value="#{item.libelleLong}"/></option>
+												  </c:otherwise>
+												</c:choose>
+										    </c:forEach>
+										</select>
+									</td>
+									
+									<td></td>
+									
+									<td>Code opération</td>
+									<td>:</td>
+									<td>
+										<select name="codeOperation">
+											<option value=" ">Tous</option>
+											<c:forEach var="item" items="#{refgenebean.codesOperation}">
+												<c:choose>
+												  <c:when test="#{item eq suivibean.search.codeOperation}"><option value="#{item}" selected="selected"><h:outputText value="#{item}"/></option></c:when>
+												  <c:otherwise><option value="#{item}" ><h:outputText value="#{item}"/></option></c:otherwise>
+												</c:choose>
+										    </c:forEach>
+										</select>
+									</td>
+								</tr>
+							
+								<tr>
+									<td>Référence comptable</td>
+									<td>:</td>
+									<td>
+										<select name="referenceComptable">
+											<option value=" ">Toutes</option>
+											<c:forEach var="item" items="#{refgenebean.referencesComptables}">
+												<c:choose>
+												  <c:when test="#{item eq suivibean.search.referenceComptable}"><option value="#{item}" selected="selected"><h:outputText value="#{item}"/></option></c:when>
+												  <c:otherwise><option value="#{item}" ><h:outputText value="#{item}"/></option></c:otherwise>
+												</c:choose>
+										    </c:forEach>
+										</select>
+									</td>
+									
+									<td></td>
+									
+									<td>Statut rapprochement</td>
+									<td>:</td>
+									<td>
+										<select name="typeEcart">
+											<option value=" ">Tous</option>
+											<c:forEach var="item" items="#{refgenebean.statutsRapprochement}">
+												<c:choose>
+												  <c:when test="#{item eq suivibean.search.typeEcart}"><option value="#{item}" selected="selected"><h:outputText value="#{item}"/></option></c:when>
+												  <c:otherwise><option value="#{item}" ><h:outputText value="#{item}"/></option></c:otherwise>
+												</c:choose>
+										    </c:forEach>
+										</select>
+									</td>
+								</tr>
+							
+								<tr>
+									<td>Id Fichier échangé</td>
+									<td>:</td>
+									<td>
+										<select name="fichierRR">
+											<option value=" ">Tous</option>
+											<c:forEach var="item" items="#{refgenebean.fichierRR}">
+												<c:choose>
+												  <c:when test="#{item eq suivibean.search.fichierRR}"><option value="#{item}" selected="selected"><h:outputText value="#{item}"/></option></c:when>
+												  <c:otherwise><option value="#{item}" ><h:outputText value="#{item}"/></option></c:otherwise>
+												</c:choose>
+										    </c:forEach>
+										</select>
+									</td>
+									
+									<td></td>
+									
+									<td colspan="3"></td>
+								</tr>
+								
+							
+							</table>
+						</td>
+						<td>
+							<h:commandButton action="#{suivibean.initSearch}" value="Réinitalisation" styleClass="wn-btn-fermer"/>			
+							<br/>
+							<h:commandButton action="#{suivibean.doSearch}" value="Recherche rapprochements" styleClass="wn-btn-fermer"/>	
+							<br/>
+							<h:commandButton action="#{suivibean.doEcarts}" value="Ecarts" styleClass="wn-btn-fermer"/>	
+							<br/>
+							<h:commandButton action="#{suivibean.exportCsv}" value="Export CSV" styleClass="wn-btn-fermer"/>	
+							<br/>
+							<h:commandButton action="#{suivibean.print}" value="Impression" styleClass="wn-btn-fermer"/>	
+						</td>
+					</tr>
+				</table>
+			</h:form>
+	</f:view>
+</jsp:root>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" threshold="all" debug="true">
+  
+	<!-- CONFIGURATION GENERALE -->
+	<activationGenerale debug="true" suivi="true" perf="true" securite="true" forceTrace="false" forceCategorie="CAT1"/>
+	
+	<!-- DECLARATION DES APPENDERS -->
+	<appender name="ASYNC1" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="SortiefichierLoop"/>
+	</appender>
+	<appender name="ASYNC2" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="SortiefichierLoop"/>
+		<appender-ref ref="SortiefichierError"/>
+		<appender-ref ref="SortiefichierSuivi"/>
+	</appender> 
+	<appender name="ASYNC3" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="SortiefichierPerf"/>
+	</appender>
+	<appender name="ASYNC4" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="SortiefichierLoop"/>
+		<appender-ref ref="SortiefichierSecu"/>
+	</appender>
+	<appender name="ASYNC5" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="SortiefichierLoop"/>
+		<appender-ref ref="SortiefichierSuivi"/>
+	</appender>
+	<appender name="SortiefichierLoop" class="com.cedicam.gm.bt.sgt.RollingFileAppender">
+		<param name="File" value="./logsDefault/GestTraceDebug.txt"/>
+		<param name="MaxFileSize" value="6553600"/>
+		<param name="MaxBackupIndex" value="30"/>
+		<param name="Append" value="true" /> 
+		<param name="Encoding" value="UTF-8"/>
+		<layout class="com.cedicam.gm.bt.sgt.Formatage">
+			<!--Format de la date -->
+			<param name="DateFormat" value="yyyy-MM-dd HH:mm:ss.SSS"/>
+		</layout>
+	</appender>
+	<appender name="SortiefichierError" class="com.cedicam.gm.bt.sgt.RollingFileAppender">
+		<param name="File" value="./logsDefault/GestTraceError.txt"/>
+		<param name="MaxFileSize" value="6553600"/>
+		<param name="MaxBackupIndex" value="30"/>
+		<param name="Append" value="true" /> 
+		<param name="Encoding" value="UTF-8"/>
+		<layout class="com.cedicam.gm.bt.sgt.Formatage">
+			<!--Format de la date -->
+			<param name="DateFormat" value="yyyy-MM-dd HH:mm:ss.SSS"/>
+		</layout>
+	</appender>
+	<appender name="SortiefichierSecu" class="com.cedicam.gm.bt.sgt.RollingFileAppender">
+		<param name="File" value="./logsDefault/GestTraceSecu.txt"/>
+		<param name="MaxFileSize" value="6553600"/>
+		<param name="MaxBackupIndex" value="30"/>
+		<param name="Append" value="true" /> 
+		<param name="Encoding" value="UTF-8"/>
+		<layout class="com.cedicam.gm.bt.sgt.Formatage">
+			<!--Format de la date -->
+			<param name="DateFormat" value="yyyy-MM-dd HH:mm:ss.SSS"/>
+		</layout>
+	</appender>
+	<appender name="SortiefichierPerf" class="com.cedicam.gm.bt.sgt.RollingFileAppender">
+		<param name="File" value="./logsDefault/GestTracePerf.txt"/>
+		<param name="MaxFileSize" value="6553600"/>
+		<param name="MaxBackupIndex" value="30"/>
+		<param name="Append" value="true" /> 
+		<param name="Encoding" value="UTF-8"/>
+		<layout class="com.cedicam.gm.bt.sgt.Formatage">
+			<!--Format de la date -->
+			<param name="DateFormat" value="yyyy-MM-dd HH:mm:ss.SSS"/>
+		</layout>
+	</appender>
+	<appender name="SortiefichierSuivi" class="com.cedicam.gm.bt.sgt.RollingFileAppender">
+		<param name="File" value="./logsDefault/GestTraceSuivi.txt"/>
+		<param name="MaxFileSize" value="6553600"/>
+		<param name="MaxBackupIndex" value="30"/>
+		<param name="Append" value="true" /> 
+		<param name="Encoding" value="UTF-8"/>
+		<layout class="com.cedicam.gm.bt.sgt.Formatage">
+			<!--Format de la date -->
+			<param name="DateFormat" value="yyyy-MM-dd HH:mm:ss.SSS"/>
+		</layout>
+	</appender>
+	<appender name="SortiefichierAlerte" class="com.cedicam.gm.bt.sgt.DailyRollingFileAppender">
+		<param name="File" value="./logsDefault/Alertes.txt"/>
+		<param name="Append" value="true"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<!--Format de la date -->
+			<param name="ConversionPattern" value="%m%n"/>
+		</layout>
+	</appender>
+
+	<!-- DECLARATION DES CATEGORIES ET DES ACTIVIATIONS -->
+	<!-- LES ATTRIBUTS POSSIBLES POUR CHAQUE ACTIVATION SONT : 
+		 categorie gravite niveArchi typeComp libComp nomPU idagen idelstco idptve 
+	-->	
+
+	<category name="CAT1"> 
+		<activation categorie="DEBUG"/> 
+		<appender-ref ref="ASYNC1"/>		
+	</category>	
+	<category name="CAT2">
+		<activation categorie="ERREUR"/> 
+		<activation categorie="ERROR"/> 
+		<appender-ref ref="ASYNC2"/>
+	</category>
+	<category name="CAT3">
+		<activation categorie="PERF"/>
+		<appender-ref ref="ASYNC3"/>
+	</category>
+	<category name="CAT4">
+		<activation categorie="SECURITE"/>
+		<appender-ref ref="ASYNC4"/>
+	</category>
+	<category name="CAT5"> 
+		<activation categorie="SUIVI"/> 
+		<appender-ref ref="ASYNC5"/>		
+	</category>	
+	<category name="ALERTE"> 
+		<appender-ref ref="SortiefichierAlerte"/>		
+	</category>	
+</log4j:configuration>

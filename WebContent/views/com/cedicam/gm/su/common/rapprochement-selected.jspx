@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+	<f:view>
+		<c:set var="rapprochement" value="#{suivibean.selectedRapprochement}" />
+		<table>
+			<tr class="listheader">
+				<td><h:outputText styleClass="selected-fieldname" value="Cd Opé"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.codeOperation }"/></td>
+				<td></td>
+				<td><h:outputText styleClass="selected-fieldname" value="Statut"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.statut }"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><h:outputText styleClass="selected-fieldname" value="Entité"/></td>
+				<td><h:outputText styleClass="selected-fieldname" value="Nombre"/></td>
+				<td><h:outputText styleClass="selected-fieldname" value="Signe"/></td>
+				<td><h:outputText styleClass="selected-fieldname" value="Montant"/></td>
+			</tr>
+			<tr>
+				<td><h:outputText styleClass="selected-fieldname" value="Entité Emet"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.emission eq null ? voidvalue : rapprochement.emission.entite}"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.emission eq null ? voidvalue : rapprochement.emission.nbOperationsFormated }"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.emission eq null ? voidvalue : rapprochement.emission.signe}"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.emission eq null ? voidvalue : rapprochement.emission.montantFormated }"/></td>
+			</tr>
+			<tr>
+				<td><h:outputText styleClass="selected-fieldname" value="Entité Dest"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.reception eq null ? voidvalue : rapprochement.reception.entite}"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.reception eq null ? voidvalue : rapprochement.reception.nbOperationsFormated }"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.reception eq null ? voidvalue : rapprochement.reception.signe}"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.reception eq null ? voidvalue : rapprochement.reception.montantFormated }"/></td>
+			</tr>
+			<tr>
+				<td><h:outputText styleClass="selected-fieldname" value="Ecart"/></td>
+				<td><h:outputText styleClass="selected-value" value=""/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.ecart eq null ? voidvalue : rapprochement.ecart.nbOperationsFormated }"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.ecart eq null ? voidvalue : rapprochement.ecart.signe}"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.ecart eq null ? voidvalue : rapprochement.ecart.montantFormated }"/></td>
+			</tr>
+			<tr>
+				<td><h:outputText styleClass="selected-fieldname" value="Règlement"/></td>
+				<td><h:outputText styleClass="selected-value" value=""/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.reglement eq null ? voidvalue : rapprochement.reglement.nbOperationsFormated }"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.reglement eq null ? voidvalue : rapprochement.reglement.signe}"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{rapprochement.reglement eq null ? voidvalue : rapprochement.reglement.montantFormated }"/></td>
+			</tr>
+		</table>
+	</f:view>
+</jsp:root>

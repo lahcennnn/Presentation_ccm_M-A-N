@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+	<f:loadBundle basename="rubriques" var="msg" />
+	<f:loadBundle basename="messagesJSF" var="msgJSF" />
+	<f:view>
+		<head>
+			<meta http-equiv="Pragma" content="no-cache" />
+			<meta http-equiv="Cache-Control" content="no-cache" />
+			<meta http-equiv="Cache-Control" content="no-store" />
+			<meta http-equiv="Cache-Control" content="must-revalidate" />
+			<meta http-equiv="Expires" content="Mon, 8 Aug 2006 10:00:00 GMT" />
+		</head>
+		<h:form>
+			<rich:panel>
+					<h:outputText value="#{msg['gm.habilitation.el000']}" />
+				<h:panelGrid columns="2">
+					
+					<h:outputText value="#{msg['gm.habilitation.el002-a']}" />
+					<h:inputText id="textfield" value="#{habilitation.hab1}">
+
+					</h:inputText>
+					<h:outputText value="#{msg['gm.habilitation.el002-b']}" />
+					<h:inputText value="#{habilitation.hab2}" />
+					<h:outputText value="#{msg['gm.habilitation.el002-c']}" />
+					<h:inputText value="#{habilitation.hab3}" />
+					<h:outputText value="#{msg['gm.habilitation.el002-d']}" />
+					<h:inputText value="#{habilitation.hab4}" />
+				</h:panelGrid>
+
+			</rich:panel>
+
+			<rich:panel>
+				<h:commandButton action="#{habilitation.valider}"
+					value="#{msg['gm.habilitation.el003']}" />
+			</rich:panel>
+
+			<script type="text/javascript">
+				var useless = "#{popUpBean.popUpOuverte}";
+			</script>
+		</h:form>
+
+	</f:view>
+</jsp:root>

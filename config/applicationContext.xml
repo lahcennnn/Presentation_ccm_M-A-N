@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:wss="http://jax-ws.dev.java.net/spring/servlet" 
+	xmlns:ws="http://jax-ws.dev.java.net/spring/core" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+						http://jax-ws.dev.java.net/spring/core xsd/spring-jax-ws-core.xsd
+						http://jax-ws.dev.java.net/spring/servlet xsd/spring-jax-ws-servlet.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+	default-autowire="constructor">
+
+	<bean name="propertyPlaceholder"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath:project.properties</value>
+		</property>
+	</bean>
+
+	<bean id="applicationContextHolder" class="com.cedicam.gm.bt.spring.ApplicationContextHolder" />
+
+
+	<bean id="containerSession" class="java.util.HashMap" scope="session">
+<!-- 		<aop:scoped-proxy/>  -->
+	</bean>
+
+	<bean id="habilitationFilter" class="com.cedicam.gm.bt.filtre.HabilitationFilter"/>
+		<bean id="ExceptionFilter" class="com.cedicam.gm.bt.erreur.ExceptionFilter"/>
+
+	<bean id="cacheHabilitation" class="com.cedicam.gm.bt.outil.CacheHabilitation"/>
+
+	<util:map id="projectProperties" map-class="java.util.HashMap">
+		<entry key="machine.logique.nom"><value>${machine.logique.nom}</value></entry>
+		<entry key="gestrace.repertoire"><value>${gestrace.repertoire}</value></entry>
+		<entry key="gm.cm.list.nbMaxLines"><value>${gm.cm.list.nbMaxLines}</value></entry>
+		<entry key="gm.commun.activation.codeetdate"><value>${gm.commun.activation.codeetdate}</value></entry>
+		<entry key="gm.commun.initHeureEchangeDebut"><value>${gm.commun.initHeureEchangeDebut}</value></entry>
+		<entry key="gm.commun.initHeureEchangeFin"><value>${gm.commun.initHeureEchangeFin}</value></entry>
+		<entry key="gm.commun.accesUrlBouchon"><value>${gm.commun.accesUrlBouchon}</value></entry>
+	</util:map>
+	<import resource="applicationContext-wsclient.xml" />
+	<import resource="applicationContext-service-presentation.xml" />
+
+
+	<bean id="rubriquesProperties" class="java.util.Properties">
+		<constructor-arg>
+			<props>
+				<prop key="defaut.app.label">${defaut.app.label}</prop>
+				<prop key="defaut.app.vers">${defaut.app.vers}</prop>
+				<prop key="defaut.app.execution">${defaut.app.execution}</prop>
+				<prop key="defaut.app.contact">${defaut.app.contact}</prop>
+			</props>
+		</constructor-arg>
+	</bean>
+
+</beans>

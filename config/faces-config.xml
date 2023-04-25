@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+                              "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<faces-config>
+
+	<converter><converter-id>periodeConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.PeriodeConverter</converter-class></converter>
+	<converter><converter-id>booleanConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.BooleanConverter</converter-class></converter>
+	<converter><converter-id>operandeConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.OperandeConverter</converter-class></converter>
+	<converter><converter-id>niveauAgregationConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.NiveauAgregationConverter</converter-class></converter>
+	<converter><converter-id>dateFinConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.DateFinConverter</converter-class></converter>
+	<converter><converter-id>dateConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.DateConverter</converter-class></converter>
+	<converter><converter-id>dateDebutConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.DateDebutConverter</converter-class></converter>
+	<converter><converter-id>statutAcquisitionConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.StatutAcquisitionConverter</converter-class></converter>
+	<converter><converter-id>deviseConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.DeviseConverter</converter-class></converter>
+	<converter><converter-id>statutConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.StatutConverter</converter-class></converter>
+	<converter><converter-id>statutConverterToolTip</converter-id><converter-class>com.cedicam.gm.bt.converter.StatutConverterToolTip</converter-class></converter>
+	<converter><converter-id>montantConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.MontantConverter</converter-class></converter>
+	<converter><converter-id>nombreConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.NombreConverter</converter-class></converter>
+	<converter><converter-id>pourcentageConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.PourcentageConverter</converter-class></converter>
+	<converter><converter-id>fractionConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.FractionConverter</converter-class></converter>
+	<converter><converter-id>fractionConverterNotNull</converter-id><converter-class>com.cedicam.gm.bt.converter.FractionConverterNotNull</converter-class></converter>
+	<converter><converter-id>Integer</converter-id><converter-class>javax.faces.convert.IntegerConverter</converter-class></converter>
+	<converter><converter-id>MultiligneConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.MultiligneConverter</converter-class></converter>
+	<converter><converter-id>dateTimeConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.DateTimeConverter</converter-class></converter>
+	<converter><converter-id>memberIdConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.MemberIdConverter</converter-class></converter>
+	<converter><converter-id>strMemberIdConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.StringMemberIdConverter</converter-class></converter>
+	<converter><converter-id>entiteGroupeConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.EntiteGroupeConverter</converter-class></converter>
+	<converter><converter-id>integerConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.IntegerConverter</converter-class></converter>
+	<converter><converter-id>valueToLabelConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.ValueToLabelConverter</converter-class></converter>
+	<converter><converter-id>forcedStringConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.ForcedStringConverter</converter-class></converter>
+	<converter><converter-id>dateStringConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.DateStringConverter</converter-class></converter>
+	<converter><converter-id>codeBanqueConverter</converter-id><converter-class>com.cedicam.gm.bt.converter.CodeBanqueConverter</converter-class></converter>
+	
+	<validator><validator-id>ccmDateValidator</validator-id><validator-class>com.cedicam.gm.ui.validator.DateValidator</validator-class></validator>
+	<validator><validator-id>ccmHeureValidator</validator-id><validator-class>com.cedicam.gm.ui.validator.HeureValidator</validator-class></validator>
+	<validator><validator-id>ccmIntegerValidator</validator-id><validator-class>com.cedicam.gm.ui.validator.IntegerValidator</validator-class></validator>
+	<validator><validator-id>ccmLongValidator</validator-id><validator-class>com.cedicam.gm.ui.validator.LongValidator</validator-class></validator>
+	<validator><validator-id>ccmLibelleValidator</validator-id><validator-class>com.cedicam.gm.ui.validator.LibelleValidator</validator-class></validator>
+	
+	<managed-bean><managed-bean-name>businessServicesBean</managed-bean-name><managed-bean-class>com.cedicam.gm.cm.bean.BusinessServicesBean</managed-bean-class><managed-bean-scope>session</managed-bean-scope></managed-bean> 
+  
+ 	<managed-bean>
+ 		<managed-bean-name>entiteservicesbean</managed-bean-name>
+ 		<managed-bean-class>com.cedicam.gm.re.bean.EntiteServicesBean</managed-bean-class>
+ 		<managed-bean-scope>session</managed-bean-scope>
+ 	</managed-bean>
+ 	
+ 	<managed-bean>
+ 		<managed-bean-name>suivibean</managed-bean-name>
+ 		<managed-bean-class>com.cedicam.gm.cm.bean.SuiviBean</managed-bean-class>
+ 		<managed-bean-scope>session</managed-bean-scope>
+ 	</managed-bean>
+ 	
+ 	<managed-bean>
+ 		<managed-bean-name>ecartsbean</managed-bean-name>
+ 		<managed-bean-class>com.cedicam.gm.cm.bean.EcartBean</managed-bean-class>
+ 		<managed-bean-scope>session</managed-bean-scope>
+ 	</managed-bean>
+ 	
+ 	<managed-bean>
+ 		<managed-bean-name>refentitebean</managed-bean-name>
+ 		<managed-bean-class>com.cedicam.gm.re.entite.ReferentielEntiteBean</managed-bean-class>
+ 		<managed-bean-scope>session</managed-bean-scope>
+ 	</managed-bean>
+ 	
+ 	<managed-bean>
+ 		<managed-bean-name>beanAriane</managed-bean-name>
+ 		<managed-bean-class>com.cedicam.gm.ui.core.FilArianeBean</managed-bean-class>
+ 		<managed-bean-scope>session</managed-bean-scope>
+ 	</managed-bean> 
+ 	
+ 	<managed-bean>
+ 		<managed-bean-name>popUpBean</managed-bean-name>
+ 		<managed-bean-class>com.cedicam.gm.bt.bean.PopUpBean</managed-bean-class>
+ 		<managed-bean-scope>session</managed-bean-scope>
+ 	</managed-bean> 
+	
+ <!--  <managed-bean> <managed-bean-name>confirmbean</managed-bean-name> <managed-bean-class>com.cedicam.gm.bt.bean.ConfirmBean</managed-bean-class> <managed-bean-scope>session</managed-bean-scope> </managed-bean> 
+  <managed-bean> <managed-bean-name>refgenebean</managed-bean-name> <managed-bean-class>com.cedicam.gm.re.general.ReferencielGeneralBean</managed-bean-class> <managed-bean-scope>session</managed-bean-scope></managed-bean> -->
+ 
+ 
+  <managed-bean>
+  <managed-bean-name>st000</managed-bean-name>
+  <managed-bean-class>com.cedicam.gm.ch.bean.menus.St000Bean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>rubriquesProperties</property-name>
+   <property-class>java.util.Properties</property-class>
+   <value>#{rubriquesProperties}</value>
+  </managed-property>
+  <!--	<managed-property> 		<property-name>agent</property-name>		<property-class>java.lang.String</property-class> 		<value>Paul	Lescriture</value>	</managed-property>
+	<managed-property>
+		<property-name>hab00010</property-name><property-class>java.lang.Boolean</property-class><value>true</value> </managed-property> <managed-property>
+		<property-name>hab00020</property-name><property-class>java.lang.Boolean</property-class><value>true</value> </managed-property> <managed-property>
+		<property-name>hab00030</property-name><property-class>java.lang.Boolean</property-class><value>true</value> </managed-property> <managed-property>
+		<property-name>hab00034</property-name><property-class>java.lang.Boolean</property-class><value>true</value> </managed-property> <managed-property>
+		<property-name>hab00050</property-name><property-class>java.lang.Boolean</property-class><value>true</value> </managed-property> <managed-property>
+		<property-name>hab00051</property-name><property-class>java.lang.Boolean</property-class><value>true</value> </managed-property> <managed-property>
+	</managed-property>		-->
+ </managed-bean>
+ 
+
+<navigation-rule>
+	<from-view-id>/views/com/cedicam/gm/re/*</from-view-id>
+	<navigation-case><from-outcome>retour</from-outcome><to-view-id>/views/com/cedicam/gm/re/ec020.jspx</to-view-id></navigation-case>
+	<navigation-case><from-outcome>refresh</from-outcome><to-view-id>/views/com/cedicam/gm/re/ec020.jspx</to-view-id></navigation-case>
+  	<navigation-case><from-outcome>consultation</from-outcome><to-view-id>/views/com/cedicam/gm/re/ec025.jspx</to-view-id></navigation-case><!-- consultation -->
+  	<navigation-case><from-outcome>edition</from-outcome><to-view-id>/views/com/cedicam/gm/re/ec035.jspx</to-view-id></navigation-case><!-- edition (creation ou modification) -->
+</navigation-rule>
+  
+ <navigation-rule>
+  <from-view-id>/views/com/cedicam/gm/*</from-view-id>
+  	<navigation-case><from-outcome>accueil</from-outcome><to-view-id>/views/com/cedicam/gm/ch/ec001.jspx</to-view-id></navigation-case>
+
+  	<navigation-case><from-outcome>suivi</from-outcome><to-view-id>/views/com/cedicam/gm/cm/ec030.jspx</to-view-id></navigation-case><!-- recherche et liste des rapprochements -->
+  	<navigation-case><from-outcome>ecarts</from-outcome><to-view-id>/views/com/cedicam/gm/cm/ec090.jspx</to-view-id></navigation-case><!-- recherche et liste des écarts -->
+    <navigation-case><from-outcome>entites</from-outcome><to-view-id>/views/com/cedicam/gm/re/ec020.jspx</to-view-id></navigation-case><!-- référentiel des entités -->
+	<navigation-case><from-outcome>regroupements</from-outcome><to-view-id>/views/com/cedicam/gm/cm/ec060.jspx</to-view-id></navigation-case><!-- liste des regroupements -->
+  	<navigation-case><from-outcome>detail</from-outcome><to-view-id>/views/com/cedicam/gm/cm/ec070.jspx</to-view-id></navigation-case><!-- details -->
+ </navigation-rule>
+ 
+
+ <managed-bean>  <managed-bean-name>habilitation</managed-bean-name>  <managed-bean-class>com.cedicam.gm.ch.bean.HabilitationBean</managed-bean-class>  <managed-bean-scope>session</managed-bean-scope> </managed-bean>
+
+   <managed-bean>  <managed-bean-name>erreur</managed-bean-name>  <managed-bean-class>com.cedicam.gm.bt.erreur.ErreurBean</managed-bean-class>  <managed-bean-scope>request</managed-bean-scope> </managed-bean>
+
+<navigation-rule>
+  <from-view-id>/views/com/cedicam/gm/ch/habilitation/habilitation.jspx</from-view-id>
+  <navigation-case><from-outcome>valider</from-outcome><to-view-id>/views/com/cedicam/gm/ch/habilitation/habilitation2.jspx</to-view-id>  </navigation-case>
+ </navigation-rule>
+
+
+ 
+ <validator>
+  <validator-id>blanckValidator</validator-id>
+  <validator-class>com.cedicam.gm.bt.validator.BlanckValidator</validator-class>
+ </validator>
+ <application>
+  <view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+  <variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
+  <locale-config>
+   <default-locale>fr</default-locale>
+   <supported-locale>fr</supported-locale>
+   <supported-locale>en</supported-locale>
+  </locale-config>
+  <message-bundle>rubriques</message-bundle>
+  <message-bundle>messagesJSF</message-bundle>
+ </application>
+
+
+
+<lifecycle>
+    <phase-listener>com.cedicam.gm.bt.listener.JsfPhasesListener</phase-listener>
+</lifecycle>
+
+</faces-config>

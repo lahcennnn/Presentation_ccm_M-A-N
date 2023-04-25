@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<f:view>
+		<ui:composition template="/themes/cedicam/template/conteneur.jspx">
+			<ui:define name="titre_ecran">
+			<ui:param name="dataBean" value="#{erreur}" />
+				<h:outputText value="ERREUR"/>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</jsp:root>

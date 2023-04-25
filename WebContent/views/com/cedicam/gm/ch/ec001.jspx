@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+<f:view>
+	<ui:composition template="/themes/cedicam/template/conteneur.jspx">
+			<ui:param name="dataBean" value="#{suivibean}" />
+			<c:set var="fil" property="#{dataBean.codeEcran }" value="st000" />
+			<ui:define name="code_ecran"><h:outputText value="EC001" /></ui:define>
+			<ui:define name="titre_ecran"><h:outputText value="#{msg['gm.ec001.el000']}" /></ui:define>
+
+			<ui:define name="date_application">
+				<h:outputText value="#{suivibean.dateApplication}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+				</h:outputText>
+			</ui:define>
+
+			<ui:define name="contenu_ecran">
+				<rich:panel id="accueilmsg">
+					<h:outputText value="#{msg['gm.ec001.el001'] }"/>
+				</rich:panel>
+				<script type="text/javascript">
+					var useless = "#{popUpBean.popUpOuverte}";
+				</script>
+			</ui:define>
+		</ui:composition>
+</f:view>
+</jsp:root>

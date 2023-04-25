@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+<f:view>
+	<ui:composition template="/themes/cedicam/template/conteneur#{modeAffichage}.jspx">
+		<ui:param name="dataBean" value="#{suivibean}" />
+		<ui:define name="titre_ecran"><h:outputText value="#{msg['gm.ec040.el000']}" /></ui:define>
+		<ui:define name="code_ecran"><h:outputText value="EC040" /></ui:define>
+		<ui:define name="date_application">
+			<h:outputText value="#{suivibean.dateApplication}"><f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" /></h:outputText>
+		</ui:define>
+		<ui:define name="contenu_ecran">
+
+<script>
+function togglePanel(idPanel){
+	var panel = $(idPanel);
+	if( panel.style.display=='none'){
+		panel.style.display='block';
+	}else {
+		panel.style.display='none';
+	}
+}
+</script>
+
+			<rich:panel id="panelRecherche" styleClass="subpanel-panel">
+				<div style="width: 100%; height: 100%;">
+					<h:form styleClass="form-paginator">
+						<div class="subpanel-upperbar">
+							<div class="subpanel-upperbar-title"><h:outputText value="#{msg['gm.ec040.el001'] }"/></div>
+							<div class="subpanel-upperbar-buttons"><h:outputText styleClass="gm-panel-toggle-btn" value="[+/-]"><a4j:support event="onclick" oncomplete="togglePanel('panelRecherche-content');" reRender="panelRecherche-content"/></h:outputText></div>
+						</div>
+					</h:form>
+					<div id="panelRecherche-content" style="overflow: auto; clear: both;" class="rich-panel">
+						<ui:include src="/views/com/cedicam/gm/cm/ec040.jspx" />
+					</div>
+				</div>
+			</rich:panel>
+				<rich:panel id="panelRapprochements" styleClass="subpanel-panel" >
+					<rich:panel style="width: 100%; height: 100% " rendered="#{suivibean.rapprochementDtManager.dataProvider.totalResultSize gt 0}">
+						<h:form styleClass="form-paginator">
+							<div class="subpanel-upperbar">
+								<div class="subpanel-upperbar-title">
+									<h:outputText value="#{msg['gm.ec050.el001'] }"/>
+									<h:commandLink action="#{suivibean.genererRapport}">
+										<h:graphicImage value="/themes/cedicam/template/img/excel16.png" alt="Export CSV"/>
+										<f:param name="format" value="CSV" />
+										<f:param name="typeRapport" value="RECH_RAPPRO" />
+									</h:commandLink>
+									<h:commandLink action="#{suivibean.imprimer}" target="printPage">
+										<h:graphicImage value="/themes/cedicam/template/img/print16.png" alt="Impression"/>
+										<f:param name="typeRapport" value="RECH_RAPPRO" />
+									</h:commandLink>
+								</div>
+								<div class="subpanel-upperbar-buttons"><h:outputText styleClass="gm-panel-toggle-btn" value="[+/-]"><a4j:support event="onclick" oncomplete="togglePanel('panelRapprochements-content');" reRender="panelRapprochements-content"/></h:outputText></div>
+								<div class="subpanel-upperbar-nbResultats">
+									<h:outputText value="#{msg['wn.commun.nombre.de.resultats'] }"/>
+									<rich:spacer height="1" width="10" />
+									<h:outputText value="#{suivibean.rapprochementDtManager.dataProvider.totalResultSize }"/>
+									<rich:spacer height="1" width="10" />
+								</div>
+							</div>
+						</h:form>
+						<div id="panelRapprochements-content" style="overflow: visible; clear: both;" class="rich-panel">
+							<ui:include src="/views/com/cedicam/gm/cm/ec050.jspx">
+								<ui:param name="modeAffichage" value="#{modeAffichage}" />
+							</ui:include>
+						</div>
+					</rich:panel>
+				</rich:panel>
+				
+				
+			<rich:modalPanel id="popupConfirmer" resizeable="false"
+					shadowDepth="0" moveable="false" rendered="#{suivibean.confirmation}"
+					showWhenRendered="#{suivibean.confirmation}">
+					<f:facet name="header">
+						<h:panelGroup>
+							<h:outputText value="#{msg['wn.commun.label.confirmation']}" />
+						</h:panelGroup>
+					</f:facet>
+
+					<div class="wn-popup-text"><h:outputText
+						value="#{empty suivibean.idIncEPOC ? msg['gm.ec050.el022'] : msg['gm.ec050.el023'] }"></h:outputText></div>
+					<br />
+
+					<rich:panel bodyClass="wn-popup-footer" styleClass="wn-mpnl-footer">
+						<h:form>
+							<h:commandButton value="#{msg['wn.commun.action-o']}"
+								styleClass="wn-popup-btn" action="#{suivibean.forcerRapprochement}">
+								<rich:componentControl for="popupConfirmer" operation="hide"
+									event="onclick" />
+							</h:commandButton>
+
+							<h:commandButton value="#{msg['wn.commun.action-n']}"
+								action="#{suivibean.continuerSaisie}" styleClass="wn-popup-btn">
+								<rich:componentControl for="popupConfirmer" operation="hide"
+									event="onclick" />
+							</h:commandButton>
+						</h:form>
+					</rich:panel>
+				</rich:modalPanel>
+
+<script>
+					function enableEnregistrerEpoc(){
+						var v = document.getElementById("form-boutons:inputepoc").value;
+						var btn = document.getElementById("form-boutons:epoc");
+						if(v!='') btn.disabled='';
+						else btn.disabled='disabled';
+					}
+				</script>
+				<h:form id="form-boutons">
+							<c:if test="#{suivibean.rapprochementDtManager.dataProvider.totalResultSize eq 0}">
+						<script>
+							//document.getElementById('panelBoutons').style.display ='none';
+						</script>
+					</c:if>
+					<c:if test="#{suivibean.rapprochementDtManager.hasRowSelected }">
+						<rich:panel styleClass="gm-panel-no-border" bodyClass="gm-btn-panel">
+							<h:outputText value="#{msg['gm.ec050.el015'] }" styleClass="gm-epoc-lib" rendered="#{st000.habF0020 }"/>
+							<c:if test="#{not suivibean.rapprochementDtManager.selectedObject.force and not (suivibean.rapprochementDtManager.selectedObject.idStatut eq 2)}">
+								<h:inputText id="inputepoc" maxlength="5" onkeyup="enableEnregistrerEpoc();" onchange="enableEnregistrerEpoc();" value="#{suivibean.idIncEPOC }" styleClass="gm-epoc-btn" rendered="#{st000.habF0020 }" autocomplete="off"/>
+								<h:commandButton id="epoc" disabled="#{empty suivibean.idIncEPOC}" value="#{msg['gm.ec050.el016'] }" action="#{suivibean.enregistrerEpoc}" styleClass="wn-btn-aspect" rendered="#{st000.habF0020 }"/>
+							</c:if>
+							<c:if test="#{suivibean.rapprochementDtManager.selectedObject.force or suivibean.rapprochementDtManager.selectedObject.idStatut eq 2 }">
+								<h:inputText id="inputepoc" disabled="true" maxlength="5" value="#{suivibean.rapprochementDtManager.selectedObject.idIncEPOC }" styleClass="gm-epoc-btn" rendered="#{st000.habF0020 }"/>
+								<h:commandButton disabled="true" id="epoc" value="#{msg['gm.ec050.el016'] }" action="#{suivibean.enregistrerEpoc}" styleClass="wn-btn-aspect" rendered="#{st000.habF0020 }"/>
+							</c:if>
+							<h:commandButton id="forcer" value="#{msg['gm.ec050.el017']}"
+								disabled="#{suivibean.rapprochementDtManager.selectedObject.hasEpoc and not suivibean.rapprochementDtManager.selectedObject.force and not (suivibean.rapprochementDtManager.selectedObject.idStatut eq 2) ? 'false':'true' }"
+								action="#{suivibean.afficheConfirmation}" styleClass="wn-btn-aspect" rendered="#{st000.habF0030 }"/>
+							<h:commandButton id="detailler" value="#{msg['gm.ec050.el018']}" action="#{suivibean.detaillerRapprochement}" styleClass="wn-btn-aspect" />
+						</rich:panel>
+					</c:if>
+					<c:if test="#{suivibean.rapprochementDtManager.dataProvider.totalResultSize gt 0 and not suivibean.rapprochementDtManager.hasRowSelected }">
+						<rich:panel styleClass="gm-panel-no-border" bodyClass="gm-btn-panel">
+							<h:outputText value="#{msg['gm.ec050.el015'] }" styleClass="gm-epoc-lib" rendered="#{st000.habF0020 }"/>
+							<h:inputText id="inputepoc" disabled="true" maxlength="5"  value="" styleClass="gm-epoc-btn" rendered="#{st000.habF0020 }"/>
+							<a4j:commandButton disabled="true" id="epoc" value="#{msg['gm.ec050.el016'] }" action="#{suivibean.enregistrerEpoc }" styleClass="wn-btn-aspect" rendered="#{st000.habF0020 }"/>
+							<a4j:commandButton disabled="true" id="forcer" value="#{msg['gm.ec050.el017']}" styleClass="wn-btn-aspect"  rendered="#{st000.habF0030 }" />
+							<a4j:commandButton disabled="true" id="detailler" value="#{msg['gm.ec050.el018']}" action="#{suivibean.detaillerRapprochement }" styleClass="wn-btn-aspect" />
+						</rich:panel>
+					</c:if>
+				</h:form>
+
+		</ui:define>
+	</ui:composition>
+</f:view>
+</jsp:root>

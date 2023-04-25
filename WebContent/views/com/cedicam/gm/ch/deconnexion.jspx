@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+<f:view>
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" style="height: 100%;">
+    <head>
+      <title>#{st000.applicationNom} - #{st000.applicationEnvironnementExecution} - DECONNEXION</title>
+      <meta content="CA-CP: Centre Comptable Monetique" name="keywords" />
+      <meta http-equiv="cache-control" content="no-cache, must-revalidate" />
+      <meta http-equiv="expires" content="0" />
+      <meta http-equiv="pragma" content="no-cache" />
+      <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8"/>
+      <link rel="stylesheet" type="text/css" href="${facesContext.externalContext.requestContextPath}/themes/cedicam/template/css/bandeau.css" />
+      <link rel="stylesheet" type="text/css" href="${facesContext.externalContext.requestContextPath}/themes/cedicam/template/css/base.css" />
+      <link rel="stylesheet" type="text/css" href="${facesContext.externalContext.requestContextPath}/themes/cedicam/template/css/cedicam.css" />
+      <link rel="stylesheet" type="text/css" href="${facesContext.externalContext.requestContextPath}/themes/cedicam/template/css/jquery-utils.css" />
+      <link rel="stylesheet" type="text/css" media="print" href="${facesContext.externalContext.requestContextPath}/themes/cedicam/template/css/cedicam-print.css" />
+
+
+      <script type="text/javascript">
+          function appelerAideWN(){// Ecran de l'aide
+              window.open("${facesContext.externalContext.requestContextPath}#{msg['gm.bandeau.fichierAide']}#DECONNEXION", "aide");
+          }
+      </script>
+    </head>
+
+    <body style="height: 70%;" class="yui-skin-sam">
+    <a4j:loadBundle basename="messagesJSF" var="msgJSF"/>
+    <a4j:loadBundle basename="rubriques" var="msg" />
+    <a4j:loadBundle basename="validationChamps" var="champ" />
+    <a4j:loadBundle basename="ariane" var="ariane" />
+      <div id="header">
+        <div id="header-cedicam">
+          <div id="logo-cedicam">
+            <img src="${facesContext.externalContext.requestContextPath}/themes/cedicam/template/img/LOGO-CA-CP-PNG.png" alt="Cedicam" />
+          </div>
+          <br />
+          <div><div id="logo-application">#{msg['wn.bandeau.codeappli']}</div><div id="logo-nom-application">#{msg['wn.bandeau.nomappli']}</div></div>
+        </div>
+
+        <div id="header-information">
+          <ui:include src="/views/com/cedicam/gm/ch/menus/st00b.jspx" /><br />
+          <c:if test="#{dataBean.afficheDateEtCode }">
+	          <div id="header-date-application">
+	            #{msg['wn.bandeau.date']}<rich:spacer height="1" width="4" />:<rich:spacer height="1" width="4" />
+	            <h:outputText value="#{dataBean.dateApplication}">
+	              <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+	            </h:outputText>
+	          </div>
+	          <br />
+	          <div id="header-code-ecran">#{msg['wn.bandeau.ecran']}<rich:spacer height="1" width="4" />:<rich:spacer height="1" width="4" />DECONNEXION</div>
+          </c:if>
+        </div>
+
+        <div id="header-application">
+          <div id="page-title">DECONNEXION</div>
+          <br />
+
+
+		<div class="menuapplication">
+			<h:form>
+				<ul id="menuDeroulant">
+					<li class="menuTxt"><h:outputLink value="javascript:appelerAideWN();" styleClass="menu-element">#{msg['wn.bandeau.menu.aide']}</h:outputLink></li>
+				</ul>
+			</h:form>
+		</div>
+          <div id="header-ariane"><ui:include src="/views/com/cedicam/gm/ch/menus/st00c.jspx" /></div>
+
+       </div>
+      </div>
+
+      <div id="footer-application">
+        <h:outputText id="footer">
+          #{st000.applicationNom} #{st000.applicationNumeroVersion} #{st000.applicationEnvironnementExecution}
+        </h:outputText>
+      </div>
+      <div id="main" style="width: 97%; position: absolute; top:0; padding-top: 80px; padding-bottom: 60px;">
+            <a4j:outputPanel ajaxRendered="true" id="errorM">
+		        <h:messages errorClass="wn-msg-error" warnClass="wn-msg-error" fatalClass="wn-msg-error" infoClass="wn-msg-information" styleClass="wn-msg-zone" showDetail="false" showSummary="true" />
+            </a4j:outputPanel>
+        <div id="contenu" style="height: 100%;">
+          <div id="main-contenu" style="height: 100%;">Vous êtes déconnecté.</div>
+        </div>
+      </div>
+      <rich:jQuery name="setFocus" timing="onload" selector="input:not(:button):visible:enabled:first:not(.filterInput)" query="focus()" />
+
+    </body>
+  </html>
+
+
+
+</f:view>
+</jsp:root>

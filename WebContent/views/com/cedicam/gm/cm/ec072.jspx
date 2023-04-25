@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<f:view>
+		<h:form id="form-detail">
+			<rich:panel>
+				<c:forEach items="#{suivibean.detail.detailList}" var="lgndetail">
+					<c:if test="#{lgndetail.entete != null and lgndetail.entete != '' }"><h:outputText value="#{lgndetail.entete}"/><br/></c:if>
+					<c:if test="#{lgndetail.ligne != null and lgndetail.ligne != '' }"><h:outputText value="#{lgndetail.ligne}"/><br/></c:if>
+				</c:forEach>
+			</rich:panel>
+		</h:form>
+	</f:view>
+</jsp:root>

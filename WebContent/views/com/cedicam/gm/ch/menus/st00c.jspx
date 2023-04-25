@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+    <f:view>
+	    <h:form id="filAriane"> 
+		    	<c:forEach items="#{beanAriane.filAriane}" var="elem">
+			    	<c:if test="#{elem.outcome != null}">
+			    		<h:commandLink value="#{elem.libelle}" action="#{elem.getOutcome}"/>
+			    		<h:outputText value=" > " />
+			    	</c:if>
+			    	<c:if test="#{elem.outcome == null}">
+			    		<h:outputText value="#{elem.libelle }" />
+			    	</c:if>
+		    	</c:forEach>
+	    </h:form>
+    </f:view>
+</jsp:root>

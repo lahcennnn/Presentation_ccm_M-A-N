@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+<f:view>
+
+	
+		<ui:composition template="/themes/cedicam/template/conteneur.jspx">
+			<ui:param name="dataBean" value="#{suivi}" />
+			<ui:define name="titre_ecran">
+				<h:outputText value="Référenciel des entités" />
+			</ui:define>
+			<ui:define name="date_application"><h:outputText value="#{suivi.dateApplication}"><f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" /></h:outputText></ui:define>
+			<ui:define name="code_ecran"><h:outputText value="Suivi" /></ui:define>
+
+			<ui:define name="contenu_ecran">
+				<h:form>
+				
+						<div class="rich-modalpanel " id="popupConfirmerContainer" style="position: absolute; z-index: 100; background-color: inherit;">
+							<div class="rich-mpnl-mask-div-opaque rich-mpnl-mask-div" id="popupConfirmerDiv" style="z-index: -1;"/>
+							<div class="rich-mpnl-panel">
+								<div class="rich-mp-container" id="popupConfirmerCDiv" style="position: absolute; left: 649px;  z-index: 9;">
+									<div style="width: 300px; height: 200px;" class="rich-mpnl-ovf-hd rich-mpnl-trim rich-mpnl-content" id="popupConfirmerContentDiv">
+										<table class="rich-mp-content-table" id="popupConfirmerContentTable" style="height: 100%; width: 100%;" border="0" cellpadding="0" cellspacing="0">
+											<tbody>
+												<tr style="height: 1%;">
+													<td class="rich-mpnl-header-cell">
+														<div class="rich-mpnl-text rich-mpnl-header " id="popupConfirmerHeader" style="white-space: nowrap;">
+															<h:outputText value="#{confirmbean.title }"/>
+														</div>
+													</td>
+												</tr>
+												<tr style="height: 99%">
+													<td class="rich-mpnl-body" valign="top">
+														<div class="wn-popup-text"><h:outputText value="#{confirmbean.title }"/></div>
+														<br/>
+														<div class="rich-panel wn-mpnl-footer" ><div class="rich-panel-body wn-popup-footer">
+																<h:form>
+																	<h:commandButton value="#{confirmbean.yesLabel}" styleClass="wn-popup-btn" action="#{confirmbean.confirm }"/>
+																	<h:commandButton value="#{confirmbean.noLabel}" styleClass="wn-popup-btn" action="#{confirmbean.cancel}"/>
+																</h:form>
+															</div>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="rich-mpnl-mask-div rich-mpnl-mask-div-transparent" id="popupConfirmerCursorDiv" style="z-index: -200;"/>
+						</div>
+				
+				</h:form>
+			</ui:define>
+		</ui:composition>
+		
+					
+	</f:view>
+</jsp:root>

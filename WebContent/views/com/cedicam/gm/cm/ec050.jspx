@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<f:view>
+		<c:set var="scroller" value="#{suivibean.rapprochementDtManager.dataProvider.scroller}"/>
+		<rich:panel styleClass="panel-pagination">
+			<h:form id="scrollerForm"  >
+				<a4j:queue id="queueScr" name="queueScroller" requestDelay="5" size="2" ignoreDupResponses="true" />
+				<table style=" width: 100%;">
+					<tr>
+						<td style="align: left; width: 33%;">
+							<h:outputText value="#{msg['gm.scroller.afficher'] }"/>
+								<rich:spacer height="1" width="2" />
+							<h:selectOneMenu value="#{scroller.pageSize}" styleClass="pagination-setpagesize">
+								 <f:selectItem itemValue="10" itemLabel="10" />
+								 <f:selectItem itemValue="25" itemLabel="25" />
+								 <f:selectItem itemValue="50" itemLabel="50" />
+								 <f:selectItem itemValue="100" itemLabel="100" />
+								 <a4j:support event="onchange" action="#{suivibean.refresh}" reRender="scrollerForm, panelTable" />
+							</h:selectOneMenu>
+								<rich:spacer height="1" width="2" />
+							<h:outputText value="#{msg['gm.scroller.nbresultparpage'] }"/>
+						</td>
+						<td style="align: center; width: 33%;">
+							<h:outputText value="#{msg['gm.scroller.result'] }"/>			<rich:spacer height="1" width="2" />
+							<h:outputText value="#{scroller.fromElement+1}"   />			<rich:spacer height="1" width="2" />
+							<h:outputText value="#{msg['gm.scroller.a'] }"/>				<rich:spacer height="1" width="2" />
+							<h:outputText value="#{scroller.toElement+1}"/>					<rich:spacer height="1" width="2" />
+							<h:outputText value="#{msg['gm.scroller.sur'] }"/>				<rich:spacer height="1" width="2" />
+							<h:outputText value="#{scroller.numberOfElements}"/>
+						</td>
+						<td style="align: right; width: 33%;">
+							<a4j:commandLink reRender="scrollerForm, panelTable" actionListener="#{scroller.gotoFirstAction}" eventsQueue="queueScroller" rendered="#{scroller.currentPage > 1 }">&lt;&lt;</a4j:commandLink>
+							<h:outputText styleClass="pagination-disabled-link" rendered="#{scroller.currentPage le 1 }" value="&lt;&lt;"/>
+								<rich:spacer height="1" width="8" />
+							<a4j:commandLink reRender="scrollerForm, panelTable" actionListener="#{scroller.gotoPreviousAction}" eventsQueue="queueScroller" rendered="#{scroller.currentPage > 1 }">&lt;</a4j:commandLink>
+							<h:outputText styleClass="pagination-disabled-link" rendered="#{scroller.currentPage le 1 }" value="&lt;"/>
+								<rich:spacer height="1" width="8" />
+							Page
+								<rich:spacer height="1" width="2" />
+							<h:inputText value="#{scroller.currentPage}" styleClass="pagination-setpagenum">
+								<f:converter converterId="integerConverter"/>
+								<a4j:support event="onchange" reRender="scrollerForm, panelTable" eventsQueue="queueScroller"/>
+							</h:inputText>
+								<rich:spacer height="1" width="2" />
+							/
+								<rich:spacer height="1" width="2" />
+							<h:outputText value="#{scroller.pageCount}"/>
+								<rich:spacer height="1" width="8" />
+							<a4j:commandLink reRender="scrollerForm, panelTable" actionListener="#{scroller.gotoNextAction}" eventsQueue="queueScroller" rendered="#{scroller.currentPage lt scroller.pageCount }">&gt;</a4j:commandLink>
+							<h:outputText styleClass="pagination-disabled-link" rendered="#{scroller.currentPage ge scroller.pageCount }" value="&gt;"/>
+								<rich:spacer height="1" width="8" />
+							<a4j:commandLink reRender="scrollerForm, panelTable" actionListener="#{scroller.gotoLastAction}" eventsQueue="queueScroller" rendered="#{scroller.currentPage lt scroller.pageCount }">&gt;&gt;</a4j:commandLink>
+							<h:outputText styleClass="pagination-disabled-link" rendered="#{scroller.currentPage ge scroller.pageCount }" value="&gt;&gt;"/>
+						</td>
+					</tr>
+				</table>
+			</h:form>
+		</rich:panel>
+		
+		<c:set var="lLignesRapprochement" value="#{suivibean.rapprochementDtManager.datatableModel}"/>
+		<c:if test="#{modeAffichage == 'print'}" >
+			<c:set var="lLignesRapprochement" value="#{suivibean.rapprochementDtManager.dataManager.fullData}"/>
+		</c:if>
+		<h:form id="zeForm">
+			<rich:panel id="panelTable">
+				<rich:extendedDataTable id="table" styleClass="jalabert" enableContextMenu="false" var="occurrence" selectionMode="single"
+						value="#{lLignesRapprochement}" selection="#{suivibean.rapprochementDtManager.selection}" sortMode="single"
+						noDataLabel="#{msg['wn.commun.nodata']}"	rowClasses="wn-ligne-impaire-bis, wn-ligne-paire-bis" columnClasses="colCodeOpe, colDevise, colEntite, colNbOpe, colSigne, colMontant, colEntite, colNbOpe, colSigne, colMontant, colNbOpe, colSigne, colMontant, colNbOpe, colMontant, colStatut, colEpoc, colForce ">
+					<f:facet name="header">
+						<rich:columnGroup>
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el002'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'codeOperationNfcca' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'codeOperationNfcca' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="codeOperationNfcca" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el004'] }" />
+									<br/><br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'devise' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'devise' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="devise" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+
+							</rich:column>
+
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el005'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'entiteEmettrice' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'entiteEmettrice' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="entiteEmettrice" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+
+							</rich:column>
+							<rich:column colspan="3"><h:outputText value="#{msg['gm.ec050.el006'] }" /></rich:column>
+
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el007'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'entiteDestinataire' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'entiteDestinataire' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="entiteDestinataire" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+
+							</rich:column>
+							<rich:column colspan="3"><h:outputText value="#{msg['gm.ec050.el008'] }" /></rich:column>
+
+							<rich:column colspan="3"><h:outputText value="#{msg['gm.ec050.el009'] }" /></rich:column>
+
+							<rich:column colspan="2"><h:outputText value="#{msg['gm.ec050.el010'] }" /></rich:column>
+
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el011'] }" />
+									<br/><br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'idStatut' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'idStatut' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="idStatut" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el012'] }" />
+									<br/><br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'idIncEPOC' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'idIncEPOC' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="idIncEPOC" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el013'] }" />
+									<br/><br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'force' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'force' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="force" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column breakBefore="true" styleClass="headerWithSort" >
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el006-a'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'nombreOpeEmission' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'nombreOpeEmission' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="nombreOpeEmission" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column sortable="true" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el006-b'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'signeEmission' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'signeEmission' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="signeEmission" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el006-c'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'montantEmission' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'montantEmission' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="montantEmission" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el008-a'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'nombreOpeReception' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'nombreOpeReception' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="nombreOpeReception" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el008-b'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'signeReception' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'signeReception' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="signeReception" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el008-c'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'montantReception' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'montantReception' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="montantReception" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el009-a'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'nombreEcart' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'nombreEcart' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="nombreEcart" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el009-b'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'signeEcart' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'signeEcart' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="signeEcart" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el009-c'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'montantEcart' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'montantEcart' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="montantEcart" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el010-a'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'nombreReglReal' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'nombreReglReal' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="nombreReglReal" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="panelTable">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec050.el010-b'] }" /><br/>
+									<c:choose>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'montantReglReal' and suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{suivibean.rapprochementDtManager.dataProvider.sort.sortProperty eq 'montantReglReal' and not suivibean.rapprochementDtManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="montantReglReal" />
+									<f:attribute name="dt" value="rap" />
+								</a4j:commandLink>
+							</rich:column>
+						</rich:columnGroup>
+					</f:facet>
+
+					<rich:column width="4%">
+						<h:outputText value="#{occurrence.codeOperationNfcca}" styleClass="tab_val_code" />
+						<span class="debug-info"><h:outputText value="#{occurrence.idRapprochement}" /><h:outputText value="#{occurrence.type}" /></span>
+					</rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.devise}"><f:converter converterId="deviseConverter" /></h:outputText></rich:column>
+
+					<rich:column width="5%"><h:outputText value="#{occurrence.entiteEmettrice}" /></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.nombreOpeEmission}" /></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.signeEmission}" /></rich:column>
+					<rich:column width="10%"><h:outputText value="#{occurrence.montantEmission}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+
+					<rich:column width="5%"><h:outputText value="#{occurrence.entiteDestinataire}" /></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.nombreOpeReception}" /></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.signeReception}" /></rich:column>
+					<rich:column width="10%"><h:outputText value="#{occurrence.montantReception}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+
+					<rich:column width="4%"><div class="#{!occurrence.force and !(occurrence.idStatut eq '2') ? 'withEcart' : 'withoutEcart'}"><h:outputText value="#{occurrence.nombreEcart}" /></div></rich:column>
+					<rich:column width="4%"><div class="#{!occurrence.force and !(occurrence.idStatut eq '2') ? 'withEcart' : 'withoutEcart'}"><h:outputText value="#{occurrence.signeEcart}" /></div></rich:column>
+					<rich:column width="10%"><div class="#{!occurrence.force and !(occurrence.idStatut eq '2') ? 'withEcart' : 'withoutEcart'}"><h:outputText value="#{occurrence.montantEcart}"><f:converter converterId="montantConverter" /></h:outputText></div></rich:column>
+
+					<rich:column width="4%"><h:outputText value="#{occurrence.nombreReglReal}"/></rich:column>
+					<rich:column width="10%"><h:outputText value="#{occurrence.montantReglReal}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+
+					<rich:column width="5%"><rich:toolTip direction="top-right" showDelay="300" layout="block"><h:outputText value="#{occurrence.idStatut}"><f:converter converterId="statutConverterToolTip" /></h:outputText></rich:toolTip><h:outputText value="#{occurrence.idStatut}"><f:converter converterId="statutConverter" /></h:outputText></rich:column>
+					<rich:column width="5%"><h:outputText value="#{occurrence.idIncEPOC}"  /></rich:column>
+					<rich:column width="5%"><rich:toolTip direction="top-right" showDelay="300" layout="block"><h:outputText value="#{occurrence.force?'Oui':'Non'}"/></rich:toolTip><h:outputText value="#{occurrence.force?'O':'N'}" /></rich:column>
+
+					<f:facet name="footer">
+						<rich:columnGroup>
+							<rich:column styleClass="colCodeOpe"><h:outputText value="#{msg['gm.ec050.el014']}" /></rich:column>
+							<rich:column styleClass="colDevise"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.devise}" ><f:converter converterId="deviseConverter" /></h:outputText></rich:column>
+
+							<rich:column styleClass="colEntite"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.entiteEmettrice}" /></rich:column>
+							<rich:column styleClass="colNbOpe"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.nombreOpeEmission}" rendered="#{suivibean.rapprochementDtManager.ligneTotal.nombreOpeEmission ge 0}" /></rich:column>
+							<rich:column styleClass="colSigne"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.signeEmission}" rendered="#{suivibean.rapprochementDtManager.ligneTotal.nombreOpeEmission ge 0}" /></rich:column>
+							<rich:column styleClass="colMontant"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.montantEmission}" rendered="#{suivibean.rapprochementDtManager.ligneTotal.nombreOpeEmission ge 0}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+
+							<rich:column styleClass="colEntite"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.entiteDestinataire}" /></rich:column>
+							<rich:column styleClass="colNbOpe"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.nombreOpeReception}" rendered="#{suivibean.rapprochementDtManager.ligneTotal.nombreOpeReception ge 0}" /></rich:column>
+							<rich:column styleClass="colSigne"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.signeReception}" rendered="#{suivibean.rapprochementDtManager.ligneTotal.nombreOpeReception ge 0}" /></rich:column>
+							<rich:column styleClass="colMontant"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.montantReception}" rendered="#{suivibean.rapprochementDtManager.ligneTotal.nombreOpeReception ge 0}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+
+							<rich:column styleClass="colNbOpe"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.nombreEcart}" rendered="#{suivibean.rapprochementDtManager.ligneTotal.nombreEcart ge 0}" /></rich:column>
+							<rich:column styleClass="colSigne"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.signeEcart}" rendered="#{suivibean.rapprochementDtManager.ligneTotal.nombreEcart ge 0}" /></rich:column>
+							<rich:column styleClass="colMontant"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.montantEcart}" rendered="#{suivibean.rapprochementDtManager.ligneTotal.nombreEcart ge 0}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+
+							<rich:column styleClass="colNbOpe"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.nombreReglReal}" rendered="#{suivibean.rapprochementDtManager.ligneTotal.nombreReglReal ge 0}" /></rich:column>
+							<!-- ASS_034: pas de montant car non signé 
+							<rich:column styleClass="colMontant"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.montantReglReal}" rendered="#{suivibean.rapprochementDtManager.ligneTotal.nombreReglReal ge 0}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+							-->
+							<rich:column styleClass="colMontant"><h:outputText value="#{suivibean.rapprochementDtManager.ligneTotal.montantReglReal}" rendered="#{suivibean.rapprochementDtManager.ligneTotal.nombreReglReal ge 0 and false}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+
+							<rich:column styleClass="colStatut"></rich:column>
+							<rich:column styleClass="colEpoc"></rich:column>
+							<rich:column styleClass="colForce"></rich:column>
+						</rich:columnGroup>
+					</f:facet>
+					<a4j:support reRender="form-boutons" id="extended_table_bean_take_selection" actionListener="#{suivibean.resetEPOC }" action="#{suivibean.rapprochementDtManager.selectRow}" event="onselectionchange" />
+				</rich:extendedDataTable>
+			</rich:panel>
+		</h:form>
+		<div id="debuglist" class="debug-info">
+			<div id="RARCVLA"><c:forEach items="#{suivibean.rapprochementDtManager.dataProvider.fullData}" var="dto"><h:outputText value="#{dto.idRapprochement}, " rendered="#{dto.type eq 'RARCVLA' }"/></c:forEach></div>
+			<div id="RARR"><c:forEach items="#{suivibean.rapprochementDtManager.dataProvider.fullData}" var="dto"><h:outputText value="#{dto.idRapprochement}, " rendered="#{dto.type eq 'RARR' }"/></c:forEach></div>
+			<div id="ECRINCRBECRIN"><c:forEach items="#{suivibean.rapprochementDtManager.dataProvider.fullData}" var="dto"><h:outputText value="#{dto.idRapprochement}, " rendered="#{dto.type eq 'ECRINCRBECRIN' }"/></c:forEach></div>
+			<div id="OTHERS - ERROR"><c:forEach items="#{suivibean.rapprochementDtManager.dataProvider.fullData}" var="dto"><h:outputText value="#{dto.idRapprochement}, "	rendered="#{empty dto.type or (!dto.type eq 'ECRINCRBECRIN' and !dto.type eq 'RARR' and !dto.type eq 'RARCVLA')}"/></c:forEach></div>
+		</div>
+	</f:view>
+</jsp:root>

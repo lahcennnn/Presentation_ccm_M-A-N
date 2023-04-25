@@ -1,0 +1,52 @@
+<!-- IE in quirks mode -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Centre Comptable Monetique – GM - Header F5</title>
+  <link rel="stylesheet" media="screen" href="./style.css" />
+  <script type="text/javascript" src="./jquery-1.4.4.min.js"></script>
+  
+  <script type="text/javascript" src="./headerF5.js"></script>
+  
+
+
+</head>
+<body>
+  <h1>Bouchon Header F5</h1>
+  <h4>A utiliser avec un navigateur moderne !</h4>
+  <br/>
+  <form id="form">
+    <table>
+      <tr>
+        <td>URL de l'appli (Couche Presentation) :</td>
+        <!-- <td><input type="text" id="appliUrl" name="appliUrl" value="http://VS0253-SDEVAA:9081/RMCI-Presentation/"/></td>  -->
+        <td><input type="text" id="appliUrl" name="appliUrl" value="http://VS0253-SDEVAA:9081/RMCI-Presentation/"/></td>
+      </tr>
+      <tr>
+        <td>Page accueil application :</td>
+        <!-- <td><input type="text" id="methodPath" name="methodPath" value="views/com/cedicam/gm/ch/menus/st000.bean"/></td>   -->
+        <td><input type="text" id="methodPath" name="methodPath" value="views/com/cedicam/gm/ch/menus/st000.bean"/></td>
+      </tr>
+      <tr>
+        <td>Adresse e-mail :</td>
+        <td>
+          <input type="text" id="email" name="email" value=""/> OU <br/>
+          <select id="emailsList" name="emailsList">
+            <option value=""></option>
+            <option selected="selected" value="nicolas.lois@capgemini.com">nicolas.lois@capgemini.com</option>
+            <option value="christine.brun@capgemini.com">christine.brun@capgemini.com</option>
+            <option value="stephane.barthalot@capgemini.com">stephane.barthalot@capgemini.com</option>
+            <option value="valery.bonnet@capgemini.com">valery.bonnet@capgemini.com</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <input type="submit" value="Envoyer"/>
+  </form>
+</body>
+</html>
+
+
+

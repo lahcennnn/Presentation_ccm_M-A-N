@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<c:set var="matrice" value="#{ecartsbean.matriceNombreEcarts}"/>
+	<h:form>
+			<table class="matriceEcarts">
+				<tr>
+					<td>
+						<h:outputLabel value=""/>				
+					</td>
+					<td>
+						<h:outputLabel value="#{msg['gm.ec110.el002-a']}"/>
+					</td>
+					<td>
+						<h:outputLabel value="#{msg['gm.ec110.el002-b']}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h:outputLabel value="#{msg['gm.ec110.el003-a']}"/>
+					</td>
+					<td>
+						<h:commandButton id="ecart00" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[0][0]}">
+							<f:attribute name="bo" value="BOA" />
+							<f:attribute name="circ" value="1" />
+						</h:commandButton>
+					</td>
+					<td>
+						<h:commandButton id="ecart10" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[1][0]}">
+							<f:attribute name="bo" value="BOE" />
+							<f:attribute name="circ" value="1" />
+						</h:commandButton>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h:outputLabel value="#{msg['gm.ec110.el003-b']}"/>
+					</td>
+					<td>
+						<h:commandButton id="ecart01" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[0][1]}">
+							<f:attribute name="bo" value="BOA" />
+							<f:attribute name="circ" value="2" />
+						</h:commandButton>
+					</td>
+					<td>
+						<h:commandButton id="ecart11" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[1][1]}">
+							<f:attribute name="bo" value="BOE" />
+							<f:attribute name="circ" value="2" />
+						</h:commandButton>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h:outputLabel value="#{msg['gm.ec110.el003-c']}"/>
+					</td>
+					<td>
+						<h:commandButton id="ecart02" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[0][2]}">
+							<f:attribute name="bo" value="BOA" />
+							<f:attribute name="circ" value="3" />
+						</h:commandButton>
+					</td>
+					<td>
+						<h:commandButton id="ecart12" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[1][2]}">
+							<f:attribute name="bo" value="BOE" />
+							<f:attribute name="circ" value="3" />
+						</h:commandButton>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h:outputLabel value="#{msg['gm.ec110.el003-d']}"/>
+					</td>
+					<td>
+						<h:commandButton id="ecart03" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[0][3]}">
+							<f:attribute name="bo" value="BOA" />
+							<f:attribute name="circ" value="4" />
+						</h:commandButton>
+					</td>
+					<td>
+						<h:commandButton id="ecart13" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[1][3]}">
+							<f:attribute name="bo" value="BOE" />
+							<f:attribute name="circ" value="4" />
+						</h:commandButton>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h:outputLabel value="#{msg['gm.ec110.el003-e']}"/>
+					</td>
+					<td>
+						<h:commandButton id="ecart04" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[0][4]}">
+							<f:attribute name="bo" value="BOA" />
+							<f:attribute name="circ" value="5" />
+						</h:commandButton>
+					</td>
+					<td>
+						<h:commandButton id="ecart14" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[1][4]}">
+							<f:attribute name="bo" value="BOE" />
+							<f:attribute name="circ" value="5" />
+						</h:commandButton>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h:outputLabel value="#{msg['gm.ec110.el003-f']}"/>
+					</td>
+					<td>
+						<h:commandButton id="ecart05" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[0][5]}">
+							<f:attribute name="bo" value="BOA" />
+							<f:attribute name="circ" value="6" />
+						</h:commandButton>
+					</td>
+					<td>
+						<h:commandButton id="ecart15" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[1][5]}">
+							<f:attribute name="bo" value="BOE" />
+							<f:attribute name="circ" value="6" />
+						</h:commandButton>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h:outputLabel value="#{msg['gm.ec110.el003-g']}"/>
+					</td>
+					<td>
+						<h:commandButton id="ecart06" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[0][6]}">
+							<f:attribute name="bo" value="BOA" />
+							<f:attribute name="circ" value="0" />
+						</h:commandButton>
+					</td>
+					<td>
+						<h:commandButton id="ecart16" value=" " actionListener="#{ecartsbean.majBoCirc }"
+							action="#{ecartsbean.lanceSuivi }" styleClass="gm-btn-ecarts" disabled="#{null == matrice[1][6]}">
+							<f:attribute name="bo" value="BOE" />
+							<f:attribute name="circ" value="0" />
+						</h:commandButton>
+					</td>
+				</tr>
+			</table>
+
+	</h:form>
+</jsp:root>

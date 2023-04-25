@@ -1,0 +1,66 @@
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<rich:modalPanel id="popupsupprimer" resizeable="false" shadowDepth="0" moveable="false"
+		rendered="#{beanName.confirmerSuppressionPhysique}"
+		showWhenRendered="#{beanName.confirmerSuppressionPhysique}">
+		<f:facet name="header">
+			<h:panelGroup>
+				<h:outputText value="#{msg['wn.commun.label.confirmation']}"></h:outputText>
+			</h:panelGroup>
+		</f:facet>
+
+		<div class="wn-popup-text"><h:outputText value="#{beanName.msgConfirmerSuppression}"></h:outputText></div>
+		<br />
+
+		<rich:panel bodyClass="wn-popup-footer" styleClass="wn-mpnl-footer">
+			<h:form>
+				<a4j:commandButton value="#{msg['wn.commun.action-o']}"
+					action="#{beanName.validerSuppressionPhysique}"
+					styleClass="wn-popup-btn">
+					<rich:componentControl for="popupsupprimer" operation="hide"
+						event="onclick" />
+				</a4j:commandButton>
+
+				<a4j:commandButton value="#{msg['wn.commun.action-n']}"
+					action="#{beanName.validerSuppressionLogique}"
+					styleClass="wn-popup-btn">
+					<rich:componentControl for="popupsupprimer" operation="hide"
+						event="onclick" />
+				</a4j:commandButton>
+			</h:form>
+		</rich:panel>
+	</rich:modalPanel>
+
+	<rich:modalPanel id="popupfermer" resizeable="false" shadowDepth="0" moveable="false"
+		rendered="#{beanName.confirmerAbandonModification}"
+		showWhenRendered="#{beanName.confirmerAbandonModification}">
+		<f:facet name="header">
+			<h:panelGroup>
+				<h:outputText value="#{msg['wn.commun.label.confirmation']}"></h:outputText>
+			</h:panelGroup>
+		</f:facet>
+		<div class="wn-popup-text"><h:outputText value="#{beanName.msgConfirmerAbandonModification}"></h:outputText></div>
+		<br />
+
+		<rich:panel bodyClass="wn-popup-footer" styleClass="wn-mpnl-footer">
+			<h:form>
+				<a4j:commandButton value="#{msg['wn.commun.action-o']}"
+					action="#{beanName.validerSortie}" styleClass="wn-popup-btn">
+				</a4j:commandButton>
+
+				<a4j:commandButton value="#{msg['wn.commun.action-n']}"
+					action="#{beanName.continuerSaisie}" styleClass="wn-popup-btn">
+					<rich:componentControl for="popupfermer" operation="hide"
+						event="onclick" />
+				</a4j:commandButton>
+			</h:form>
+		</rich:panel>
+	</rich:modalPanel>
+
+</jsp:root>

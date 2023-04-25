@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+	<f:view>
+		<h:form id="form-detailreg">
+			<rich:panel id="panelTableDetailRapprochement">
+				<rich:extendedDataTable id="table-detail-reg" value="#{suivibean.selectedRegroupementDtModel}" var="occurrence"
+						rowClasses="wn-ligne-impaire, wn-ligne-paire" noDataLabel="#{msg['wn.commun.nodata']}"
+						columnClasses="colTypeCre, colRefCompta, colZoneRap, colIdFichier, colNbOpe, colDevise, colSigne, colMontant, colDevise, colSigne, colMontant, colTopCompta, colSigne, colDate, colProcess, colTypeImpaye ">
+					<f:facet name="header">
+						<rich:columnGroup>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec062.el001'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec062.el002'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec062.el003'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec062.el004'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec062.el005'] }" /></rich:column>
+							<rich:column colspan="3"><h:outputText value="#{msg['gm.ec062.el006'] }" /></rich:column>
+							<rich:column colspan="3"><h:outputText value="#{msg['gm.ec062.el007'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec062.el008'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec062.el009'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec062.el010'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec062.el011'] }" /></rich:column>
+							<rich:column breakBefore="true" ><h:outputText value="#{msg['gm.ec062.el006-a'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec062.el006-b'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec062.el006-c'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec062.el007-a'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec062.el007-b'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec062.el007-c'] }" /></rich:column>
+						</rich:columnGroup>
+					</f:facet>
+					<rich:column width="6%"><h:outputText value="#{occurrence.typeCre}" /></rich:column>
+					<rich:column width="10%"><h:outputText value="#{occurrence.refComptable}"/></rich:column>
+					<rich:column width="8%"><h:outputText value="#{occurrence.zoneRapprochement}" /></rich:column>
+					<rich:column width="10%"><h:outputText value="#{occurrence.refFicOpeEcrin}" /></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.nbOperations}" /></rich:column>
+					<rich:column width="5%"><h:outputText value="#{occurrence.deviseRglmt}" ><f:converter converterId="deviseConverter" /></h:outputText></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.signeRglmt}" /></rich:column>
+					<rich:column width="11%"><h:outputText value="#{occurrence.sommeMontantRglmt}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+					<rich:column width="5%"><h:outputText value="#{occurrence.deviseTrans}" ><f:converter converterId="deviseConverter" /></h:outputText></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.signeTrans}" /></rich:column>
+					<rich:column width="11%"><h:outputText value="#{occurrence.sommeMontantTrans}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.topCompta}" /></rich:column>
+					<rich:column width="6%"><h:outputText value="#{occurrence.dateRglmt}"  ><f:converter converterId="dateConverter" /></h:outputText></rich:column>
+					<rich:column width="7%"><h:outputText value="#{occurrence.processingCode}" /></rich:column>
+					<rich:column width="6%"><h:outputText value="#{occurrence.typeImpaye}" /></rich:column>
+				</rich:extendedDataTable>
+			</rich:panel>
+		</h:form>
+	</f:view>
+</jsp:root>

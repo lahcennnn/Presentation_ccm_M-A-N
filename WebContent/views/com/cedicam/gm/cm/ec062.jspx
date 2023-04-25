@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<f:view>
+		<h:form id="form-detailrap">
+			<rich:panel id="panelTableDetailRapprochement">
+				<rich:extendedDataTable id="table-rap"	 value="#{suivibean.selectedRapprochementDtModel}" var="occurrence"
+						enableContextMenu="false"  rowClasses="wn-ligne-impaire-bis, wn-ligne-paire-bis" noDataLabel="#{msg['wn.commun.nodata']}"
+						columnClasses="colCodeOpe, colDevise, colEntite, colNbOpe, colSigne, colMontant, colEntite, colNbOpe, colSigne, colMontant, colNbOpe, colSigne, colMontant, colNbOpe, colMontant, colStatut, colEpoc, colForce ">
+					<f:facet name="header">
+						<rich:columnGroup>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec050.el002'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec050.el004'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec050.el005'] }" /></rich:column>
+							<rich:column colspan="3"><h:outputText value="#{msg['gm.ec050.el006'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec050.el007'] }" /></rich:column>
+							<rich:column colspan="3"><h:outputText value="#{msg['gm.ec050.el008'] }" /></rich:column>
+							<rich:column colspan="3"><h:outputText value="#{msg['gm.ec050.el009'] }" /></rich:column>
+							<rich:column colspan="2"><h:outputText value="#{msg['gm.ec050.el010'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec050.el011'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec050.el012'] }" /></rich:column>
+							<rich:column rowspan="2"><h:outputText value="#{msg['gm.ec050.el013'] }" /></rich:column>
+							<rich:column breakBefore="true" ><h:outputText value="#{msg['gm.ec050.el006-a'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec050.el006-b'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec050.el006-c'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec050.el008-a'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec050.el008-b'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec050.el008-c'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec050.el009-a'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec050.el009-b'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec050.el009-c'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec050.el010-a'] }" /></rich:column>
+							<rich:column><h:outputText value="#{msg['gm.ec050.el010-b'] }" /></rich:column>
+						</rich:columnGroup>
+					</f:facet>
+
+					<rich:column width="4%">
+						<h:outputText value="#{occurrence.codeOperationNfcca}"  styleClass="tab_val_code" />
+						<span class="debug-info"><h:outputText value="#{occurrence.idRapprochement}" /> <h:outputText value="#{occurrence.type}" /></span>
+					</rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.devise}"><f:converter converterId="deviseConverter" /></h:outputText></rich:column>
+
+					<rich:column width="5%"><h:outputText value="#{occurrence.entiteEmettrice}" /></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.nombreOpeEmission}" /></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.signeEmission}" /></rich:column>
+					<rich:column width="10%"><h:outputText value="#{occurrence.montantEmission}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+
+					<rich:column width="5%"><h:outputText value="#{occurrence.entiteDestinataire}" /></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.nombreOpeReception}" /></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.signeReception}" /></rich:column>
+					<rich:column width="10%"><h:outputText value="#{occurrence.montantReception}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+
+					<rich:column width="4%">
+						<div class="#{!occurrence.force and !(occurrence.idStatut eq '2') ? 'withEcart' : 'withoutEcart'}">
+							<h:outputText value="#{occurrence.nombreEcart}" />
+						</div>
+					</rich:column>
+					<rich:column width="4%">
+						<div class="#{!occurrence.force and !(occurrence.idStatut eq '2') ? 'withEcart' : 'withoutEcart'}">
+							<h:outputText value="#{occurrence.signeEcart}" />
+						</div>
+					</rich:column>
+					<rich:column width="10%">
+						<div class="#{!occurrence.force and !(occurrence.idStatut eq '2') ? 'withEcart' : 'withoutEcart'}">
+							<h:outputText value="#{occurrence.montantEcart}" ><f:converter converterId="montantConverter" /></h:outputText>
+						</div>
+					</rich:column>
+
+					<rich:column width="4%"><h:outputText value="#{occurrence.nombreReglReal}" /></rich:column>
+					<rich:column width="10%"><h:outputText value="#{occurrence.montantReglReal}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+
+					<rich:column width="5%"><rich:toolTip direction="top-right" showDelay="300" layout="block"><h:outputText value="#{occurrence.idStatut}"><f:converter converterId="statutConverterToolTip" /></h:outputText></rich:toolTip><h:outputText value="#{occurrence.idStatut}"><f:converter converterId="statutConverter" /></h:outputText></rich:column>
+					<rich:column width="5%"><h:outputText value="#{occurrence.idIncEPOC}" /></rich:column>
+					<rich:column width="5%"><rich:toolTip direction="top-right" showDelay="300" layout="block"><h:outputText value="#{occurrence.force?'Oui':'Non'}"/></rich:toolTip><h:outputText value="#{occurrence.force?'O':'N'}" /></rich:column>
+				</rich:extendedDataTable>
+			</rich:panel>
+		</h:form>
+	</f:view>
+</jsp:root>

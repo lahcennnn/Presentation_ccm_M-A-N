@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+<f:view>
+	<ui:composition template="/themes/cedicam/template/conteneur#{modeAffichage}.jspx">
+		<ui:param name="dataBean" value="#{suivibean}" />
+		<ui:define name="titre_ecran"><h:outputText value="#{msg['gm.ec070.el000']}" /></ui:define>
+		<ui:define name="code_ecran"><h:outputText value="EC070" /></ui:define>
+		<ui:define name="date_application">
+			<h:outputText value="#{suivibean.dateApplication}"><f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" /></h:outputText>
+		</ui:define>
+		<ui:define name="contenu_ecran">
+
+<script>
+function togglePanel(idPanel){
+	var panel = $(idPanel);
+	if( panel.style.display=='none'){
+		panel.style.display='block';
+	}else {
+		panel.style.display='none';
+	}
+}
+</script>
+
+			<div id="panelRapSummary" class="subpanel-panel">
+				<div style=" width: 100%; height: 100%; border: solid rgb(211, 223, 255) 1px; ">
+					<h:form styleClass="form-paginator">
+						<div class="subpanel-upperbar">
+							<div class="subpanel-upperbar-title">
+								<h:outputText value="#{msg['gm.ec070.el001'] }"/>
+							</div>
+							<div class="subpanel-upperbar-buttons"><a href="#" onclick="togglePanel('panelRapSummary-content');">[+/-]</a></div>
+						</div>
+					</h:form>
+					<div id="panelRapSummary-content" style="overflow: hidden; clear: both;" class="rich-panel">
+						<ui:include src="/views/com/cedicam/gm/cm/ec062.jspx" />
+					</div>
+				</div>
+			</div>
+
+			<div id="panelRegSummary" class="subpanel-panel">
+				<div style=" width: 100%; height: 100%; border: solid rgb(211, 223, 255) 1px; ">
+					<h:form styleClass="form-paginator">
+						<div class="subpanel-upperbar">
+							<div class="subpanel-upperbar-title">
+								<h:outputText value="#{msg['gm.ec070.el002'] }"/>
+							</div>
+							<div class="subpanel-upperbar-buttons"><a href="#" onclick="togglePanel('panelRegSummary-content');">[+/-]</a></div>
+						</div>
+					</h:form>
+					<div id="panelRegSummary-content" style="overflow: hidden; clear: both;" class="rich-panel">
+						<ui:include src="/views/com/cedicam/gm/cm/ec071.jspx" />
+					</div>
+				</div>
+			</div>
+
+			<div id="panelReg" class="subpanel-panel">
+				<div style="width: 100%; height: 100%; border: solid rgb(211, 223, 255) 1px; ">
+					<h:form styleClass="form-paginator">
+						<div class="subpanel-upperbar">
+							<div class="subpanel-upperbar-title">
+								<h:outputText value="#{msg['gm.ec070.el003'] }"/>
+								<h:commandLink action="#{suivibean.genererRapport}">
+									<h:graphicImage value="/themes/cedicam/template/img/excel16.png" alt="Export CSV"/>
+									<f:param name="format" value="CSV" />
+									<f:param name="typeRapport" value="DETAIL_REGROUP" />
+								</h:commandLink>
+								<h:commandLink action="#{suivibean.imprimer}" target="printPage">
+									<h:graphicImage value="/themes/cedicam/template/img/print16.png" alt="Impression"/>
+									<f:param name="typeRapport" value="DETAIL_REGROUP" />
+								</h:commandLink>
+							</div>
+							<div class="subpanel-upperbar-buttons"><a href="#" onclick="togglePanel('panelRegEm-content');">[+/-]</a></div>
+						</div>
+					</h:form>
+					<div id="panelRegEm-content" style="word-wrap: break-word; overflow: hidden; clear: both;" class="rich-panel">
+						<ui:include src="/views/com/cedicam/gm/cm/ec072.jspx"/>
+					</div>
+				</div>
+			</div>
+			<h:form id="form-boutons">
+				<rich:panel styleClass="gm-panel-no-border" bodyClass="gm-btn-panel">
+					<h:commandButton id="retour" value="#{msg['gm.commun.retour'] }" action="#{suivibean.fermerDetailRegroupement }" styleClass="wn-btn-aspect"/>
+				</rich:panel>
+			</h:form>
+		</ui:define>
+		
+			
+	</ui:composition>
+</f:view>
+</jsp:root>

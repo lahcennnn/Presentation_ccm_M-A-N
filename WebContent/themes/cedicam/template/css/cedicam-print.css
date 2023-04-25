@@ -1,0 +1,61 @@
+@page { size:landscape;size: 21.0cm;}
+@media Print { .rotator {filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1)} }
+
+/***************************/
+/** STYLE PRINT GENERIQUE **/
+/***************************/
+
+body { 
+  width: auto!important; 
+  margin: auto!important; 
+  font-family: serif; 
+  font-size: 12pt; 
+  background-color: #fff!important; 
+  color: #000!important; 
+} 
+p, h1, h2, h3, h4, h5, h6, blockquote, ul, ol { 
+  color: #000!important; 
+  margin: auto!important; 
+} 
+.print { 
+  display: block; /* affichage des éléments de classe print */ 
+} 
+p, blockquote { 
+  orphans: 3; /* pas de ligne seule en bas */ 
+  widows: 3; /* pas de ligne seule en haut */ 
+} 
+blockquote, ul, ol { 
+  page-break-inside: avoid; /* pas de coupure dans ces élements */ 
+} 
+h1 { 
+  page-break-before: always; /* chaque titre commence sur une nouvelle page */ 
+} 
+h1, h2, h3, caption { 
+  page-break-after: avoid; /* pas de saut après ces éléments */ 
+} 
+a { 
+  color: #000!important; 
+  text-decoration: underline!important; 
+} 
+a[href]:after { 
+  content: " (" attr(href) ")"; /* affichage des URL des liens */ 
+}
+
+
+/***************************************/
+/** STYLE PRINT SPECIFIQUE CEDICAM WN **/
+/***************************************/
+body {font-family: Arial,Verdana,sans-serif;}
+
+#header-application form {display: none;}
+#header-ariane {display: none;}
+#header-information-user, #header-information-deconnect {display: none;}
+.wn-btn-panel {display: none;}
+.extdt-header-sort-img{display: none;}
+
+#page-title{color: #444; font-size: 22px; font-weight: bold;}
+#main table td.extdt-cell {border-bottom: 1px solid #888;}
+
+.rich-datascr-button {display: none;}
+.rich-datascr-act {color: #000; font-weight: bold;}
+.rich-datascr-inact {color: #888;}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<f:view>
+		<ui:composition template="/themes/cedicam/template/conteneur.jspx">
+			<ui:param name="dataBean" value="#{st000}"/>
+
+			<ui:define name="titre_ecran">
+				<h:outputText value="#{msg['wn.st000.el001']}" />
+			</ui:define>
+			
+			<ui:define name="code_ecran">
+				<h:outputText value="ST000" />
+			</ui:define>
+			
+			<ui:define name="date_application">
+				<h:outputText value="#{st000.dateApplication}">
+					<f:convertDateTime type="date" pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
+				</h:outputText>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</jsp:root>

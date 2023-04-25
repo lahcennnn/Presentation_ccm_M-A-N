@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<f:view>
+		<c:set var="search" value="#{suivibean.searchManager}"/>
+		<h:form id="formrecherche" >
+		
+			<h:panelGrid  id="tableRechercheForm" columns="7" columnClasses="searchColGroup1, searchColGroup2,searchColGroup3,
+				searchColGroup6,searchColGroup7,searchColGroup8,searchColGroup9">
+
+				<h:outputLabel value="#{msg['gm.ec040.el002-a']}" title="#{msg['gm.commun.formatdate'] }" for="debutEch" />
+				<h:outputLabel value=":" for="debutEch" />
+				<h:panelGroup>
+				<h:panelGrid columns="3" columnClasses="searchColGroup31,searchColGroup32,searchColGroup33">
+					<rich:calendar id="debutEch" value="#{search.criteres.dateDebutEchange}" styleClass="form-dateinput" datePattern="dd/MM/yyyy" enableManualInput="#{true}" title="#{msg['gm.commun.formatdate'] }"
+						label="#{msg['gm.ec040.el002-a']}"	maxlength="#{champ['commun.date.maxLength']}"	monthLabels="#{msg['gm.commun.mois.calendrier']}" todayControlMode="hidden"
+						required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.datedebutechange'] } - #{msg['gm.error.datenull'] }">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+						<f:converter converterId="dateConverter" />
+						<a4j:support immediate="true" event="onchanged" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons"/>
+					</rich:calendar>
+					<h:inputText id="heureDebut" value="#{search.heureEchangeDebut}" size="5" label="#{msg['gm.ec040.el002-a']}" title="HH:MM" maxlength="5"
+						required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.heuredebutechange'] } - #{msg['gm.error.datenull'] }">
+						<f:validator validatorId="ccmHeureValidator"/>
+					</h:inputText>
+					<h:outputLabel styleClass="wn-couleur-obligatoire" for="debutEch" >&#10041;</h:outputLabel>
+				</h:panelGrid>
+				</h:panelGroup>
+				<h:outputText value="" />
+				<h:outputLabel value="#{msg['gm.ec040.el006']}" for="selectReseau"/>
+				<h:outputLabel value=":" for="selectReseau"/>
+				<h:selectOneMenu value="#{search.criteres.reseau}" id="selectReseau" label="#{msg['gm.ec040.el006']}">
+					<f:selectItems value="#{search.listReseau}" />
+					<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.changePrimary}"  reRender="panelCritSec, panelRapprochements, form-boutons"/>
+				</h:selectOneMenu>
+
+				<h:outputText value="" />
+				<h:outputText value="" />
+				<h:panelGroup>
+					<h:panelGrid id="formRechercheGuideDate1" columns="3" columnClasses="searchColGroup31,searchColGroup32,searchColGroup33">
+						<h:outputText styleClass="gm-rappel-date" value="#{msg['gm.commun.formatdate'] }"/>
+						<h:outputText styleClass="gm-rappel-date" value="#{msg['gm.commun.formatheure'] }"/>
+						<h:outputText value="" />
+					</h:panelGrid>
+				</h:panelGroup>
+				<h:outputText value="" />
+				<h:outputText value="" />
+				<h:outputText value="" />
+				<h:outputText value="" />
+
+				<h:outputLabel value="#{msg['gm.ec040.el002-b']}" for="finEch" />
+				<h:outputLabel value=":" for="finEch"/>
+				<h:panelGroup>
+					<h:panelGrid columns="3" columnClasses="searchColGroup31,searchColGroup32,searchColGroup33">
+						<rich:calendar id="finEch" value="#{search.criteres.dateFinEchange}" styleClass="form-dateinput"	datePattern="dd/MM/yyyy" enableManualInput="#{true}" title="#{msg['gm.commun.formatdate'] }"
+								label="#{msg['gm.ec040.el002-b-long']}"	maxlength="#{champ['commun.date.maxLength']}"	monthLabels="#{msg['gm.commun.mois.calendrier']}" todayControlMode="hidden"
+								required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.datefinechange'] } - #{msg['gm.error.datenull'] }">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+							<f:converter converterId="dateConverter" />
+							<a4j:support immediate="true" event="onchanged" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons"/>
+						</rich:calendar>
+						<h:inputText id="heureFin" value="#{search.heureEchangeFin}" size="5" label="#{msg['gm.ec040.el002-b-long']}" title="HH:MM" maxlength="5"
+							required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.heurefinechange'] } - #{msg['gm.error.datenull'] }">
+							<f:validator validatorId="ccmHeureValidator"/>
+						</h:inputText>
+					<h:outputLabel styleClass="wn-couleur-obligatoire" for="finEch" >&#10041;</h:outputLabel>
+					</h:panelGrid>
+				</h:panelGroup>
+				<h:outputText value="" />
+				<h:outputLabel value="#{msg['gm.ec040.el007']}" for="selectSens"/>
+				<h:outputLabel value=":" for="selectSens"/>
+				<h:selectOneMenu value="#{search.criteres.sens}" id="selectSens" label="#{msg['gm.ec040.el007']}">
+					<f:selectItems value="#{search.listSens}" />
+					<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons"/>
+				</h:selectOneMenu>
+
+				<h:outputLabel value="#{msg['gm.ec040.el003-a']}"  for="debutDateConv"/>
+				<h:outputLabel value=":" for="debutDateConv"/>
+				<h:panelGroup>
+					<h:panelGrid columns="3" columnClasses="searchColGroup31,searchColGroup32,searchColGroup33">
+						<rich:calendar id="debutDateConv" value="#{search.criteres.dateDebutConvRef}" styleClass="form-dateinput"	datePattern="dd/MM/yyyy" enableManualInput="#{true}" title="#{msg['gm.commun.formatdate'] }"
+							label="#{msg['gm.ec040.el003-a']}"	maxlength="#{champ['commun.date.maxLength']}"	monthLabels="#{msg['gm.commun.mois.calendrier']}"  todayControlMode="hidden">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+							<f:converter converterId="dateConverter" />
+							<a4j:support immediate="true" event="onchanged" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons"/>
+						</rich:calendar>
+						<h:outputLabel value="#{msg['gm.ec040.el003-b']}" for="finDateConv" />
+						<rich:calendar id="finDateConv" value="#{search.criteres.dateFinConvRef}" styleClass="form-dateinput"	datePattern="dd/MM/yyyy" enableManualInput="#{true}" title="#{msg['gm.commun.formatdate'] }"
+							label="#{msg['gm.ec040.el003-b-long']}"	maxlength="#{champ['commun.date.maxLength']}" todayControlMode="hidden"	monthLabels="#{msg['gm.commun.mois.calendrier']}">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+							<f:converter converterId="dateConverter" />
+							<a4j:support immediate="true" event="onchanged" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons"/>
+						</rich:calendar>
+					</h:panelGrid>
+				</h:panelGroup>
+				<h:outputText value="" />
+				<h:outputLabel value="#{msg['gm.ec040.el008']}" for="selectBO"/>
+				<h:outputLabel value=":" for="selectBO"/>
+				<h:selectOneMenu value="#{search.criteres.backOffice}" id="selectBO"	label="#{msg['gm.ec040.el008']}">
+					<f:selectItems value="#{search.listBO}" />
+					<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons"/>
+				</h:selectOneMenu>
+
+				<h:outputText value="" />
+				<h:outputText value="" />
+				<h:panelGroup>
+					<h:panelGrid id="formRechercheGuideDate2" columns="3" columnClasses="searchColGroup31,searchColGroup32,searchColGroup33">
+						<h:outputText styleClass="gm-rappel-date" value="#{msg['gm.commun.formatdate'] }"/>
+						<h:outputText value="" />
+						<h:outputText styleClass="gm-rappel-date" value="#{msg['gm.commun.formatdate'] }"/>
+					</h:panelGrid>
+				</h:panelGroup>
+				<h:outputText value="" />
+				<h:outputText value="" />
+				<h:outputText value="" />
+				<h:outputText value="" />
+
+				<h:outputLabel value="#{msg['gm.ec040.el004-a']}" for="debutDateReg" />
+				<h:outputLabel value=":" for="debutDateReg"/>
+				<h:panelGroup>
+				<h:panelGrid columns="3" columnClasses="searchColGroup31,searchColGroup32,searchColGroup33">
+				<rich:calendar id="debutDateReg" value="#{search.criteres.dateDebutReglement}" styleClass="form-dateinput"	datePattern="dd/MM/yyyy" enableManualInput="#{true}" title="#{msg['gm.commun.formatdate'] }"
+					label="#{msg['gm.ec040.el004-a']}" todayControlMode="hidden" maxlength="#{champ['commun.date.maxLength']}"	monthLabels="#{msg['gm.commun.mois.calendrier']}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+					<f:converter converterId="dateConverter" />
+					<a4j:support immediate="true" event="onchanged" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons"/>
+				</rich:calendar>
+				<h:outputLabel value="#{msg['gm.ec040.el004-b']}" for="finDateReg" />
+				<rich:calendar id="finDateReg" value="#{search.criteres.dateFinReglement}" styleClass="form-dateinput"	datePattern="dd/MM/yyyy" enableManualInput="#{true}" title="#{msg['gm.commun.formatdate'] }"
+					label="#{msg['gm.ec040.el004-b-long']}" todayControlMode="hidden" maxlength="#{champ['commun.date.maxLength']}"	monthLabels="#{msg['gm.commun.mois.calendrier']}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+					<f:converter converterId="dateConverter" />
+					<a4j:support immediate="true" event="onchanged" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons"/>
+				</rich:calendar>
+				</h:panelGrid>
+				</h:panelGroup>
+				<h:outputText value="" />
+				<h:outputLabel value="#{msg['gm.ec040.el009']}" for="selectStatut"/>
+				<h:outputLabel value=":" for="selectStatut"/>
+				<h:selectOneMenu value="#{search.criteres.statutRapprochement}" id="selectStatut" label="#{msg['gm.ec040.el009']}">
+					<f:selectItems value="#{search.listStatut}" />
+					<a4j:support event="onchange" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons, btCrit, panelIndicateurForcage"/>
+				</h:selectOneMenu>
+
+
+				<h:outputLabel value="#{msg['gm.ec040.el005']}" for="selectChef"  />
+				<h:outputLabel value=":" for="selectChef"/>
+				<h:selectOneMenu value="#{search.criteres.chefDeFile}" id="selectChef" label="#{msg['gm.ec040.el005']}" >
+					<f:selectItems value="#{search.listChefDeFile}" />
+					<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons"/>
+				</h:selectOneMenu>
+				<h:outputText value="" />
+				<h:outputLabel value="#{msg['gm.ec040.el010']}" for="selectDevise"  />
+				<h:outputLabel value=":" for="selectDevise"/>
+				<h:selectOneMenu value="#{search.criteres.devRegCompt}" id="selectDevise" label="#{msg['gm.ec040.el010']}">
+					<f:selectItems value="#{search.listDevise}" />
+					<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons"/>
+				</h:selectOneMenu>
+
+				<h:outputLabel value="#{msg['gm.ec040.el022']}" for="selectIndicateurForcage"  />
+				<h:outputLabel value=":" for="selectIndicateurForcage"/>
+				<h:panelGroup id="panelIndicateurForcage">
+				<h:selectOneMenu value="#{search.criteres.forceStr}" id="selectIndicateurForcage" label="#{msg['gm.ec040.el022']}" disabled="#{search.criteres.statutRapprochement eq 2 or search.criteres.statutRapprochement eq 6 or search.criteres.statutRapprochement eq 7 }">
+					<f:selectItems value="#{search.listForcage}" />
+					<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons"/>
+				</h:selectOneMenu>
+				</h:panelGroup>
+				<h:outputText value="" />
+				<h:outputText value="" />
+				<h:outputText value="" />
+				<h:outputText value="" />
+
+
+			</h:panelGrid>
+			<rich:panel id="panelCritSec" styleClass="panelCritSec">
+				<rich:panel styleClass="panelSeparator" rendered="#{search.criteresSecondaires}">
+					<hr class="form-separator"/>
+				</rich:panel>
+				<h:panelGrid columns="7" columnClasses="searchColGroup1, searchColGroup2,searchColGroup3,
+				searchColGroup6,searchColGroup7,searchColGroup8,searchColGroup9" rendered="#{search.criteresSecondaires}">
+							<c:if test="#{search.reseauInter }">
+								<h:outputLabel value="#{msg['gm.ec040.el011']}" for="selectEntEchE" />
+								<h:outputLabel value=":" for="selectEntEchE"/>
+								<h:selectOneMenu value="#{search.criteres.entiteEchangeE}" id="selectEntEchE" label="#{msg['gm.ec040.el011']}">
+									<f:selectItems value="#{search.listEntiteEchangeEmettrice}" />
+									<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.resetResult}" reRender="panelRapprochements, form-boutons, btCrit" />
+								</h:selectOneMenu>
+								<h:outputLabel value="" for="selectEntEchD"/>
+								<h:outputLabel value="#{msg['gm.ec040.el012']}" for="selectEntEchD" />
+								<h:outputLabel value=":" for="selectEntEchD"/>
+								<h:selectOneMenu value="#{search.criteres.entiteEchangeD}" id="selectEntEchD" label="#{msg['gm.ec040.el012']}">
+									<f:selectItems value="#{search.listEntiteEchangeDestinataire}" />
+									<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.resetResult}" reRender="panelRapprochements, form-boutons, btCrit" />
+								</h:selectOneMenu>
+
+								<h:outputLabel value="#{msg['gm.ec040.el013']}" for="selectEntCptE" />
+								<h:outputLabel value=":" for="selectEntCptE"/>
+								<h:selectOneMenu value="#{search.criteres.entiteComptaE}" id="selectEntCptE" label="#{msg['gm.ec040.el013']}">
+									<f:selectItems value="#{search.listEntiteComptaEmettrice}" />
+									<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.resetResult}" reRender="panelRapprochements, form-boutons, btCrit" />
+								</h:selectOneMenu>
+								<h:outputLabel value="" for="selectEntCptD"/>
+								<h:outputLabel value="#{msg['gm.ec040.el014']}" for="selectEntCptD" />
+								<h:outputLabel value=":" for="selectEntCptD"/>
+								<h:selectOneMenu value="#{search.criteres.entiteComptaD}" id="selectEntCptD" label="#{msg['gm.ec040.el014']}">
+									<f:selectItems value="#{search.listEntiteComptaDestinataire}" />
+									<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.resetResult}" reRender="panelRapprochements, form-boutons, btCrit" />
+								</h:selectOneMenu>
+
+							</c:if>
+
+							<c:if test="#{search.reseauAutre or (search.reseauTous and !search.sensTous) }">
+								<h:outputLabel value="#{msg['gm.ec040.el015']}" for="selectEntEch"  />
+								<h:outputLabel value=":" for="selectEntEch"/>
+								<h:selectOneMenu value="#{search.criteres.entiteEchange}" id="selectEntEch" label="#{msg['gm.ec040.el015']}">
+									<f:selectItems value="#{search.listEntiteEchange}" />
+									<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.resetResult}" reRender="panelRapprochements, form-boutons, btCrit" />
+								</h:selectOneMenu>
+								<h:outputLabel value="" for="selectEntCpt"/>
+								<h:outputLabel value="#{msg['gm.ec040.el016']}" for="selectEntCpt"  />
+								<h:outputLabel value=":" for="selectEntCpt"/>
+								<h:selectOneMenu value="#{search.criteres.entiteCompta}" id="selectEntCpt"	label="#{msg['gm.ec040.el016']}">
+									<f:selectItems value="#{search.listEntiteCompta}" />
+									<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.resetResult}" reRender="panelRapprochements, form-boutons, btCrit" />
+								</h:selectOneMenu>
+
+							</c:if>
+
+							<h:outputLabel value="#{msg['gm.ec040.el017']}" for="selectIdFic"  />
+							<h:outputLabel value=":" for="selectIdFic"/>
+							<h:selectOneMenu value="#{search.criteres.idFichierRefRemise}" id="selectIdFic" label="#{msg['gm.ec040.el017']}" >
+								<f:selectItems value="#{search.listFichierReferenceRemise}" />
+								<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.resetResult}" reRender="panelRapprochements, form-boutons, btCrit" />
+							</h:selectOneMenu>
+							<h:outputLabel value="" for="selectCodeOp"/>
+							<h:outputLabel value="#{msg['gm.ec040.el018']}" for="selectCodeOp"  />
+							<h:outputLabel value=":" for="selectCodeOp"/>
+							<h:selectOneMenu value="#{search.criteres.codeOpeNfcca}" id="selectCodeOp" label="#{msg['gm.ec040.el018']}" >
+								<f:selectItems value="#{search.listCodeOperationNfcca}" />
+								<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.resetResult}" reRender="panelRapprochements, form-boutons, btCrit" />
+							</h:selectOneMenu>
+
+							<h:outputLabel value="#{msg['gm.ec040.el019']}" for="selectRefCpt"  />
+							<h:outputLabel value=":" for="selectRefCpt"/>
+							<h:selectOneMenu value="#{search.criteres.referenceComptable}" id="selectRefCpt" label="#{msg['gm.ec040.el019']}" >
+								<f:selectItems value="#{search.listReferenceComptable}" />
+								<a4j:support immediate="true" event="onchange" actionListener="#{suivibean.resetResult}" reRender="panelRapprochements, form-boutons, btCrit" />
+							</h:selectOneMenu>
+							<h:outputLabel value="" for="retablir"/>
+							<h:outputLabel value="" for="retablir"/>
+							<h:outputLabel value="" for="retablir"/>
+							<h:commandButton id="retablir" value="#{msg['gm.ec040.el020']}"	action="#{suivibean.retablir}" styleClass="gm-btn-aspect" />
+
+				</h:panelGrid>
+				<rich:panel styleClass="panelSeparator" rendered="#{search.criteresSecondaires}">
+					<hr class="form-separator"/>
+				</rich:panel>
+			</rich:panel>
+			
+			<rich:panel id="btCrit" styleClass="search_buttons_panel_no_margin">
+				<h:panelGroup styleClass="form-buttons">
+					<a4j:commandButton id="initialiser" value="#{msg['gm.ec040.el021']}" action="#{suivibean.resetBloc}" immediate="true" reRender="panelCritSec, tableRechercheForm, panelRapprochements, form-boutons" styleClass="gm-btn-aspect" />
+					<h:commandButton id="rechercher" value="#{msg['gm.ec040.el023']}" action="#{suivibean.rechercher}" disabled="#{not suivibean.autoriseRechercher}" styleClass="gm-btn-aspect" />
+					<a4j:commandButton id="refreshPanels" value="refreshPanels" immediate="true" ajaxSingle="true" actionListener="#{suivibean.changePrimary}" reRender="panelCritSec, panelRapprochements, form-boutons" style="display:none" />						
+				</h:panelGroup>
+			</rich:panel>
+		</h:form>
+
+		<script>
+			function changeStatut(){
+				var selectStatut = document.getElementById('formrecherche:selectStatut');
+				var selectForcage = document.getElementById('formrecherche:selectIndicateurForcage');
+				var valStatut = selectStatut.options[selectStatut.selectedIndex].value;
+				if(valStatut=='2' || valStatut=='6' || valStatut=='7'){
+					selectForcage.disabled = 'disabled';
+					selectForcage.selectedIndex = 0;
+				}else{
+					selectForcage.disabled = '';
+				}
+			}
+			changeStatut();
+		</script>
+		<script type="text/javascript">
+        //<![CDATA[
+			var rechercherPressed = 0;
+			var mouseDown = 0;
+			
+			addLoadEvent(
+				function() {
+					// Initialisation des variables
+					rechercherPressed = 0;
+					mouseDown = 0;
+					
+					// Récupération du formulaire
+					var formRechercher = document.getElementById('formrecherche');
+					
+					// Ajout d'un event listener sur les input text
+					var inputElements = formRechercher.getElementsByTagName('input');
+					for (var i = 0; i < inputElements.length; i++) {
+						if (inputElements[i].type == 'text') {
+							var inputText = inputElements[i];
+							addEventHandler(inputText, 'change', actionEventChange);
+						}
+					}
+					
+					// Ajout d'un event listener sur le mousedown du bouton rechercher
+					var boutonRechercher = document.getElementById('formrecherche:rechercher');
+					addEventHandler(boutonRechercher, 'mousedown', function() { rechercherPressed = 1; });
+					
+					// Ajout des events sur le mousedown et mouseup du document
+					addEventHandler(document, 'mousedown', function() { ++mouseDown; });
+					addEventHandler(document, 'mouseup', function() { --mouseDown; });
+				}
+			);
+			
+			// Action onChange
+			function actionEventChange() {
+				if (mouseDown > 0) {
+					addEventHandler(document, 'mouseup', actionEventMouseUp);
+				}
+			}
+			
+			// Action onMouseUp
+			function actionEventMouseUp(e) {
+				if (!e) { e = window.event; } // IE 8 or previous
+				
+				var target = null;
+				if (e.target) {
+					target = e.target;
+				} else if (e.srcElement) {
+					target = e.srcElement; // IE 8 or previous
+				}
+ 				
+				if (target && target.id != 'formrecherche:rechercher' || rechercherPressed == 0) {
+					rechercherPressed = 0;
+					document.getElementById('formrecherche:refreshPanels').click();
+				}
+				removeEventHandler(document, 'mouseup', actionEventMouseUp);
+			}
+	  	//]]>	
+		</script>
+	</f:view>
+</jsp:root>

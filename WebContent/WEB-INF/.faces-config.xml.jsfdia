@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#tva#rf061.jspx"
+  PATH="/views/com/cedicam/gm/cv/tva/rf061.jspx" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#views#com#cedicam#gm#cv#tva#rf061.jspx:0"
+   NAME="item" PATH="/views/com/cedicam/gm/cv/tva/rf061.jspx" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="modifier::#views#com#cedicam#gm#cv#tva#rf062.jspx" NAME="output"
+    PATH="/views/com/cedicam/gm/cv/tva/rf062.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#tva#rf062.jspx"
+    TITLE="modifier" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#tva#rf062.jspx"
+  PATH="/views/com/cedicam/gm/cv/tva/rf062.jspx" SHAPE="240,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#views#com#cedicam#gm#cv#tva#rf062.jspx:0"
+   NAME="item" PATH="/views/com/cedicam/gm/cv/tva/rf062.jspx" model-entity="JSFProcessItem"/>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#*"
+  PATH="/views/com/cedicam/gm/*" SHAPE="64,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#views#com#cedicam#gm#*:0" NAME="item"
+   PATH="/views/com/cedicam/gm/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="ac031::#views#com#cedicam#gm#mc#acquisitionbehalf#ac031.jspx"
+    NAME="output"
+    PATH="/views/com/cedicam/gm/mc/acquisitionbehalf/ac031.jspx"
+    TARGET="rules:#views#com#cedicam#gm#mc#acquisitionbehalf#ac031.jspx"
+    TITLE="ac031" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ac021::#views#com#cedicam#gm#mc#acquisitionfees#ac021.jspx"
+    NAME="output"
+    PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac021.jspx"
+    TARGET="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac021.jspx"
+    TITLE="ac021" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ac011::#views#com#cedicam#gm#cv#xxx#ac011.jspx" NAME="output1"
+    PATH="/views/com/cedicam/gm/cv/xxx/ac011.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#ac011.jspx" TITLE="ac011" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ra021::#views#com#cedicam#gm#cv#xxx#ra021.jspx" NAME="output2"
+    PATH="/views/com/cedicam/gm/cv/xxx/ra021.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#ra021.jspx" TITLE="ra021" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ra011::#views#com#cedicam#gm#cv#xxx#ra011.jspx" NAME="output3"
+    PATH="/views/com/cedicam/gm/cv/xxx/ra011.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#ra011.jspx" TITLE="ra011" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rl0a1::#views#com#cedicam#gm#cv#xxx#rl0a1.jspx" NAME="output4"
+    PATH="/views/com/cedicam/gm/cv/xxx/rl0a1.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#rl0a1.jspx" TITLE="rl0a1" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="re011::#views#com#cedicam#gm#cv#xxx#re011.jspx" NAME="output5"
+    PATH="/views/com/cedicam/gm/cv/xxx/re011.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#re011.jspx" TITLE="re011" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rl0a2::#views#com#cedicam#gm#cv#xxx#rl0a2.jspx" NAME="output6"
+    PATH="/views/com/cedicam/gm/cv/xxx/rl0a2.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#rl0a2.jspx" TITLE="rl0a2" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ve011::#views#com#cedicam#gm#cv#xxx#ve011.jspx" NAME="output7"
+    PATH="/views/com/cedicam/gm/cv/xxx/ve011.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#ve011.jspx" TITLE="ve011" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="vv011::#views#com#cedicam#gm#cv#xxx#vv011.jspx" NAME="output8"
+    PATH="/views/com/cedicam/gm/cv/xxx/vv011.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#vv011.jspx" TITLE="vv011" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rl0a3::#views#com#cedicam#gm#cv#xxx#rl0a3.jspx" NAME="output9"
+    PATH="/views/com/cedicam/gm/cv/xxx/rl0a3.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#rl0a3.jspx" TITLE="rl0a3" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rl0a4::#views#com#cedicam#gm#cv#xxx#rl0a4.jspx" NAME="output10"
+    PATH="/views/com/cedicam/gm/cv/xxx/rl0a4.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#rl0a4.jspx" TITLE="rl0a4" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="aj011::#views#com#cedicam#gm#cv#xxx#aj011.jspx" NAME="output11"
+    PATH="/views/com/cedicam/gm/cv/xxx/aj011.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#aj011.jspx" TITLE="aj011" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="su010::#views#com#cedicam#gm#cv#xxx#su010.jspx" NAME="output12"
+    PATH="/views/com/cedicam/gm/cv/xxx/su010.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#su010.jspx" TITLE="su010" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rf061::#views#com#cedicam#gm#cv#tva#rf061.jspx" NAME="output13"
+    PATH="/views/com/cedicam/gm/cv/tva/rf061.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#tva#rf061.jspx" TITLE="rf061" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rf071::#views#com#cedicam#gm#cv#pays#rf071.jspx" NAME="output14"
+    PATH="/views/com/cedicam/gm/cv/pays/rf071.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#pays#rf071.jspx"
+    TITLE="rf071" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rf101::#views#com#cedicam#gm#cv#etablissement#rf101.jspx"
+    NAME="output15"
+    PATH="/views/com/cedicam/gm/cv/etablissement/rf101.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#etablissement#rf101.jspx"
+    TITLE="rf101" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rf001::#views#com#cedicam#gm#cv#cataloguecasa#rf001.jspx"
+    NAME="output16"
+    PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf001.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf001.jspx"
+    TITLE="rf001" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rf011::#views#com#cedicam#gm#cv#cataloguecasa#rf011.jspx"
+    NAME="output17"
+    PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf011.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf011.jspx"
+    TITLE="rf011" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rf021::#views#com#cedicam#gm#cv#cataloguecasa#rf021.jspx"
+    NAME="output18"
+    PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf021.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf021.jspx"
+    TITLE="rf021" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rf051::#views#com#cedicam#gm#cv#ventilation#rf051.jspx"
+    NAME="output19"
+    PATH="/views/com/cedicam/gm/cv/ventilation/rf051.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#ventilation#rf051.jspx"
+    TITLE="rf051" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rf081::#views#com#cedicam#gm#cv#ventilation#rf081.jspx"
+    NAME="output20"
+    PATH="/views/com/cedicam/gm/cv/ventilation/rf081.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#ventilation#rf081.jspx"
+    TITLE="rf081" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rf041::#views#com#cedicam#gm#cm#cataloguemastercard#rf041.jspx"
+    NAME="output21"
+    PATH="/views/com/cedicam/gm/cm/cataloguemastercard/rf041.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cm#cataloguemastercard#rf041.jspx"
+    TITLE="rf041" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rf151::#views#com#cedicam#gm#cm#cataloguemastercard#rf151.jspx"
+    NAME="output22"
+    PATH="/views/com/cedicam/gm/cm/cataloguemastercard/rf151.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cm#cataloguemastercard#rf151.jspx"
+    TITLE="rf151" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="st010::#views#com#cedicam#gm#cv#xxx#st010.jspx" NAME="output23"
+    PATH="/views/com/cedicam/gm/cv/xxx/st010.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#st010.jspx" TITLE="st010" model-entity="JSFProcessItemOutput"/>
+    <PROCESS-ITEM-OUTPUT
+    ID="st011::#views#com#cedicam#gm#cv#xxx#st011.jspx" NAME="output24"
+    PATH="/views/com/cedicam/gm/cv/xxx/st011.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#xxx#st011.jspx" TITLE="st011" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf001.jspx"
+  PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf001.jspx"
+  SHAPE="480,2608,50,73" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM
+   ID="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf001.jspx:0"
+   NAME="item" PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf001.jspx" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="ajouter::#views#com#cedicam#gm#cv#cataloguecasa#rf002.jspx"
+    NAME="output"
+    PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf002.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf002.jspx"
+    TITLE="ajouter" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="modifier::#views#com#cedicam#gm#cv#cataloguecasa#rf002.jspx"
+    NAME="output1"
+    PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf002.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf002.jspx"
+    TITLE="modifier" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="supprimer::#views#com#cedicam#gm#cv#cataloguecasa#rf002.jspx"
+    NAME="output2"
+    PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf002.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf002.jspx"
+    TITLE="supprimer" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf002.jspx"
+  PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf002.jspx"
+  SHAPE="64,2576,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM
+   ID="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf002.jspx:0"
+   NAME="item" PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf002.jspx" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="OK::#views#com#cedicam#gm#cv#cataloguecasa#rf001.jspx"
+    NAME="output"
+    PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf001.jspx"
+    TARGET="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf001.jspx"
+    TITLE="OK" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#rl0a4.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/rl0a4.jspx" SHAPE="336,2001,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#cv#etablissement#rf101.jspx"
+  PATH="/views/com/cedicam/gm/cv/etablissement/rf101.jspx"
+  SHAPE="336,2449,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#ra011.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/ra011.jspx" SHAPE="336,1217,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#pays#rf071.jspx"
+  PATH="/views/com/cedicam/gm/cv/pays/rf071.jspx" SHAPE="336,2337,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf011.jspx"
+  PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf011.jspx"
+  SHAPE="336,2737,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#cm#cataloguemastercard#rf041.jspx"
+  PATH="/views/com/cedicam/gm/cm/cataloguemastercard/rf041.jspx"
+  SHAPE="336,145,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#ve011.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/ve011.jspx" SHAPE="336,1665,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#cv#ventilation#rf051.jspx"
+  PATH="/views/com/cedicam/gm/cv/ventilation/rf051.jspx"
+  SHAPE="336,2961,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#cv#ventilation#rf081.jspx"
+  PATH="/views/com/cedicam/gm/cv/ventilation/rf081.jspx"
+  SHAPE="336,3073,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#re011.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/re011.jspx" SHAPE="336,1441,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#cm#cataloguemastercard#rf151.jspx"
+  PATH="/views/com/cedicam/gm/cm/cataloguemastercard/rf151.jspx"
+  SHAPE="336,192,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#su010.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/su010.jspx" SHAPE="336,2225,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#rl0a3.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/rl0a3.jspx" SHAPE="336,1889,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#ac011.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/ac011.jspx" SHAPE="336,960,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#vv011.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/vv011.jspx" SHAPE="336,1777,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#aj011.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/aj011.jspx" SHAPE="336,2113,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#rl0a1.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/rl0a1.jspx" SHAPE="336,1329,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#rl0a2.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/rl0a2.jspx" SHAPE="336,1553,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#ra021.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/ra021.jspx" SHAPE="336,1105,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#st010.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/st010.jspx" SHAPE="336,112,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#cv#xxx#st011.jspx"
+  PATH="/views/com/cedicam/gm/cv/xxx/st011.jspx" SHAPE="336,112,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#cv#cataloguecasa#rf021.jspx"
+  PATH="/views/com/cedicam/gm/cv/cataloguecasa/rf021.jspx"
+  SHAPE="336,2849,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac021.jspx"
+  PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac021.jspx"
+  SHAPE="336,1032,50,25" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM
+   ID="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac021.jspx:0"
+   NAME="item"
+   PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac021.jspx" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="lister::#views#com#cedicam#gm#mc#acquisitionfees#ac022.jspx"
+    NAME="output"
+    PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac022.jspx"
+    TARGET="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac022.jspx"
+    TITLE="lister" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="fermer::#views#com#cedicam#gm#ch#menus#st000.jspx"
+    NAME="output1" PATH="/views/com/cedicam/gm/ch/menus/st000.jspx"
+    TARGET="rules:#views#com#cedicam#gm#ch#menus#st000.jspx"
+    TITLE="fermer" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#com#cedicam#gm#ch#menus#st000.jspx"
+  PATH="/views/com/cedicam/gm/ch/menus/st000.jspx" SHAPE="256,4897,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac022.jspx"
+  PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac022.jspx"
+  SHAPE="560,1761,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM
+   ID="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac022.jspx:0"
+   NAME="item"
+   PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac022.jspx" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="detailler::#views#com#cedicam#gm#mc#acquisitionfees#ac023.jspx"
+    NAME="output"
+    PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac023.jspx"
+    TARGET="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac023.jspx"
+    TITLE="detailler" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="abandonner::#views#com#cedicam#gm#mc#acquisitionfees#ac024.jspx"
+    NAME="output1"
+    PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac024.jspx"
+    TARGET="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac024.jspx"
+    TITLE="abandonner" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="fermer::#views#com#cedicam#gm#mc#acquisitionfees#ac021.jspx"
+    NAME="output2"
+    PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac021.jspx"
+    TARGET="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac021.jspx"
+    TITLE="fermer" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac023.jspx"
+  PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac023.jspx"
+  SHAPE="800,2481,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM
+   ID="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac023.jspx:0"
+   NAME="item"
+   PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac023.jspx" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="fermer::#views#com#cedicam#gm#mc#acquisitionfees#ac022.jspx"
+    NAME="output"
+    PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac022.jspx"
+    TARGET="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac022.jspx"
+    TITLE="fermer" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac024.jspx"
+  PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac024.jspx"
+  SHAPE="800,2657,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM
+   ID="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac024.jspx:0"
+   NAME="item"
+   PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac024.jspx" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="fermer::#views#com#cedicam#gm#mc#acquisitionfees#ac022.jspx"
+    NAME="output"
+    PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac022.jspx"
+    TARGET="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac022.jspx"
+    TITLE="fermer" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="valider::#views#com#cedicam#gm#mc#acquisitionfees#ac022.jspx"
+    NAME="output1"
+    PATH="/views/com/cedicam/gm/mc/acquisitionfees/ac022.jspx"
+    TARGET="rules:#views#com#cedicam#gm#mc#acquisitionfees#ac022.jspx"
+    TITLE="valider" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

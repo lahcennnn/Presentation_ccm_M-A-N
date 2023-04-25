@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<f:view>
+		<ui:composition template="/themes/cedicam/template/conteneur#{modeAffichage}.jspx">
+			<ui:param name="dataBean" value="#{refentitebean}" />
+			<ui:define name="titre_ecran"><h:outputText value="#{msg['gm.ec020.el002']}" /></ui:define>
+			<ui:define name="code_ecran">EC020</ui:define>
+
+			<ui:define name="contenu_ecran">
+
+				<h:form id="validiteForm">
+					<div id="panelRecherche" class="subpanel-panel">
+						<div style=" width: 100%; height: 100%; border: solid rgb(211, 223, 255) 1px; ">
+							<div class="subpanel-upperbar">
+								<div class="subpanel-upperbar-title"><h:outputText value="#{msg['gm.ec020.el002'] }"/></div>
+							</div>
+							<div id="panelRecherche-content" style="overflow: auto; clear: both;" class="rich-panel">
+								<h:panelGrid columns="3" styleClass="filtreStatutEntite">
+									<h:outputLabel value="#{msg['gm.ec020.el003']}" for="selectRefEntBeanSelectValidite"/>
+									<h:outputLabel value=":" for = "selectRefEntBeanSelectValidite"/>
+									<h:selectOneMenu id="selectRefEntBeanSelectValidite" value="#{refentitebean.selectedValidite}" label="#{msg['gm.ec020.el003']}">
+										<f:selectItems value="#{refentitebean.listeValidites}" />
+										<a4j:support event="onchange" actionListener="#{refentitebean.selectValidite}" oncomplete="javascript:addTitleOnTruncatedData();" reRender="panelTable, btnPanel, panelScript, panelRapprochements" ajaxSingle="true" />
+									</h:selectOneMenu>
+								</h:panelGrid>
+							</div>
+						</div>
+					</div>
+				</h:form>
+
+				<c:set var="dtmngr" value="#{refentitebean.entiteDtManager}"/>
+				<c:set var="sort" value="#{dtmngr.dataProvider.sort}"/>
+				<c:set var="scroller" value="#{dtmngr.dataProvider.scroller}"/>
+
+
+				<rich:panel id="panelRapprochements" styleClass="subpanel-panel">
+					<rich:panel style="width: 100%; height: 100%" rendered="#{scroller.numberOfElements gt 0}">
+						<h:form styleClass="form-paginator">
+							<div class="subpanel-upperbar">
+								<div class="subpanel-upperbar-title">
+									<h:outputText value="#{msg['gm.ec050.el001'] }"/>
+										<h:commandLink action="#{refentitebean.genererRapport}">
+											<h:graphicImage value="/themes/cedicam/template/img/excel16.png" alt="Export CSV"/>
+											<f:param name="format" value="CSV" />
+											<f:param name="typeRapport" value="RECH_ENTITE" />
+										</h:commandLink>
+										<h:commandLink action="#{refentitebean.imprimer}" target="printPage">
+											<h:graphicImage value="/themes/cedicam/template/img/print16.png" alt="Impression"/>
+											<f:param name="typeRapport" value="RECH_ENTITE" />
+										</h:commandLink>
+								</div>
+								<div class="subpanel-upperbar-nbResultats">
+									<h:outputText value="#{msg['wn.commun.nombre.de.resultats'] }"/>
+									<rich:spacer height="1" width="10" />
+									<h:outputText value="#{refentitebean.entiteDtManager.dataProvider.totalResultSize }"/>
+									<rich:spacer height="1" width="10" />
+								</div>
+							</div>
+						</h:form>
+						<div id="panelRapprochements-content" style="overflow: visible; clear: both;" class="rich-panel">
+							<rich:panel id="panelScript" styleClass="panel-pagination">
+								<h:form id="scrollerForm">
+									<a4j:queue id="queueScr" name="queueScroller" requestDelay="5" size="2" ignoreDupResponses="true" />
+									<table style=" width: 100%;">
+										<tr>
+											<td style="align: left; width: 33%;">
+												<h:outputText value="#{msg['gm.scroller.afficher'] }"/>
+													<rich:spacer height="1" width="2" />
+												<h:selectOneMenu value="#{scroller.pageSize}" styleClass="pagination-setpagesize">
+													 <f:selectItem itemValue="10" itemLabel="10" />
+													 <f:selectItem itemValue="25" itemLabel="25" />
+													 <f:selectItem itemValue="50" itemLabel="50" />
+													 <f:selectItem itemValue="100" itemLabel="100" />
+													 <a4j:support event="onchange" action="#{refentitebean.refresh}" reRender="scrollerForm, panelTable, panelRapprochements" />
+												</h:selectOneMenu>
+													<rich:spacer height="1" width="2" />
+												<h:outputText value="#{msg['gm.scroller.nbresultparpage'] }"/>
+											</td>
+											<td style="align: center; width: 33%;">
+												<h:outputText value="#{msg['gm.scroller.result'] }"/>			<rich:spacer height="1" width="2" />
+												<h:outputText value="#{scroller.fromElement+1}"   />			<rich:spacer height="1" width="2" />
+												<h:outputText value="#{msg['gm.scroller.a'] }"/>				<rich:spacer height="1" width="2" />
+												<h:outputText value="#{scroller.toElement+1}"/>					<rich:spacer height="1" width="2" />
+												<h:outputText value="#{msg['gm.scroller.sur'] }"/>				<rich:spacer height="1" width="2" />
+												<h:outputText value="#{scroller.numberOfElements}"/>
+											</td>
+											<td style="align: right; width: 33%;">
+												<a4j:commandLink reRender="scrollerForm, panelTable" actionListener="#{scroller.gotoFirstAction}" eventsQueue="queueScroller" rendered="#{scroller.currentPage > 1 }">&lt;&lt;</a4j:commandLink>
+												<h:outputText styleClass="pagination-disabled-link" rendered="#{scroller.currentPage le 1 }" value="&lt;&lt;"/>
+													<rich:spacer height="1" width="8" />
+												<a4j:commandLink reRender="scrollerForm, panelTable" actionListener="#{scroller.gotoPreviousAction}" eventsQueue="queueScroller" rendered="#{scroller.currentPage > 1 }">&lt;</a4j:commandLink>
+												<h:outputText styleClass="pagination-disabled-link" rendered="#{scroller.currentPage le 1 }" value="&lt;"/>
+													<rich:spacer height="1" width="8" />
+												Page
+													<rich:spacer height="1" width="2" />
+												<h:inputText value="#{scroller.currentPage}" styleClass="pagination-setpagenum">
+													<a4j:support event="onchange" eventsQueue="queueScroller" reRender="scrollerForm, panelTable" />
+												</h:inputText>
+													<rich:spacer height="1" width="2" />
+												/
+													<rich:spacer height="1" width="2" />
+												<h:outputText value="#{scroller.pageCount}"/>
+													<rich:spacer height="1" width="8" />
+												<a4j:commandLink reRender="scrollerForm, panelTable" actionListener="#{scroller.gotoNextAction}" eventsQueue="queueScroller" rendered="#{scroller.currentPage lt scroller.pageCount }">&gt;</a4j:commandLink>
+												<h:outputText styleClass="pagination-disabled-link" rendered="#{scroller.currentPage ge scroller.pageCount }" value="&gt;"/>
+													<rich:spacer height="1" width="8" />
+												<a4j:commandLink reRender="scrollerForm, panelTable" actionListener="#{scroller.gotoLastAction}" eventsQueue="queueScroller" rendered="#{scroller.currentPage lt scroller.pageCount }">&gt;&gt;</a4j:commandLink>
+												<h:outputText styleClass="pagination-disabled-link" rendered="#{scroller.currentPage ge scroller.pageCount }" value="&gt;&gt;"/>
+											</td>
+										</tr>
+									</table>
+								</h:form>
+							</rich:panel>
+							
+							<c:set var="lLignesEntites" value="#{dtmngr.datatableModel}"/>
+							<c:if test="#{modeAffichage == 'print'}" >
+								<c:set var="lLignesEntites" value="#{dtmngr.dataManager.fullData}"/>
+							</c:if>
+							<h:form id="zeForm">
+								<rich:panel id="panelTable" style="border: none;">
+									<rich:extendedDataTable id="table" styleClass="light" enableContextMenu="false" var="occurrence" selectionMode="single"
+											value="#{lLignesEntites}" selection="#{dtmngr.selection}"
+											noDataLabel="#{msg['wn.commun.nodata']}"	rowClasses="wn-ligne-impaire-bis, wn-ligne-paire-bis"
+											columnClasses="colEntite, colEntite, colEntite, colDate, colDate, colEntite, colEntite, colEntite, colEntite, colEntite, colEntite, colEntite, colEntite, colDate, colDate">
+
+										<f:facet name="header">
+											<rich:columnGroup>										
+												<rich:column styleClass="headerWithSort" width="6%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el004']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'codeBanque' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'codeBanque' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="codeBanque" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.codeBanqueValue}" id="selectCodeBanque" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="codeBanque" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.codeBanqueSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="6%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el005']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'clientExterneGroupeCa' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'clientExterneGroupeCa' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="clientExterneGroupeCa" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.clientExterneGroupeCaValue}" id="selectClientExterneGroupeCa" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="clientExterneGroupeCa" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.clientExterneGroupeCaSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+											
+												<rich:column styleClass="headerWithSort" width="6%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el006']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'chefDeFile' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png"  alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'chefDeFile' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="chefDeFile" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.chefDeFileValue}" id="selectChefDeFile" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="chefDeFile" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.tous']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.chefDeFileSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="11%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el007']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'dtDeMigrEntSurBoa' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'dtDeMigrEntSurBoa' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="dtDeMigrEntSurBoa" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.dtDeMigrEntSurBoaValue}" id="selectDtDeMigrEntSurBoa" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="dtDeMigrEntSurBoa" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.dtDeMigrEntSurBoaSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="11%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el008']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'dtDeMigrEntSurBoe' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'dtDeMigrEntSurBoe' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="dtDeMigrEntSurBoe" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu  value="#{refentitebean.entiteDtManager.dataProvider.filter.dtDeMigrEntSurBoeValue}" id="selectDtDeMigrEntSurBoe" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="dtDeMigrEntSurBoe" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.dtDeMigrEntSurBoeSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="5%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el009']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'cdBanqueEntACompt' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'cdBanqueEntACompt' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="cdBanqueEntACompt" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.cdBanqueEntAComptValue}" id="selectCdBanqueEntACompt" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="cdBanqueEntACompt" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.cdBanqueEntAComptSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="9%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle"  value="#{msg['gm.ec020.el010']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'codeIcaMci' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'codeIcaMci' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="codeIcaMci" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.codeIcaMciValue}" id="selectCodeIcaMci" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="codeIcaMci" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.tous']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.codeIcaMciSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="5%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el011']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'circ1CdBqReglInter' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'circ1CdBqReglInter' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="circ1CdBqReglInter" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu  value="#{refentitebean.entiteDtManager.dataProvider.filter.circ1CdBqReglInterValue}" id="selectCirc1CdBqReglInter" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="circ1CdBqReglInter" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.circ1CdBqReglInterSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="5%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el012']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'circ1CdBqReglIntra' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'circ1CdBqReglIntra' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="circ1CdBqReglIntra" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.circ1CdBqReglIntraValue}" id="selectCirc1CdBqReglIntra" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="circ1CdBqReglIntra" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.circ1CdBqReglIntraSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="5%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el013']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'circ1CdBqReglCore' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'circ1CdBqReglCore' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="circ1CdBqReglCore" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.circ1CdBqReglCoreValue}" id="selectCirc1CdBqReglCore" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="circ1CdBqReglCore" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.circ1CdBqReglCoreSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="5%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el014']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'circ1CdBqReglCup' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'circ1CdBqReglCup' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="circ1CdBqReglCup" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.circ1CdBqReglCupValue}" id="selectCirc1CdBqReglCup" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="circ1CdBqReglCup" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.circ1CdBqReglCupSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="5%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el015']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'circ1CdBqReglMci' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'circ1CdBqReglMci' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="circ1CdBqReglMci" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.circ1CdBqReglMciValue}" id="selectCirc1CdBqReglMci" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="circ1CdBqReglMci" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.circ1CdBqReglMciSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="5%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el016']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'circ1CdBqReglVisa' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'circ1CdBqReglVisa' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="circ1CdBqReglVisa" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.circ1CdBqReglVisaValue}" id="selectCirc1CdBqReglVisa" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="circ1CdBqReglVisa" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.circ1CdBqReglVisaSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="8%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el017']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'dtDbEffet' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'dtDbEffet' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="dtDbEffet" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.dtDbEffetValue}" id="selectDtDbEffet" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="dtDbEffet" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.dtDbEffetSelectItemList}"/>
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+
+												<rich:column styleClass="headerWithSort" width="8%">
+													<a4j:commandLink actionListener="#{refentitebean.trier}" reRender="panelTable">
+														<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec020.el018']}" />
+														<br/>
+														<c:choose>
+															<c:when test="#{sort.sortProperty eq 'dtFinEffet' and sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+															</c:when>
+															<c:when test="#{sort.sortProperty eq 'dtFinEffet' and not sort.sortAscending }">
+																<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+															</c:when>
+															<c:otherwise>
+																<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+															</c:otherwise>
+														</c:choose>
+														<f:attribute name="sortPropertyName" value="dtFinEffet" />
+													</a4j:commandLink>
+													<br/>
+													<h:selectOneMenu value="#{refentitebean.entiteDtManager.dataProvider.filter.dtFinEffetValue}" id="selectDtFinEffet" label="#{msg['gm.ec020.el004']}" styleClass="bordered_select">
+														<f:attribute name="sortPropertyName" value="dtDbEffet" />
+														<f:selectItem itemValue="ALL" itemLabel="#{msg['gm.commun.filtre.toutes']}" />
+														<f:selectItems value="#{refentitebean.entiteDtManager.dataProvider.filter.dtFinEffetSelectItemList}" />
+														<a4j:support event="onchange" actionListener="#{refentitebean.filtrer}" reRender="panelTable, scrollerForm"/>
+													</h:selectOneMenu>
+												</rich:column>
+											</rich:columnGroup>
+										</f:facet>
+
+										<rich:column width="6%"><h:outputText value="#{occurrence.codeBanque}"><f:converter converterId="codeBanqueConverter"/></h:outputText></rich:column>
+										<rich:column width="6%"><h:outputText value="#{occurrence.clientExterneGroupeCa}"><f:converter converterId="entiteGroupeConverter" /></h:outputText></rich:column>
+										<rich:column width="6%"><h:outputText value="#{occurrence.chefDeFile}"><f:converter converterId="codeBanqueConverter"/></h:outputText></rich:column>
+										<rich:column width="11%"><h:outputText value="#{occurrence.dtDeMigrEntSurBoa}"><f:converter converterId="dateTimeConverter" /></h:outputText></rich:column>
+										<rich:column width="11%"><h:outputText value="#{occurrence.dtDeMigrEntSurBoe}"><f:converter converterId="dateTimeConverter" /></h:outputText></rich:column>
+										<rich:column width="5%"><h:outputText value="#{occurrence.cdBanqueEntACompt}"><f:converter converterId="codeBanqueConverter"/></h:outputText></rich:column>
+										<rich:column width="10%"><h:outputText value="#{occurrence.codeIcaMci}"><f:converter converterId="memberIdConverter"/></h:outputText></rich:column>
+										<rich:column width="5%"><h:outputText value="#{occurrence.circ1CdBqReglInter}"><f:converter converterId="codeBanqueConverter"/></h:outputText></rich:column>
+										<rich:column width="5%"><h:outputText value="#{occurrence.circ1CdBqReglIntra}"><f:converter converterId="codeBanqueConverter"/></h:outputText></rich:column>
+										<rich:column width="5%"><h:outputText value="#{occurrence.circ1CdBqReglCore}"><f:converter converterId="codeBanqueConverter"/></h:outputText></rich:column>
+										<rich:column width="5%"><h:outputText value="#{occurrence.circ1CdBqReglCup}"><f:converter converterId="codeBanqueConverter"/></h:outputText></rich:column>
+										<rich:column width="5%"><h:outputText value="#{occurrence.circ1CdBqReglMci}"><f:converter converterId="codeBanqueConverter"/></h:outputText></rich:column>
+										<rich:column width="5%"><h:outputText value="#{occurrence.circ1CdBqReglVisa}"><f:converter converterId="codeBanqueConverter"/></h:outputText></rich:column>
+										<rich:column width="8%"><h:outputText value="#{occurrence.dtDbEffet}"><f:converter converterId="dateConverter"/></h:outputText></rich:column>
+										<rich:column width="8%"><h:outputText value="#{occurrence.dtFinEffet}"><f:converter converterId="dateConverter"/></h:outputText></rich:column>
+
+										<a4j:support reRender="panelBoutons" id="extended_table_bean_take_selection" action="#{dtmngr.selectRow}" event="onselectionchange" />
+									</rich:extendedDataTable>
+								</rich:panel>
+
+								<c:if test="#{modeAffichage != 'print'}">
+								<rich:panel styleClass="wn-panel-no-border" id="panelBoutons" bodyClass="gm-btn-panel">
+									<h:commandButton id="btnConsulter" value="#{msg['gm.ec020.el019']}" styleClass="wn-btn-aspect"
+										action="#{refentitebean.goConsulter}" rendered="#{st000.habF0070}"	disabled="#{dtmngr.selectedOccurrence == null}"/>
+
+									<h:commandButton id="btnCreer" value="#{msg['gm.ec020.el020']}" styleClass="wn-btn-aspect" action="#{refentitebean.goCreer}" rendered="#{st000.habF0060}"/>
+
+									<h:commandButton id="btnModifier" value="#{msg['gm.ec020.el021']}" styleClass="wn-btn-aspect"
+										action="#{refentitebean.goModifier}" rendered="#{st000.habF0060}"
+										disabled="#{dtmngr.selectedOccurrence == null or dtmngr.selectedOccurrence.dtFinEffet lt refentitebean.dateApplication}"/>
+
+									<h:commandButton id="btnSupprimer" value="#{msg['gm.ec020.el022']}" styleClass="wn-btn-aspect wn-btn-supprimer"
+										action="#{refentitebean.afficheConfirmation }"  rendered="#{st000.habF0060}"	disabled="#{dtmngr.selectedOccurrence == null or dtmngr.selectedOccurrence.dtFinEffet lt refentitebean.dateApplication}"/>
+								</rich:panel>
+								</c:if>
+								<!--<a4j:poll interval="1000" oncomplete="javascript:addTitleOnTruncatedData();" enabled="true" />-->
+							</h:form>
+						</div>
+					</rich:panel>
+
+					<rich:panel style="width: 100%; height: 100%" rendered="#{scroller.numberOfElements eq 0}">
+						<div id="panelRapprochements-content-empty" style="overflow: auto; clear: both;" class="rich-panel">
+							<h:form id="zeForm-empty">
+								<c:if test="#{modeAffichage != 'print'}">
+								<rich:panel styleClass="wn-panel-no-border" id="panelBoutons-empty" bodyClass="gm-btn-panel">
+									<h:commandButton id="btnConsulter-empty" value="#{msg['gm.ec020.el019']}" styleClass="wn-btn-aspect"
+										action="#{refentitebean.goConsulter}" rendered="#{st000.habF0070}"	disabled="#{dtmngr.selectedOccurrence == null}"/>
+
+									<h:commandButton id="btnCreer-empty" value="#{msg['gm.ec020.el020']}" styleClass="wn-btn-aspect" action="#{refentitebean.goCreer}" rendered="#{st000.habF0060}"/>
+
+									<h:commandButton id="btnModifier-empty" value="#{msg['gm.ec020.el021']}" styleClass="wn-btn-aspect"
+										action="#{refentitebean.goModifier}" rendered="#{st000.habF0060}"
+										disabled="#{dtmngr.selectedOccurrence == null or dtmngr.selectedOccurrence.dtFinEffet lt refentitebean.dateApplication}"/>
+
+									<h:commandButton id="btnSupprimer-empty" value="#{msg['gm.ec020.el022']}" styleClass="wn-btn-aspect wn-btn-supprimer"
+										action="#{refentitebean.afficheConfirmation }"  rendered="#{st000.habF0060}"	disabled="#{dtmngr.selectedOccurrence == null or dtmngr.selectedOccurrence.dtFinEffet lt refentitebean.dateApplication}"/>
+								</rich:panel>
+								</c:if>
+							</h:form>
+						</div>
+					</rich:panel>
+				</rich:panel>
+				
+				
+
+				<rich:modalPanel id="popupConfirmer" resizeable="false" shadowDepth="0" moveable="false" rendered="#{refentitebean.confirmation}" showWhenRendered="#{refentitebean.confirmation}">
+					<f:facet name="header"><h:panelGroup><h:outputText value="#{msg['wn.commun.label.confirmation']}" /></h:panelGroup></f:facet>
+
+					<div class="wn-popup-text">
+						<h:outputText value="#{msg['gm.ec020.el023a'] }"/>
+						<h:outputText value="#{dtmngr.selectedObject.codeBanque }">
+							<f:converter converterId="codeBanqueConverter" />
+						</h:outputText>
+						<h:outputText value="#{msg['gm.ec020.el023b'] }"/>
+					</div>
+					<br />
+
+					<rich:panel bodyClass="wn-popup-footer" styleClass="wn-mpnl-footer">
+						<h:form>
+							<a4j:commandButton value="#{msg['wn.commun.action-o']}" styleClass="wn-popup-btn" action="#{refentitebean.supprimer}">
+								<rich:componentControl for="popupConfirmer" operation="hide" event="onclick" />
+							</a4j:commandButton>
+							<a4j:commandButton value="#{msg['wn.commun.action-n']}" action="#{refentitebean.continuerSaisie}" styleClass="wn-popup-btn">
+								<rich:componentControl for="popupConfirmer" operation="hide" event="onclick" />
+							</a4j:commandButton>
+						</h:form>
+					</rich:panel>
+				</rich:modalPanel>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</jsp:root>

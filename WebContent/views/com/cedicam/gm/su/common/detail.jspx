@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+	<f:view>
+		<a4j:region id="regionDetails">
+			<table style="margin-left: 0;">
+				<tr class="listheader">
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="CRE détail du regroupement"/>	
+							<input type="hidden" name="listName" value="details" />
+							<input type="hidden" name="propertyName" value="ligne" />
+						</h:form>
+					</td>
+				</tr>
+				<c:forEach var="detail" items="#{suivibean.details}" >
+					<c:set var="odd" value="#{suivibean.oddEven }"/>
+					<c:set var="trstyle" value=""/>
+					<c:if test="#{odd}"><c:set var="trstyle" value='background-color: rgb(234, 243, 255);'/></c:if>
+					<tr style="#{trstyle}">
+						<td><h:outputText value="#{detail.ligne }"/></td>
+					</tr>
+				</c:forEach>
+			</table>
+		</a4j:region>
+	</f:view>
+</jsp:root>

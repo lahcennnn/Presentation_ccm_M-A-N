@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"	xmlns:jsp="http://java.sun.com/JSP/Page"	xmlns:ui="http://java.sun.com/jsf/facelets"	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"	xmlns:a4j="http://richfaces.org/a4j"	xmlns:c="http://java.sun.com/jstl/core"	xmlns:rich="http://richfaces.org/rich" version="2.0">
+	<f:view>
+		<ui:composition template="/themes/cedicam/template/conteneur.jspx">
+			<ui:define name="titre_ecran"><h:outputText value="ERREUR" /></ui:define>
+			<ui:define name="code_ecran"><h:outputText value="ERREUR" /></ui:define>
+			<ui:define name="contenu_ecran">
+				<c:if test="#{erreur.message != null}">
+					<h1>#{erreur.message}</h1>
+				</c:if>
+				<!-- <c:choose>
+					<c:when test="#{erreur.codeErreurHttp != null}">
+						<p>
+				   			<c:choose>
+				   				<c:when test="#{erreur.codeErreurHttp eq '400'}">La syntaxe de la requête est erronée</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '401'}">Une authentification est nécessaire pour accéder à la ressource</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '402'}">Paiement requis pour accéder à la ressource (non utilisé)</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '403'}">Le serveur a compris la requête, mais refuse de l'exécuter. Contrairement à l'erreur 401, s'authentifier ne fera aucune différence. Sur les serveurs où l'authentification est requise, cela signifie généralement que l'authentification a été acceptée mais que les droits d'accès ne permettent pas au client d'accéder à la ressource</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '404'}">Ressource non trouvée</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '405'}">Méthode de requête non autorisée</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '406'}">Toutes les réponses possibles seront refusées.</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '407'}">Accès à la ressource autorisé par identification avec le proxy</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '408'}">Temps d'attente d'une réponse du serveur écoulé</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '409'}">La requête ne peut être traitée à l'état actuel</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '410'}">La ressource est indisponible et aucune adresse de redirection n'est connue</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '411'}">La longueur de la requête n'a pas été précisée</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '412'}">Préconditions envoyées par la requête non-vérifiées</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '413'}">Traitement abandonné dû à une requête trop importante</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '414'}">URI trop longue</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '415'}">Format de requête non-supportée pour une méthode et une ressource données</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '416'}">Champs d'en-tête de requête « range » incorrect.</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '500'}">Erreur interne du serveur</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '501'}">Fonctionnalité réclamée non supportée par le serveur</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '502'}">Mauvaise réponse envoyée à un serveur intermédiaire par un autre serveur.</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '503'}">Service temporairement indisponible ou en maintenance</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '504'}">Temps d'attente d'une réponse d'un serveur à un serveur intermédiaire écoulé</c:when>
+								<c:when test="#{erreur.codeErreurHttp eq '505'}">Version HTTP non gérée par le serveur</c:when>
+								<c:otherwise>Code erreur HTTP inconnu: <h:outputText value="#{erreur.codeErreurHttp}"/></c:otherwise>
+				   			</c:choose>
+				   		</p>
+					</c:when>
+				</c:choose> -->
+				<script type="text/javascript">
+		          //<![CDATA[
+		          		document.getElementById("errorM").style.display='none';
+		          		var useless = "#{popUpBean.popUpOuverte}";
+		          //]]>
+				</script>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</jsp:root>

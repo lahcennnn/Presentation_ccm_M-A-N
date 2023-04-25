@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+<f:view>
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" style="height: 100%;">
+    <head>
+      <title>#{msg['gm.deconnexion.message'] }</title>
+      <script type="text/javascript">
+    	function closeMe() {
+    		try {
+    			// Si appel en mode POPUP : appel de la fonction principale de fermeture
+    			javascript:closeWindow();
+    		} catch (e) {
+    			window.open('','_parent','');
+    			window.close();
+
+				// Sinon mode normal : on essaie de fermer la fenêtre
+    	  	      var browserName=navigator.appName;
+    	  	      if (browserName=="Microsoft Internet Explorer") {
+    	  	          // Internet Explorer
+    	        	  var obj_window = window.open('blank', '_self');
+    	  	          obj_window.opener = window;
+    	  	          obj_window.focus();
+    	  	          opener=self;
+    	  	          self.close(); 
+    	  	      }
+    	  	      else 
+    	  	      {
+    	  	          //les autres navigateurs
+    	  	      		setTimeout(function(){window.close();}, 1);
+    	  	      }
+    	  	      // fin mode normal
+			}
+  	}
+
+    	// fermeture automatique de la fenêtre
+      	closeMe();
+      </script>
+    </head>
+
+    <body>
+	<rich:panel styleClass="decomsg" bodyClass="decomsgbody">
+		<h:outputText value="Vous avez été déconnecté de l'application Centre de Comptabilité Monétique."/>
+		<br/><br/>
+		<h:outputText value="Vous pouvez maintenant fermer votre navigateur en cliquant sur la croix en haut à droite."/>
+	</rich:panel>
+    </body>
+  </html>
+
+</f:view>
+</jsp:root>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<f:view>
+		<ui:composition template="/themes/cedicam/template/conteneur.jspx">
+		
+		
+		
+			<ui:param name="dataBean" value="#{refentitebean}" />
+			<ui:define name="titre_ecran">
+				<h:outputText value="#{msg['gm.ec035.el002']}" rendered="#{refentitebean.entiteEdition.creation}" />
+				<h:outputText value="#{msg['gm.ec035.el003']}" rendered="#{!refentitebean.entiteEdition.creation}" />
+			</ui:define>
+
+			<ui:define name="code_ecran">
+				<h:outputText value="EC035" rendered="#{refentitebean.entiteEdition.creation }" />
+				<h:outputText value="EC030" rendered="#{!refentitebean.entiteEdition.creation }" />
+			</ui:define>
+
+			<ui:define name="contenu_ecran">
+				<script type="text/javascript">
+					function reinitFormulaire() {
+						document.getElementById('formsaisie:debutEffetInputDate').value='#{refentitebean.entiteEdition.dDbEffet}';
+						document.getElementById('formsaisie:finEffetInputDate').value='#{refentitebean.entiteEdition.dFinEffet}';
+						document.getElementById('formsaisie:codeBanque').value='#{refentitebean.entiteEdition.codeBanque}';
+						document.getElementById('formsaisie:libelle').value='#{refentitebean.entiteEdition.entiteOriginale.libelle}';
+						document.getElementById('formsaisie:codeIcaMci').value='#{refentitebean.entiteEdition.codeIcaMci}';
+						document.getElementById('formsaisie:dtDeMigrEntSurBoaInputDate').value='#{refentitebean.entiteEdition.dMigBoa}';
+						document.getElementById('formsaisie:hDeMigrEntSurBoa').value='#{refentitebean.entiteEdition.hMigBoa}';
+						document.getElementById('formsaisie:dtDeMigrEntSurBoeInputDate').value='#{refentitebean.entiteEdition.dMigBoe}';
+						document.getElementById('formsaisie:hDeMigrEntSurBoe').value='#{refentitebean.entiteEdition.hMigBoe}';
+						document.getElementById('formsaisie:clientExterneGroupeCa').value=document.getElementById('formsaisie:clientExterneGroupeCa').options[0].value;
+						document.getElementById('formsaisie:chefDeFile').value=document.getElementById('formsaisie:chefDeFile').options[0].value;
+						document.getElementById('formsaisie:cdBanqueEntACompt').value=document.getElementById('formsaisie:cdBanqueEntACompt').options[0].value;
+						document.getElementById('formsaisie:circ1CdBqReglInter').value=document.getElementById('formsaisie:circ1CdBqReglInter').options[0].value;
+						document.getElementById('formsaisie:circ1CdBqReglIntra').value=document.getElementById('formsaisie:circ1CdBqReglIntra').options[0].value;
+						document.getElementById('formsaisie:circ1CdBqReglCore').value=document.getElementById('formsaisie:circ1CdBqReglCore').options[0].value;
+						document.getElementById('formsaisie:circ1CdBqReglCup').value=document.getElementById('formsaisie:circ1CdBqReglCup').options[0].value;
+						document.getElementById('formsaisie:circ1CdBqReglMci').value=document.getElementById('formsaisie:circ1CdBqReglMci').options[0].value;
+						document.getElementById('formsaisie:circ1CdBqReglVisa').value=document.getElementById('formsaisie:circ1CdBqReglVisa').options[0].value;
+					}
+				</script>
+				<h:form id="formsaisie">
+				<a4j:queue name="formQueue" size="1" requestDelay="500" sizeExceededBehavior="dropNext" />
+					<rich:panel id="panelRecherche" styleClass="subpanel-panel" style="overflow-x: visible;">
+						<rich:panel style="width:100%; height:100%; border:solid rgb(211, 223, 255) 1px;">
+							<div class="subpanel-upperbar">
+								<div class="subpanel-upperbar-title">
+									<h:outputText value="#{msg['gm.ec035.el002']}" rendered="#{refentitebean.entiteEdition.creation}" />
+									<h:outputText value="#{msg['gm.ec035.el003']}" rendered="#{!refentitebean.entiteEdition.creation}" />
+								</div>
+							</div>
+							<rich:panel id="panelRecherche-content" style="overflow: auto; clear: both;" styleClass="rich-panel">
+								
+								<h:panelGrid columns="7">
+									
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el003']}" for="debutEffet"/>
+									<h:outputLabel value=":" for="debutEffet"/>
+									<h:panelGroup>
+										<rich:calendar id="debutEffet" value="#{refentitebean.entiteEdition.dDbEffet}" styleClass="form-dateinput" 
+											datePattern="dd/MM/yyyy" rendered="#{refentitebean.entiteEdition.creation or refentitebean.dateApplication lt refentitebean.entiteDtManager.selectedOccurrence.dtDbEffet}"
+											enableManualInput="#{true}" title="#{msg['gm.commun.formatdate'] }" label="#{msg['gm.ec025.el003']}"
+											maxlength="#{champ['commun.date.maxLength']}" monthLabels="#{msg['gm.commun.mois.calendrier']}" converter="dateStringConverter" 
+											required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.dateDebutEffet'] } - #{msg['gm.error.datenull'] }">											
+											<f:validator validatorId="ccmDateValidator"/>
+										</rich:calendar>
+										<h:outputText value="#{refentitebean.entiteEdition.dDbEffet}"  styleClass="consultation-valeur"
+											rendered="#{!refentitebean.entiteEdition.creation and refentitebean.dateApplication ge refentitebean.entiteDtManager.selectedOccurrence.dtDbEffet}"/>
+										<rich:spacer height="1" width="15" />
+										<h:outputLabel styleClass="wn-couleur-obligatoire" for="debutEffet" rendered="#{refentitebean.entiteEdition.creation or refentitebean.dateApplication lt refentitebean.entiteDtManager.selectedOccurrence.dtDbEffet}">&#10041;</h:outputLabel>
+									</h:panelGroup>
+									<h:outputLabel for="finEffet"/>
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el004']}" for="finEffet"/>
+									<h:outputLabel value=":" for="finEffet"/>
+									<h:panelGroup>
+										<rich:calendar id="finEffet" value="#{refentitebean.entiteEdition.dFinEffet}" styleClass="form-dateinput"
+											datePattern="dd/MM/yyyy" enableManualInput="#{true}" title="#{msg['gm.commun.formatdate'] }" label="#{msg['gm.ec025.el004']}"
+											maxlength="#{champ['commun.date.maxLength']}"	monthLabels="#{msg['gm.commun.mois.calendrier']}" converter="dateStringConverter"
+											required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.dateFinEffet'] } - #{msg['gm.error.datenull'] }">
+											<f:validator validatorId="ccmDateValidator"/>
+										</rich:calendar>
+										<rich:spacer height="1" width="15" />
+										<h:outputLabel styleClass="wn-couleur-obligatoire" for="finEffet">&#10041;</h:outputLabel>
+									</h:panelGroup>
+								
+									
+									
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el005']}" for="codeBanque"/>
+									<h:outputLabel value=":" for="codeBanque"/>
+									<h:panelGroup>
+										<h:outputText value="#{refentitebean.entiteEdition.entiteOriginale.codeBanque}" rendered="#{!refentitebean.entiteEdition.creation}" styleClass="consultation-valeur">
+											<f:converter converterId="codeBanqueConverter"/>
+										</h:outputText>
+										<h:inputText id="codeBanque" value="#{refentitebean.entiteEdition.codeBanque}" label="#{msg['gm.ec025.el005']}" maxlength="5" rendered="#{refentitebean.entiteEdition.creation}" converter="forcedStringConverter"
+										required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.codeBanque'] } - #{msg['gm.error.datenull'] }">
+											<f:validator validatorId="ccmIntegerValidator"/>
+										</h:inputText>
+										<rich:spacer height="1" width="15" />
+										<h:outputLabel styleClass="wn-couleur-obligatoire" rendered="#{refentitebean.entiteEdition.creation}" for="codeBanque">&#10041;</h:outputLabel>
+									</h:panelGroup>
+									<h:outputLabel for="cdBanqueEntACompt"/>
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el013']}" for="cdBanqueEntACompt"/>
+									<h:outputLabel value=":" for="cdBanqueEntACompt"/>
+									<h:panelGroup styleClass="consultation-valeur">
+										<h:selectOneMenu styleClass="saisie-entite-select" value="#{refentitebean.entiteEdition.entiteOriginale.cdBanqueEntACompt}" id="cdBanqueEntACompt"	label="#{msg['gm.ec040.el016']}">
+											<f:selectItems value="#{refentitebean.entiteListManager.listEntiteCompta}" />
+										</h:selectOneMenu>
+									</h:panelGroup>
+									
+
+
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el006']}" for="libelle"/>
+									<h:outputLabel value=":" for="libelle"/>
+									<h:panelGroup>
+										<h:inputText id="libelle" value="#{refentitebean.entiteEdition.entiteOriginale.libelle}" maxlength="20" converter="forcedStringConverter" label="#{msg['gm.ec025.el006']}" 
+										required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.libelle'] } - #{msg['gm.error.datenull'] }">
+											<f:validator validatorId="ccmLibelleValidator"/>
+										</h:inputText>
+										<rich:spacer height="1" width="15" />
+										<h:outputLabel styleClass="wn-couleur-obligatoire" for="libelle">&#10041;</h:outputLabel>
+									</h:panelGroup>
+									<h:outputLabel for="circ1CdBqReglInter"/>
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el015']}" for="circ1CdBqReglInter"/>
+									<h:outputLabel value=":" for="circ1CdBqReglInter"/>
+									<h:panelGroup styleClass="consultation-valeur">
+										<h:selectOneMenu styleClass="saisie-entite-select" value="#{refentitebean.entiteEdition.entiteOriginale.circ1CdBqReglInter}" id="circ1CdBqReglInter"	label="#{msg['gm.ec040.el016']}">
+											<f:selectItems value="#{refentitebean.entiteListManager.listEntiteReglement}" />
+										</h:selectOneMenu>
+									</h:panelGroup>
+									
+
+
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el014']}" for="codeIcaMci"/>
+									<h:outputLabel value=":" for="codeIcaMci"/>
+									<h:panelGroup>
+										<h:inputText id="codeIcaMci" value="#{refentitebean.entiteEdition.codeIcaMci}" maxlength="11" label="#{msg['gm.ec025.el014']}"
+										required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.codeIcaMci'] } - #{msg['gm.error.datenull'] }">
+											<f:converter converterId="strMemberIdConverter"/>
+											<f:validator validatorId="ccmLongValidator"/>
+										</h:inputText>
+										<rich:spacer height="1" width="15" />
+										<h:outputLabel styleClass="wn-couleur-obligatoire" for="codeIcaMci">&#10041;</h:outputLabel>
+									</h:panelGroup>
+									<h:outputLabel for="circ1CdBqReglIntra"/>
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el016']}" for="circ1CdBqReglIntra"/>
+									<h:outputLabel value=":" for="circ1CdBqReglIntra"/>
+									<h:panelGroup styleClass="consultation-valeur">
+										<h:selectOneMenu id="circ1CdBqReglIntra" styleClass="saisie-entite-select" value="#{refentitebean.entiteEdition.entiteOriginale.circ1CdBqReglIntra}" label="#{msg['gm.ec040.el016']}">
+											<f:selectItems value="#{refentitebean.entiteListManager.listEntiteReglement}" />
+										</h:selectOneMenu>
+									</h:panelGroup>
+									
+									
+									
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el007']}" for="clientExterneGroupeCa"/>
+									<h:outputLabel value=":" for="clientExterneGroupeCa"/>
+									<h:panelGroup styleClass="consultation-valeur">
+										<h:selectOneMenu style="width: 65px;" value="#{refentitebean.entiteEdition.entiteOriginale.clientExterneGroupeCa}" id="clientExterneGroupeCa"	label="#{msg['gm.ec040.el016']}">
+											<f:selectItem itemLabel="#{msg['gm.ec025.el007.oui']}" itemValue="N" />
+											<f:selectItem itemLabel="#{msg['gm.ec025.el007.non']}" itemValue="O" />
+										</h:selectOneMenu>
+									</h:panelGroup>
+									<h:outputLabel for="circ1CdBqReglCore"/>
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el017']}" for="circ1CdBqReglCore"/>
+									<h:outputLabel value=":" for="circ1CdBqReglCore"/>
+									<h:panelGroup styleClass="consultation-valeur">
+										<h:selectOneMenu styleClass="saisie-entite-select" value="#{refentitebean.entiteEdition.entiteOriginale.circ1CdBqReglCore}" id="circ1CdBqReglCore"	label="#{msg['gm.ec040.el016']}">
+											<f:selectItems value="#{refentitebean.entiteListManager.listEntiteReglement}" />
+										</h:selectOneMenu>
+									</h:panelGroup>
+
+
+
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el008']}" for="dtDeMigrEntSurBoa"/>
+									<h:outputLabel value=":" for="dtDeMigrEntSurBoa"/>
+									<h:panelGroup styleClass="consultation-valeur">
+										<rich:calendar id="dtDeMigrEntSurBoa" value="#{refentitebean.entiteEdition.dMigBoa}" styleClass="form-dateinput"
+											datePattern="dd/MM/yyyy" enableManualInput="#{true}" title="#{msg['gm.commun.formatdate'] }" label="#{msg['gm.ec025.el008']}" 
+											maxlength="#{champ['commun.date.maxLength']}" monthLabels="#{msg['gm.commun.mois.calendrier']}" converter="dateStringConverter">
+											<f:validator validatorId="ccmDateValidator"/>
+										</rich:calendar>
+										<h:inputText id="hDeMigrEntSurBoa" value="#{refentitebean.entiteEdition.hMigBoa}" size="5" label="#{msg['gm.ec025.el009']}" title="HH:MM" maxlength="5">
+											<f:validator validatorId="ccmHeureValidator"/>
+										</h:inputText>
+									</h:panelGroup>
+									<h:outputLabel for="circ1CdBqReglCup"/>
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el018']}" for="circ1CdBqReglCup"/>
+									<h:outputLabel value=":" for="circ1CdBqReglCup"/>
+									<h:panelGroup styleClass="consultation-valeur">
+										<h:selectOneMenu styleClass="saisie-entite-select" value="#{refentitebean.entiteEdition.entiteOriginale.circ1CdBqReglCup}" id="circ1CdBqReglCup"	label="#{msg['gm.ec040.el016']}">
+											<f:selectItems value="#{refentitebean.entiteListManager.listEntiteReglement}" />
+										</h:selectOneMenu>
+									</h:panelGroup>
+									
+									
+									
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el010']}" for="dtDeMigrEntSurBoe"/>
+									<h:outputLabel value=":" for="dtDeMigrEntSurBoe"/>
+									<h:panelGroup styleClass="consultation-valeur">
+										<rich:calendar id="dtDeMigrEntSurBoe" value="#{refentitebean.entiteEdition.dMigBoe}" styleClass="form-dateinput"
+											datePattern="dd/MM/yyyy" enableManualInput="#{true}" title="#{msg['gm.commun.formatdate'] }" label="#{msg['gm.ec025.el010']}" 
+											maxlength="#{champ['commun.date.maxLength']}" monthLabels="#{msg['gm.commun.mois.calendrier']}" converter="dateStringConverter">
+											<f:validator validatorId="ccmDateValidator"/>
+										</rich:calendar>
+										<h:inputText id="hDeMigrEntSurBoe" value="#{refentitebean.entiteEdition.hMigBoe}" size="5" label="#{msg['gm.ec025.el011']}" title="HH:MM" maxlength="5">
+											<f:validator validatorId="ccmHeureValidator"/>
+										</h:inputText>
+									</h:panelGroup>
+									<h:outputLabel for="circ1CdBqReglMci"/>
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el019']}" for="circ1CdBqReglMci"/>
+									<h:outputLabel value=":" for="circ1CdBqReglMci"/>
+									<h:panelGroup styleClass="consultation-valeur">
+										<h:selectOneMenu styleClass="saisie-entite-select" value="#{refentitebean.entiteEdition.entiteOriginale.circ1CdBqReglMci}" id="circ1CdBqReglMci"	label="#{msg['gm.ec040.el016']}">
+											<f:selectItems value="#{refentitebean.entiteListManager.listEntiteReglement}" />
+										</h:selectOneMenu>
+									</h:panelGroup>
+									
+									
+									
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el012']}" for="chefDeFile"/>
+									<h:outputLabel value=":" for="chefDeFile"/>
+									<h:panelGroup styleClass="consultation-valeur">
+										<h:selectOneMenu styleClass="saisie-entite-select" value="#{refentitebean.entiteEdition.entiteOriginale.chefDeFile}" id="chefDeFile"	label="#{msg['gm.ec040.el016']}">
+											<f:selectItems value="#{refentitebean.entiteListManager.listChefDeFile}" />
+										</h:selectOneMenu>
+										<rich:spacer height="1" width="15" />
+									</h:panelGroup>
+									<h:outputLabel for="circ1CdBqReglVisa"/>
+									<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el020']}" for="circ1CdBqReglVisa"/>
+									<h:outputLabel value=":" for="circ1CdBqReglVisa"/>
+									<h:panelGroup styleClass="consultation-valeur">
+										<h:selectOneMenu styleClass="saisie-entite-select" value="#{refentitebean.entiteEdition.entiteOriginale.circ1CdBqReglVisa}" id="circ1CdBqReglVisa"	label="#{msg['gm.ec040.el016']}">
+											<f:selectItems value="#{refentitebean.entiteListManager.listEntiteReglement}" />
+										</h:selectOneMenu>
+									</h:panelGroup>
+
+									<c:if test="#{!refentitebean.entiteEdition.creation}">
+										<h:panelGroup><rich:spacer height="20" width="20" /></h:panelGroup>
+										<h:outputText/>
+										<h:outputText/>
+										<h:outputText/>
+										<h:outputText/>
+										<h:outputText/>
+										<h:outputText/>
+										
+										
+										<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el021']}" for="dateCreation"/>
+										<h:outputLabel value=":" for="dateCreation"/>
+										<h:outputText id="dateCreation" styleClass="consultation-valeur" value="#{refentitebean.entiteEdition.entiteOriginale.dateCreation}"><f:converter converterId="dateTimeConverter"/></h:outputText>
+										<h:outputText/>
+										<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el022']}" for="userCreation"/>
+										<h:outputLabel value=":" for="userCreation"/>
+										<h:outputText id="userCreation" styleClass="consultation-valeur" value="#{refentitebean.entiteEdition.entiteOriginale.userCreation}" />
+				
+				
+										<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el023']}" for="dateMaj"/>
+										<h:outputLabel value=":" for="dateMaj"/>
+										<h:outputText id="dateMaj" styleClass="consultation-valeur" value="#{refentitebean.entiteEdition.entiteOriginale.dateMaj}"><f:converter converterId="dateTimeConverter"/></h:outputText>
+										<h:outputText/>
+										<h:outputLabel styleClass="consultation-libelle" value="#{msg['gm.ec025.el024']}" for="userMaj"/>
+										<h:outputLabel value=":" for="userMaj"/>
+										<h:outputText id="userMaj" styleClass="consultation-valeur" value="#{refentitebean.entiteEdition.entiteOriginale.userMaj}" />
+									</c:if>
+								</h:panelGrid>
+							</rich:panel>
+						</rich:panel>
+					</rich:panel>
+					<rich:panel id="btnPanel" styleClass="gm-panel-no-border" bodyClass="gm-btn-panel">
+						<a4j:commandButton ajaxSingle="true" id="btnInitialiser" value="#{msg['gm.ec035.el004']}" styleClass="gm-btn-aspect" action="#{refentitebean.goCreer}" rendered="#{refentitebean.entiteEdition.creation}" reRender="panelRecherche" />
+						<a4j:commandButton id="btnValider" value="#{msg['gm.ec035.el005']}" styleClass="gm-btn-aspect" actionListener="#{refentitebean.afficheConfirmationEdition}" eventsQueue="formQueue" reRender="errorM, popupParent, popupConfirmer" />
+						<h:commandButton id="btnRetour" value="#{msg['gm.ec035.el006']}" styleClass="gm-btn-aspect"	action="#{refentitebean.refreshBloc}" immediate="true"></h:commandButton>
+					</rich:panel>
+				</h:form>
+				
+				
+				
+				<rich:panel styleClass="gm-panel-no-border" id="popupParent" >
+					<rich:modalPanel id="popupConfirmer" resizeable="false" shadowDepth="0" moveable="false" rendered="#{refentitebean.confirmation}" showWhenRendered="#{refentitebean.confirmation}">
+						<f:facet name="header"><h:panelGroup><h:outputText value="#{msg['wn.commun.label.confirmation']}" /></h:panelGroup></f:facet>
+	
+						<div class="wn-popup-text">
+							<h:outputText value="#{msg['gm.ec035.el007'] }" rendered="#{refentitebean.entiteEdition.creation }"/>
+							<h:outputText value="#{msg['gm.ec035.el008'] }" rendered="#{!refentitebean.entiteEdition.creation }"/>
+						</div>
+						<br />
+						<rich:panel bodyClass="wn-popup-footer" styleClass="wn-mpnl-footer">
+							<h:form>
+								<h:commandButton value="#{msg['wn.commun.action-o']}"	styleClass="wn-popup-btn" action="#{refentitebean.enregistrerEdition}">
+									<rich:componentControl for="popupConfirmer" operation="hide" event="onclick" />
+								</h:commandButton>
+								<a4j:commandButton value="#{msg['wn.commun.action-n']}" actionListener="#{refentitebean.continuerSaisie}" styleClass="wn-popup-btn" reRender="popupParent, popupConfirmer" />
+							</h:form>
+						</rich:panel>
+					</rich:modalPanel>
+				</rich:panel>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</jsp:root>

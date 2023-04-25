@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/x
+html1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:c="http://java.sun.com/jstl/core">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Redirection</title>
+<meta name="robots" content="noindex,follow" />
+<script type="text/javascript">
+//<![CDATA[
+	
+	function erreurPopUp() { 
+		var useless = "#{popUpBean.erreurOuverturePopUp}";
+		var msgPopupBloquee = "Ouverture en plein écran impossible. Merci de désactiver les bloqueurs de popup de votre navigateur et de réessayer.";
+		document.write(msgPopupBloquee);
+		
+	}
+	
+	//]]>
+    </script>
+    
+</head>
+
+    <body onload="erreurPopUp();">
+    	<p>
+    		Ouverture en plein écran impossible. Merci de désactiver les bloqueurs de popup de votre navigateur et de réessayer.
+    	</p>
+    </body>
+
+</html>

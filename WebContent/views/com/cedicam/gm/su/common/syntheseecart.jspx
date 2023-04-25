@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+	<f:view>
+		<table style="margin-left: 0;">
+			<tr class="listheader">
+				<td>Réseau</td>
+				<td>Ecart BOA</td>
+				<td>Ecart BOE</td>
+			</tr>
+			
+			
+			<c:forEach var="entry" items="#{suivibean.ecart.ecarts}" >
+				<c:set var="odd" value="#{suivibean.oddEven }"/>
+				<c:set var="trstyle" value=""/>
+				<c:if test="#{odd}"><c:set var="trstyle" value='background-color: rgb(234, 243, 255);'/></c:if>
+				
+				<tr style="#{trstyle}">
+					<td><h:outputText value="#{entry.key }"/></td>
+					<c:choose>
+						<c:when test="#{entry.value.ecartBoa}">
+							<td style="background-color: red;">
+								<h:form>
+									<input type="hidden" name="id" value="#{entry.value.id }"/>
+									<h:commandButton styleClass="cellbouton" value="Consulter" action="#{suivibean.selectEcart}"/>
+								</h:form>
+							</td>
+						</c:when>
+						<c:otherwise>
+							<td style="background-color: green;"></td>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="#{entry.value.ecartBoe}">
+							<td style="background-color: red;">
+								<h:form>
+									<input type="hidden" name="id" value="#{entry.value.id }"/>
+									<h:commandButton styleClass="cellbouton" value="Consulter"  action="#{suivibean.selectEcart}"/>
+								</h:form>
+							</td>
+						</c:when>
+						<c:otherwise>
+							<td style="background-color: green;"></td>
+						</c:otherwise>
+					</c:choose>
+				</tr>
+			</c:forEach>
+		</table>
+	</f:view>
+</jsp:root>

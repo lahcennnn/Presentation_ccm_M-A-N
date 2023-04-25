@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<f:view>
+		<ui:composition template="/themes/cedicam/template/conteneur.jspx">
+			<ui:param name="dataBean" value="#{refentitebean}" />
+			<ui:define name="titre_ecran">
+				<h:outputText value="#{msg['gm.ec025.el002']}" />
+			</ui:define>
+
+			<ui:define name="code_ecran">EC025</ui:define>
+
+			<ui:define name="contenu_ecran">
+				<div id="panelRecherche" class="subpanel-panel">
+					<div style=" width: 100%; height: 100%; border: solid rgb(211, 223, 255) 1px; ">
+						<h:form styleClass="form-paginator">
+							<div class="subpanel-upperbar">
+								<div class="subpanel-upperbar-title"><h:outputText value="#{msg['gm.ec025.el002'] }"/></div>
+							</div>
+						<div id="panelRecherche-content" style="overflow: auto; clear: both;" class="rich-panel">
+							<table>
+								<tr>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el003']}" for="dtDbEffet"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="dtDbEffet" value="#{refentitebean.entiteDtManager.selectedOccurrence.dtDbEffet}"><f:converter converterId="dateConverter"/></h:outputText></td>
+									<td></td>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el004']}" for="dtFinEffet"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="dtFinEffet" value="#{refentitebean.entiteDtManager.selectedOccurrence.dtFinEffet}"><f:converter converterId="dateConverter"/></h:outputText></td>
+								</tr>
+								<tr>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el005']}" for="codeBanque"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="codeBanque" value="#{refentitebean.entiteDtManager.selectedOccurrence.codeBanque}"><f:converter converterId="codeBanqueConverter"/></h:outputText></td>
+									<td></td>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el013']}" for="txtCdBanqueEntACompt"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="txtCdBanqueEntACompt" value="#{refentitebean.entiteDtManager.selectedOccurrence.cdBanqueEntACompt}">
+										<f:converter converterId="valueToLabelConverter"/>
+									</h:outputText></td>
+								</tr>
+								<tr>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el006']}" for="libelle"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="libelle" value="#{refentitebean.entiteDtManager.selectedOccurrence.libelle}" /></td>
+									<td></td>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el015']}" for="txtCirc1CdBqReglInter"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="txtCirc1CdBqReglInter" value="#{refentitebean.entiteDtManager.selectedOccurrence.circ1CdBqReglInter}" >
+										<f:converter converterId="valueToLabelConverter"/>
+									</h:outputText></td>
+								</tr>
+								<tr>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el014']}" for="codeIcaMci"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="codeIcaMci" value="#{refentitebean.entiteDtManager.selectedOccurrence.codeIcaMci}"><f:converter converterId="memberIdConverter"/></h:outputText></td>
+									<td></td>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el016']}" for="txtCirc1CdBqReglIntra"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="txtCirc1CdBqReglIntra" value="#{refentitebean.entiteDtManager.selectedOccurrence.circ1CdBqReglIntra}" >
+										<f:converter converterId="valueToLabelConverter"/>
+									</h:outputText></td>
+								</tr>
+								<tr>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el007']}" for="clientExterneGroupeCa"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="clientExterneGroupeCa" value="#{msg['gm.ec025.el007.oui']}" rendered="#{refentitebean.entiteDtManager.selectedOccurrence.clientExterneGroupeCa == 'N'}"/><h:outputText value="#{msg['gm.ec025.el007.non']}" rendered="#{refentitebean.entiteDtManager.selectedOccurrence.clientExterneGroupeCa == 'O'}"/></td>
+									<td></td>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el017']}" for="txtCirc1CdBqReglCore"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="txtCirc1CdBqReglCore" value="#{refentitebean.entiteDtManager.selectedOccurrence.circ1CdBqReglCore}" >
+										<f:converter converterId="valueToLabelConverter"/>
+									</h:outputText></td>
+								</tr>
+								<tr>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el008']}" for="dtDeMigrEntSurBoa"/></td>
+									<td>:</td>
+									<td class="consultation-valeur">
+										<h:outputText id="dtDeMigrEntSurBoa" value="#{refentitebean.entiteDtManager.selectedOccurrence.dtDeMigrEntSurBoa}"><f:converter converterId="dateTimeConverter"/></h:outputText>
+									</td>
+									<td></td>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el018']}" for="txtCirc1CdBqReglCup"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="txtCirc1CdBqReglCup" value="#{refentitebean.entiteDtManager.selectedOccurrence.circ1CdBqReglCup}" >
+										<f:converter converterId="valueToLabelConverter"/>
+									</h:outputText></td>
+								</tr>
+								<tr>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el010']}" for="dtDeMigrEntSurBoe"/></td>
+									<td>:</td>
+									<td class="consultation-valeur">
+										<h:outputText id="dtDeMigrEntSurBoe" value="#{refentitebean.entiteDtManager.selectedOccurrence.dtDeMigrEntSurBoe}"><f:converter converterId="dateTimeConverter"/></h:outputText>
+									</td>
+									<td></td>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el019']}" for="txtCirc1CdBqReglMci"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="txtCirc1CdBqReglMci" value="#{refentitebean.entiteDtManager.selectedOccurrence.circ1CdBqReglMci}" >
+										<f:converter converterId="valueToLabelConverter"/>
+									</h:outputText></td>
+								</tr>
+								<tr>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el012']}" for="txtChefDeFile"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="txtChefDeFile" value="#{refentitebean.entiteDtManager.selectedOccurrence.chefDeFile}">
+										<f:converter converterId="valueToLabelConverter"/>
+									</h:outputText>
+									</td>
+									<td></td>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el020']}" for="txtCirc1CdBqReglVisa"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="txtCirc1CdBqReglVisa" value="#{refentitebean.entiteDtManager.selectedOccurrence.circ1CdBqReglVisa}" >
+										<f:converter converterId="valueToLabelConverter"/>
+									</h:outputText></td>
+								</tr>
+								<tr>
+									<td colspan="7"><rich:spacer height="20" width="2" /></td>
+								</tr>
+								<tr>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el021']}" for="dateCreation"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="dateCreation" value="#{refentitebean.entiteDtManager.selectedOccurrence.dateCreation}"><f:converter converterId="dateTimeConverter"/></h:outputText></td>
+									<td></td>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el022']}" for="userCreation"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="userCreation" value="#{refentitebean.entiteDtManager.selectedOccurrence.userCreation}" /></td>
+								</tr>
+								<tr>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el023']}" for="dateMaj"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="dateMaj" value="#{refentitebean.entiteDtManager.selectedOccurrence.dateMaj}"><f:converter converterId="dateTimeConverter"/></h:outputText></td>
+									<td></td>
+									<td class="consultation-libelle"><h:outputLabel value="#{msg['gm.ec025.el024']}" for="userMaj"/></td>
+									<td>:</td>
+									<td class="consultation-valeur"><h:outputText id="userMaj" value="#{refentitebean.entiteDtManager.selectedOccurrence.userMaj}" /></td>
+								</tr>
+							</table>
+						</div>
+							<rich:panel styleClass="gm-panel-no-border"
+								bodyClass="gm-btn-panel">
+								<h:commandButton id="btnRetour" value="#{msg['gm.ec035.el006']}"
+									styleClass="wn-btn-aspect" action="#{refentitebean.refreshBloc}"></h:commandButton>
+							</rich:panel>
+						</h:form>
+					</div>
+				</div>
+			</ui:define>
+
+			<ui:define name="contenu_boutons">
+				<h:form id="form-boutons">
+					<h:commandButton id="btnRetour" value="#{msg['gm.ec025.el025']}" styleClass="wn-btn-aspect"	action="#{refentitebean.refreshBloc}"></h:commandButton>
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</jsp:root>

@@ -1,0 +1,72 @@
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+<style>
+
+#menuDeroulant { width: 644px; list-style-type: none; margin: 0; padding: 0; border: 0; position: absolute; top: 0; left: 0;}
+#menuDeroulant li { float: left; margin: 0; width: 250px; padding: 0; border: 0;}
+#menuDeroulant .sousMenu { display: none; list-style-type: none; margin: 0; padding: 0; border: 0;}
+#menuDeroulant .sousMenu li { float: none; margin: 0; padding: 0; border: 0; width: 249px; border-top: 1px solid transparent; border-right: 1px solid transparent;}
+#menuDeroulant li a:link, #menuDeroulant li a:visited { display: block; height: 1%; color: #FFF; background: #3B4E77; margin: 0; /*padding: 4px 8px;*/ border-right: 1px solid #fff; text-decoration: none;}
+#menuDeroulant li a:hover { background-color: #F2462E; }
+#menuDeroulant li a:active { background-color: #5F879D; }
+#menuDeroulant .sousMenu li a:link, #menuDeroulant .sousMenu li a:visited { display: block; color: #FFF; margin: 0; border: 0; text-decoration: none; background: transparent url("fondTR.png") repeat;}
+#menuDeroulant .sousMenu li a:hover { background-image: none; background-color: #F2462E;}
+#menuDeroulant li:hover > .sousMenu { display: block; }
+
+input.menubouton{width:200px; color: white;  background-color:transparent;   border-style:none; text-align: left;}
+
+#menuDeroulant .menuTxt {width: 100px;}
+#menuDeroulant .menuIcon {width: 30px;}
+
+.extdt-ss-vsbl { display: none;}
+
+input.icon16 {width: 16px; height: 10px; border: none;}
+
+
+.form-paginator{float: left; color: black;}
+.form-paginator-size{float: right; color: black;}
+
+input.paginatorbouton{display: block; width:30px; font-weight: bold; color: black;  background-color:transparent;   border-style:none; text-align: left;}
+.paginatorbouton_disabled{display: block; width:30px; font-weight: bold; color: #CCCCCC;  background-color:transparent;   border-style:none; text-align: left;}
+#paginator-panel .rich-panel-body  { padding-top: 4px; height: 18px;}
+
+.subpanel-panel {padding: 0;}
+.subpanel-upperbar {height: 20px; background-color: rgb(211, 223, 255); width: 100%; color: white;}
+.subpanel-upperbar-title {float: left; color: rgb(0, 0, 206); font-weight: bold;}
+.subpanel-upperbar-buttons {float: right;}
+input.subpanel-upperbar-buttons{display: block; width:30px; font-weight: bold; color: white;  background-color:transparent;   border-style:none; text-align: left;}
+
+#panelSearch { padding: 0px;}
+#panelList { padding: 0px;}
+#panelDetail { padding: 0px;}
+</style>	
+	<f:view>
+		<div style="position: relative; margin-top: -15px; height: 25px;">
+			<h:form>
+				<ul id="menuDeroulant">
+					<li class="menuTxt">
+						<h:commandButton styleClass="menubouton" action="#{suivibean.resetBloc}" value="Suivi"/>
+					</li>
+					<li class="menuTxt">
+						<h:commandButton styleClass="menubouton" action="ecart" value="Ecarts"/>
+					</li>
+					<li class="menuIcon">
+						<h:graphicImage value="/themes/cedicam/template/img/icon-param.gif" />
+						<ul class="sousMenu">
+							<li><h:commandButton styleClass="menubouton" action="entites" rendered="#{st000.habF0050}" value="Referenciel"/></li>
+						</ul>
+					</li>
+					<li class="menuIcon"><h:outputLink value="javascript:appelerAideWN();" styleClass="menu-element">?</h:outputLink></li>
+					<li class="menuIcon"><h:outputLink value="javascript:window.exportCsv();"><h:graphicImage value="/themes/cedicam/template/img/icon-export.gif" /></h:outputLink></li>
+					<li class="menuIcon"><h:outputLink value="javascript:window.print();"><h:graphicImage value="/themes/cedicam/template/img/icon-print.gif" /></h:outputLink></li>
+				</ul>
+			</h:form>
+		</div>
+	</f:view>
+</jsp:root>

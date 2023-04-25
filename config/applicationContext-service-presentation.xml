@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ws="http://jax-ws.dev.java.net/spring/core"
+	xmlns:wss="http://jax-ws.dev.java.net/spring/servlet" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+						http://jax-ws.dev.java.net/spring/core xsd/spring-jax-ws-core.xsd
+						http://jax-ws.dev.java.net/spring/servlet xsd/spring-jax-ws-servlet.xsd"
+	default-autowire="constructor">
+
+	<bean id="traceService" class="com.cedicam.gm.bt.core.service.impl.TraceServiceImpl" />
+
+	<bean id="alerteService" class="com.cedicam.gm.bt.core.service.impl.AlerteServiceImpl">
+		<property name="traceService"><ref bean="traceService" /></property>
+		<property name="graviteDefaut" value="${alerte.gravite.defaut}"/>
+		<property name="formatDate" value="${alerte.format.timestamp}"/>
+	</bean>
+
+	<bean id="evenementService"	class="com.cedicam.gm.bt.core.service.impl.EvenementServiceImpl">
+		<property name="traceService"><ref bean="traceService" /></property>
+		<property name="alerteService"><ref bean="alerteService" /></property>
+		<property name="fichierAlerte" value="${evenement.mapping.alerte.file.name}"/>
+	</bean>
+
+
+	<bean id="typologieService"	class="com.cedicam.gm.bt.core.service.impl.TypologieServiceImpl" />
+
+
+</beans>

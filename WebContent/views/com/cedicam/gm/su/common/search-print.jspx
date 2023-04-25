@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+	<f:view>
+	<style>
+	.searchField { float: left; margin-left: 100px;}
+	</style>
+		<c:set var="search" value="#{suivibean.search}" />
+		<c:if test="#{search.dateEchangeFromUsed or search.dateEchangeToUsed }">
+			<div class="searchField">
+				<span><h:outputText value="Date d'échange du " styleClass="selected-fieldname"/></span>		
+				<span>
+					<h:outputText value="#{search.dateEchangeFrom }" styleClass="selected-value"/>
+					<h:outputText value="  #{search.heureEchangeFrom }:#{search.minuteEchangeFrom } " styleClass="selected-value"/>
+				</span>
+				<span><h:outputText value=" au " styleClass="selected-fieldname"/></span>
+				<span>
+					<h:outputText value="#{search.dateEchangeTo }" styleClass="selected-value"/>
+					<h:outputText value="  #{search.heureEchangeTo }:#{search.minuteEchangeTo } " styleClass="selected-value"/>
+				</span>				
+			</div>
+		</c:if>
+		<c:if test="#{search.dateConvRefFromUsed or search.dateConvRefToUsed }">
+			<div class="searchField">
+				<span><h:outputText value="Date conv.référence du " styleClass="selected-fieldname"/></span>		
+				<span><h:outputText value="#{search.dateConvRefFrom }" styleClass="selected-value"/></span>		
+
+				<span><h:outputText value=" au " styleClass="selected-fieldname"/></span>
+				<span><h:outputText value="#{search.dateConvRefto }" styleClass="selected-value"/></span>		
+			</div>
+		</c:if>
+		<c:if test="#{search.dateRgltFromUsed or search.dateRgltToUsed }">
+			<div class="searchField">
+				<span><h:outputText value="Date règlement du " styleClass="selected-fieldname"/></span>		
+				<span><h:outputText value="#{search.dateRgltFrom }" styleClass="selected-value"/></span>		
+				
+				<span><h:outputText value=" au " styleClass="selected-fieldname"/></span>
+				<span><h:outputText value="#{search.dateRgltTo }" styleClass="selected-value"/></span>	
+			</div>
+		</c:if>
+		<c:if test="#{search.reseauUsed }">
+			<div class="searchField">
+				<span><h:outputText value="Réseau" styleClass="selected-fieldname"/></span>		
+				<span><h:outputText value="#{search.reseau }" styleClass="selected-value"/></span>		
+			</div>
+		</c:if>
+		<c:if test="#{search.sensUsed }">
+			<div class="searchField">
+				<span><h:outputText value="Sens" styleClass="selected-fieldname"/></span>		
+				<span><h:outputText value="#{search.sens }" styleClass="selected-value"/></span>	
+			</div>
+		</c:if>
+		<c:if test="#{search.backOfficeUsed }">
+			<div class="searchField">
+				<span><h:outputText value="Back office" styleClass="selected-fieldname"/></span>		
+				<span><h:outputText value="#{search.backOffice }" styleClass="selected-value"/></span>	
+			</div>
+		</c:if>
+		<c:if test="#{search.entiteEchangeUsed }">
+			<div class="searchField">
+				<span><h:outputText value="Entité d'échange" styleClass="selected-fieldname"/></span>		
+				<span><h:outputText value="#{search.entiteEchange }" styleClass="selected-value"/></span>	
+			</div>
+		</c:if>
+		<c:if test="#{search.chefDeFileUsed }">
+			<div class="searchField">
+				<span><h:outputText value="Chef de file / membre princ." styleClass="selected-fieldname"/></span>		
+				<span><h:outputText value="#{search.chefDeFile }" styleClass="selected-value"/></span>	
+			</div>
+		</c:if>
+		<c:if test="#{search.codeOperationUsed }">
+			<div class="searchField">
+				<span><h:outputText value="Code opération" styleClass="selected-fieldname"/></span>		
+				<span><h:outputText value="#{search.codeOperation }" styleClass="selected-value"/></span>	
+			</div>
+		</c:if>
+		<c:if test="#{search.referenceComptableUsed }">
+			<div class="searchField">
+				<span><h:outputText value="Référence comptable" styleClass="selected-fieldname"/></span>		
+				<span><h:outputText value="#{search.referenceComptable }" styleClass="selected-value"/></span>	
+			</div>
+		</c:if>
+		<c:if test="#{search.typeEcartUsed }">
+			<div class="searchField">
+				<span><h:outputText value="Statut rapprochement" styleClass="selected-fieldname"/></span>		
+				<span><h:outputText value="#{search.typeEcart }" styleClass="selected-value"/></span>	
+			</div>
+		</c:if>
+		<c:if test="#{search.fichierRRUsed }">
+			<div class="searchField">
+				<span><h:outputText value="Id Fichier échangé" styleClass="selected-fieldname"/></span>		
+				<span><h:outputText value="#{search.fichierRR }" styleClass="selected-value"/></span>	
+			</div>
+		</c:if>
+
+	</f:view>
+</jsp:root>

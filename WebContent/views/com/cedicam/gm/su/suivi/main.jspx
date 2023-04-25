@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+<f:view>
+		<c:set var="currentBean" value="suivibean"/>
+		<ui:composition template="/themes/cedicam/template/conteneur.jspx">
+			<ui:param name="dataBean" value="#{suivi}" />
+			<ui:define name="titre_ecran">
+				<h:outputText value="Suivi" />
+				<h:outputText value=" - Maquettee écran composé de 3 volets" />
+			</ui:define>
+			<ui:define name="date_application"><h:outputText value="#{suivi.dateApplication}"><f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" /></h:outputText></ui:define>
+			<ui:define name="code_ecran"><h:outputText value="Suivi" /></ui:define>
+
+			<ui:define name="contenu_ecran">
+<style>
+input.cellbouton {width:200px; color: black;  background-color:transparent;   border-style:none; text-align: left;}
+tr.listheader {background-color: rgb(17, 68, 136); color: white;}
+
+.print-section {margin-top: 30px; border: solid rgb(168, 183, 219) 1px;}
+.print-section-title {background-color: rgb(211, 223, 255);}
+.print-sectio-body {}
+.selected-value {margin-left: 10px;}
+.selected-fieldname {font-weight: bold; margin-left: 10px;}
+</style>
+		<c:if test="#{suivibean.viewMode}">
+			<div id="panelSearch" class="subpanel-panel" style="height: #{suivibean.searchHeight}%; ">
+				<div style=" width: 100%; height: 100%; border: solid rgb(211, 223, 255) 1px; ">
+					<div class="subpanel-upperbar">
+						<div class="subpanel-upperbar-title">Recherche</div>
+						<div class="subpanel-upperbar-buttons">
+							<h:form styleClass="form-paginator">
+								<h:commandButton styleClass="subpanel-upperbar-buttons" action="#{suivibean.biggerSearch}" image="/themes/cedicam/template/img/icons/window_bigger.png" style=" width:20px; height: 20px;"/>
+							</h:form>
+							<c:if test="#{suivibean.searchExpanded}">
+								<h:form styleClass="form-paginator">
+									<h:commandButton styleClass="subpanel-upperbar-buttons"  action="#{suivibean.smallerSearch}" image="/themes/cedicam/template/img/icons/window_smaller.png" style="margin-left: 5px; width:20px; height: 20px;"/>
+								</h:form>
+								<h:form styleClass="form-paginator">
+									<h:commandButton styleClass="subpanel-upperbar-buttons" action="#{suivibean.collapseSearch}" image="/themes/cedicam/template/img/icons/window_minimize.png" style="margin-left: 5px;width:20px; height: 20px; margin-right: 10px;"/>
+								</h:form>
+							</c:if>
+						</div>
+
+					</div>
+					<c:if test="#{suivibean.searchExpanded}">
+						<div style="overflow: auto; clear: both; height: 88%;" class="rich-panel">
+							<ui:include src="/views/com/cedicam/gm/su/common/search.jspx"/>
+						</div>
+					</c:if>
+				</div>
+			</div>
+
+			<c:if test="#{suivibean.hasSyntheseEcart}">
+				<div id="panelsyntheseecart" class="subpanel-panel" style="height: #{suivibean.syntheseEcartHeight}%; ">
+					<div style="width: 100%; height: 100%; border: solid rgb(211, 223, 255) 1px; ">
+						<div class="subpanel-upperbar">
+							<div class="subpanel-upperbar-title">Synthèse écarts</div>
+							<div class="subpanel-upperbar-buttons">
+								<h:form styleClass="form-paginator">
+									<h:commandButton styleClass="subpanel-upperbar-buttons" action="#{suivibean.biggerSyntheseEcart}" image="/themes/cedicam/template/img/icons/window_bigger.png" style=" width:20px; height: 20px;"/>
+								</h:form>
+								<c:if test="#{suivibean.syntheseEcartExpanded}">
+									<h:form styleClass="form-paginator">
+										<h:commandButton styleClass="subpanel-upperbar-buttons"  action="#{suivibean.smallerSyntheseEcart}" image="/themes/cedicam/template/img/icons/window_smaller.png" style="margin-left: 10px; width:20px; height: 20px;"/>
+									</h:form>
+									<h:form styleClass="form-paginator">
+										<h:commandButton styleClass="subpanel-upperbar-buttons" action="#{suivibean.collapseSyntheseEcart}" image="/themes/cedicam/template/img/icons/window_minimize.png"  style="margin-left: 5px;width:20px; height: 20px; margin-right: 10px;"/>
+									</h:form>
+								</c:if>
+							</div>
+						</div>
+						<c:if test="#{suivibean.syntheseEcartExpanded}">
+							<div style="overflow: auto; clear: both; height: 88%;" class="rich-panel">
+								<ui:include src="/views/com/cedicam/gm/su/common/syntheseecart.jspx"/>
+							</div>
+						</c:if>
+					</div>
+				</div>
+			</c:if>
+
+
+
+			<c:if test="#{suivibean.hasRegroupements}">
+				<div id="panelregroupement" class="subpanel-panel" style="height: #{suivibean.regroupementsHeight}%; ">
+					<div style="width: 100%; height: 100%; border: solid rgb(211, 223, 255) 1px; ">
+						<div class="subpanel-upperbar">
+							<div class="subpanel-upperbar-title">Regroupements</div>
+							<div class="subpanel-upperbar-buttons">
+								<h:form styleClass="form-paginator">
+									<h:commandButton styleClass="subpanel-upperbar-buttons" action="#{suivibean.biggerRegroupements}" image="/themes/cedicam/template/img/icons/window_bigger.png" style=" width:20px; height: 20px;"/>
+								</h:form>
+								<c:if test="#{suivibean.regroupementsExpanded}">
+									<h:form styleClass="form-paginator">
+										<h:commandButton styleClass="subpanel-upperbar-buttons"  action="#{suivibean.smallerRegroupements}" image="/themes/cedicam/template/img/icons/window_smaller.png" style="margin-left: 10px; width:20px; height: 20px;"/>
+									</h:form>
+									<h:form styleClass="form-paginator">
+										<h:commandButton styleClass="subpanel-upperbar-buttons" action="#{suivibean.collapseRegroupements}" image="/themes/cedicam/template/img/icons/window_minimize.png"  style="margin-left: 5px;width:20px; height: 20px; margin-right: 10px;"/>
+									</h:form>
+								</c:if>
+							</div>
+						</div>
+						<c:if test="#{suivibean.regroupementsExpanded}">
+							<div style="overflow: auto; clear: both; height: 88%;" class="rich-panel">
+								<ui:include src="/views/com/cedicam/gm/su/common/regroupements.jspx"/>
+							</div>
+						</c:if>
+					</div>
+				</div>
+			</c:if>
+
+			<c:if test="#{suivibean.hasDetail}">
+				<div id="paneldetail" class="subpanel-panel" style="height: #{suivibean.detailHeight}%; ">
+					<div style="width: 100%; height: 100%; border: solid rgb(211, 223, 255) 1px; ">
+						<div class="subpanel-upperbar">
+							<div class="subpanel-upperbar-title">Détail</div>
+							<div class="subpanel-upperbar-buttons">
+								<h:form styleClass="form-paginator">
+									<h:commandButton styleClass="subpanel-upperbar-buttons" action="#{suivibean.biggerDetail}" image="/themes/cedicam/template/img/icons/window_bigger.png" style=" width:20px; height: 20px;"/>
+								</h:form>
+								<c:if test="#{suivibean.detailExpanded}">
+									<h:form styleClass="form-paginator">
+										<h:commandButton styleClass="subpanel-upperbar-buttons"  action="#{suivibean.smallerDetail}" image="/themes/cedicam/template/img/icons/window_smaller.png" style="margin-left: 10px; width:20px; height: 20px;"/>
+									</h:form>
+									<h:form styleClass="form-paginator">
+										<h:commandButton styleClass="subpanel-upperbar-buttons" action="#{suivibean.collapseDetail}" image="/themes/cedicam/template/img/icons/window_minimize.png"  style="margin-left: 5px;width:20px; height: 20px; margin-right: 10px;"/>
+									</h:form>
+								</c:if>
+							</div>
+						</div>
+						<c:if test="#{suivibean.detailExpanded}">
+							<div style="overflow: auto; clear: both; height: 88%;" class="rich-panel">
+								<ui:include src="/views/com/cedicam/gm/su/common/detail.jspx"/>
+							</div>
+						</c:if>
+					</div>
+				</div>
+			</c:if>
+		</c:if>
+
+		<div id='toto'>toto</div>
+		<script>
+
+		(function() {
+		    var Dom = YAHOO.util.Dom,
+		        Event = YAHOO.util.Event;
+
+		    Event.onDOMReady(function() {
+		        var layout = new YAHOO.widget.Layout('toto',{
+		            minWidth: 1000,
+		            minHeight: 500,
+		            units: [
+		                { position: 'top', height: 50, resize: false, body: 'top1', header: 'Top', gutter: '5px', collapse: true, resize: true, maxHeight: 100 },
+		                { position: 'bottom', header: 'Bottom', height: 100, resize: true, body: 'bottom1', gutter: '5px', collapse: true, maxHeight: 130 },
+		                { position: 'center', minWidth: 400, minHeight: 200 }
+		            ]
+		        });
+		        layout.on('render', function() {
+		            var el = layout.getUnitByPosition('center').get('wrap');
+		            var layout2 = new YAHOO.widget.Layout(el, {
+		                parent: layout,
+		                minWidth: 400,
+		                minHeight: 200,
+		                units: [
+		                    { position: 'top', header: 'Top 2', height: 30, gutter: '2px', maxHeight: 80 },
+			                { position: 'bottom', header: 'Bottom 2', height: 100, resize: true, body: 'bottom1', gutter: '5px', collapse: true, maxHeight: 130 },
+		                    { position: 'center', body: 'center2', gutter: '2px', scroll: true }
+		                ]
+		            });
+		            layout2.render();
+		        });
+		        layout.render();
+		    });
+		})();
+		</script>
+
+			<c:if test="#{suivibean.printMode}">
+				<br/>
+				<h:form><h:commandButton action="#{suivibean.view}" value="Retour consultation" styleClass="wn-btn-fermer"/></h:form>
+				<br/>
+
+				<div  class="print-section">
+					<div class="print-section-title">Recherche</div>
+					<div class="print-section-body"><ui:include src="/views/com/cedicam/gm/su/common/search-print.jspx"/></div>
+				</div>
+
+				<c:if test="#{suivibean.hasSyntheseEcart}">
+					<div  class="print-section">
+						<c:choose>
+							<c:when test="#{suivibean.hasRapprochements}">
+								<div class="print-section-title">Ecart sélectionné</div>
+								<div class="print-section-body"><ui:include src="/views/com/cedicam/gm/su/common/syntheseecart-selected.jspx"/></div>
+							</c:when>
+							<c:otherwise>
+								<div class="print-section-title">Synthèse écarts</div>
+								<div class="print-section-body"><ui:include src="/views/com/cedicam/gm/su/common/syntheseecart.jspx"/></div>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</c:if>
+
+				<c:if test="#{suivibean.hasRapprochements}">
+					<div  class="print-section">
+						<c:choose>
+							<c:when test="#{suivibean.hasRegroupements}">
+								<div class="print-section-title">Rapprochement sélectionné</div>
+								<div class="print-section-body"><ui:include src="/views/com/cedicam/gm/su/common/rapprochement-selected.jspx"/></div>
+							</c:when>
+							<c:otherwise>
+								<div class="print-section-title">Rapprochements</div>
+								<div class="print-section-body"><ui:include src="/views/com/cedicam/gm/su/common/rapprochements.jspx"/></div>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</c:if>
+
+				<c:if test="#{suivibean.hasRegroupements}">
+					<div  class="print-section">
+						<c:choose>
+							<c:when test="#{suivibean.hasDetail}">
+								<div class="print-section-title">Regroupement sélectionné</div>
+								<div class="print-section-body"><ui:include src="/views/com/cedicam/gm/su/common/regroupement-selected.jspx"/></div>
+							</c:when>
+							<c:otherwise>
+								<div class="print-section-title">Regroupements</div>
+								<div class="print-section-body"><ui:include src="/views/com/cedicam/gm/su/common/regroupements.jspx"/></div>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</c:if>
+
+				<c:if test="#{suivibean.hasDetail}">
+					<div  class="print-section">
+						<div class="print-section-title">Détails</div>
+						<div class="print-section-body"><ui:include src="/views/com/cedicam/gm/su/common/detail.jspx"/></div>
+					</div>
+				</c:if>
+			</c:if>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</jsp:root>

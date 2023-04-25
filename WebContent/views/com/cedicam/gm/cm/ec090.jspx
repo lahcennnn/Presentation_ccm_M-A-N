@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<f:view>
+		<ui:composition template="/themes/cedicam/template/conteneur#{modeAffichage}.jspx">
+			<ui:param name="dataBean" value="#{ecartsbean}" />
+
+			<ui:define name="titre_ecran">
+				<h:outputText value="#{msg['gm.ec100.el000'] }" />
+			</ui:define>
+
+			<ui:define name="code_ecran">
+				<h:outputText value="EC100" />
+			</ui:define>
+
+			<ui:define name="date_application">
+				<h:outputText value="#{ecartsbean.dateApplication}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+				</h:outputText>
+			</ui:define>
+
+			<ui:define name="contenu_ecran">
+
+<script>
+function togglePanel(idPanel){
+	var panel = $(idPanel);
+	if( panel.style.display=='none'){
+		panel.style.display='block';
+	}else {
+		panel.style.display='none';
+	}
+}
+</script>
+
+				<div id="panelRecherche" class="subpanel-panel">
+					<div style=" width: 100%; height: 100%; border: solid rgb(211, 223, 255) 1px; ">
+						<h:form styleClass="form-paginator">
+							<div class="subpanel-upperbar">
+								<div class="subpanel-upperbar-title"><h:outputText value="#{msg['gm.ec100.el001'] }"/></div>
+								<div class="subpanel-upperbar-buttons"><h:outputText styleClass="gm-panel-toggle-btn" value="[+/-]"><a4j:support event="onclick" oncomplete="togglePanel('panelRecherche-content');" reRender="panelRecherche-content"/></h:outputText></div>
+							</div>
+						</h:form>
+						<div id="panelRecherche-content" style="overflow: auto; clear: both;" class="rich-panel">
+								<ui:include src="/views/com/cedicam/gm/cm/ec100.jspx" />
+						</div>
+					</div>
+				</div>
+
+
+				<rich:panel id="panelEcarts" styleClass="subpanel-panel">
+						<rich:panel style="width: 100%; height: 100%; border: 0px none;" rendered="#{ecartsbean.afficheSynthese}">
+							<h:form styleClass="form-paginator">
+								<div class="subpanel-upperbar">
+									<div class="subpanel-upperbar-title">
+										<h:outputText value="#{msg['gm.ec050.el001'] }"/>
+										<h:commandLink action="#{ecartsbean.genererRapport}">
+											<h:graphicImage value="/themes/cedicam/template/img/excel16.png" alt="Export CSV"/>
+											<f:param name="format" value="CSV" />
+											<f:param name="typeRapport" value="RECH_ECART" />
+										</h:commandLink>
+										<h:commandLink action="#{ecartsbean.imprimer}" target="printPage">
+											<h:graphicImage value="/themes/cedicam/template/img/print16.png" alt="Impression"/>
+											<f:param name="typeRapport" value="RECH_ECART" />
+										</h:commandLink>
+									</div>
+									<div class="subpanel-upperbar-buttons"><h:outputText styleClass="gm-panel-toggle-btn" value="[+/-]"><a4j:support event="onclick" oncomplete="togglePanel('panelEcarts-content');" reRender="panelEcarts-content"/></h:outputText></div>
+								</div>
+							</h:form>
+							<div id="panelEcarts-content" style="overflow: auto; clear: both;" class="rich-panel">
+									<ui:include src="/views/com/cedicam/gm/cm/ec110.jspx" />
+							</div>
+						</rich:panel>
+				</rich:panel>
+			</ui:define>
+
+		</ui:composition>
+	</f:view>
+</jsp:root>

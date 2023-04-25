@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="RMCI-Presentation" basedir="." default="buildEar">
+
+		<property name="project.application.name"  value="CCM-Presentation" />
+	
+		<!-- Valeur project.root.dir doit etre passee en parametre (-D...) -->
+		<property name="project.root.dir" value="D:/APPLI/TOTO" />
+		<property name="project.deploy.dir"  value="D:/APPLI/TOTO" />		
+		<property name="websphere.webxml.dir"  value="D:/APPLI/TOTO" />
+	
+		<property name="project.bin.dir" value="${project.root.dir}/WebContent/WEB-INF/classes" />
+		<property name="project.src.dir" value="${project.root.dir}/src" />
+		<property name="project.config.dir" value="${project.root.dir}/config" />
+		<property name="project.config.dir.TI" value="${project.root.dir}/configIntegration" />
+		<property name="project.war.dir" value="${project.root.dir}/WebContent" />
+		<property name="project.deploiement.dir" value="${project.root.dir}/Deploiement" />
+		<property name="project.ear.dir" value="${project.root.dir}" />
+		<property name="project.lib.dir"   value="${project.root.dir}/WebContent/WEB-INF/lib" />
+		<property name="project.libWas7.dir"   value="${project.root.dir}/libWas7" />	
+		<property name="project.libBusiness.dir"   value="${project.root.dir}/libBusiness" />	
+		<property name="servletLib"  value="D:/Program Files/IBM/WebSphere/AppServer/lib" />
+				
+		<property name="output.jar.dir" value="d:/jar" />
+
+		<path id="build.classpath">
+			<pathelement path="${classpath}"/>		
+			<fileset dir="${project.lib.dir}">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset dir="${project.libBusiness.dir}">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset dir="${servletLib}">
+				<include name="*.jar"/>
+			</fileset>
+			 <dirset dir="${project.bin.dir}">
+      			  <include name="**/classes"/>
+      			  <exclude name="**/*Test*"/>
+    		</dirset>
+			
+			<pathelement location="${project.bin.dir}" />
+		</path>
+		
+
+	<!-- Info -->
+	<target name="info" description="Display configuration">
+		<echo message="******************** " />
+		<echo message="*      Ant demo script   *" />
+		<echo message="******************** " />
+		<echo message="Author	                          : SBT " />
+		<echo message="Script version                : 1.0.0" />
+		<echo message="Ant  version                   : ${ant.version}" />
+		<echo message="Java version                  : ${ant.java.version}" />
+		<echo message="Java home directory       : ${java.home}" />
+		<echo message="Java classpath				:${java.class.path}" />
+		<echo message="Build classpath				:${build.classpath}" />
+
+	</target>
+
+	<!-- Init -->
+	<target name="init" depends="info" description="Initialize build">
+		<mkdir dir="${project.bin.dir}" />
+	</target>
+
+
+	<!-- Suppression des répertoires/fichiers temp -->
+	<target name="clean" depends="info" description="Removes all generated files">
+		<delete>
+			<fileset dir="${project.bin.dir}"/>
+		</delete>
+	</target>
+
+	<!-- Copie des fichiers nécessaires au build (config) -->
+	<target name="prepare" depends="info">
+		<copy todir="${project.bin.dir}">
+			<fileset dir="${project.config.dir}"/>
+		</copy>
+		<copy todir="${project.bin.dir}" overwrite="true">
+			<fileset dir="${project.config.dir.TI}">
+				<include name="project.properties"/>
+			</fileset>
+		</copy>
+		
+	</target>
+
+	<!-- Compile source files -->
+	<target name="compile" depends="info" description="Compilation des classes">
+		<javac srcdir="${project.src.dir}" includes="**/*.java" excludes="test/**/*.java" destdir="${project.bin.dir}" failonerror="false" debug="on"> 
+			<classpath refid="build.classpath"/>
+		</javac>
+	</target>
+
+	<!-- Build WAR files-->
+	<target name="buildWar" depends="info" description="Consruction du war">
+		<war destfile="${project.war.dir}/${project.application.name}.war" webxml="${project.war.dir}/WEB-INF/web.xml" manifest="${project.war.dir}/META-INF/Manifest.mf">
+            <fileset dir="${project.war.dir}">
+                <include name="xsd/*"/>
+            </fileset>
+            <fileset dir="${project.war.dir}">
+				<include name="themes/**/*.*"/>
+			</fileset>
+			<fileset dir="${project.war.dir}">
+				<include name="views/**/*.*"/>
+			</fileset>
+			<fileset dir="${project.war.dir}">
+				<include name="*.*"/>
+			</fileset>
+			<classes dir="${project.bin.dir}"/>
+			<webinf dir="${project.war.dir}/WEB-INF">
+			 	<include name="ibm-web*.xml"/>
+			 </webinf>
+			<lib dir="${project.libWas7.dir}">
+					<include name="*.jar"/>
+  			</lib>
+			<lib dir="${project.libBusiness.dir}">
+					<include name="*.jar"/>
+  			</lib>
+		</war>
+	</target>
+
+
+	<!-- Build EAR files-->
+	<target name="buildEar" depends="info" description="Consruction de l ear">
+		<ear destfile="${project.ear.dir}/${project.application.name}.ear" appxml="${project.deploiement.dir}/application.xml" manifest="${project.deploiement.dir}/MANIFEST.MF">
+			<metainf dir="${project.deploiement.dir}">
+				<include name="*.*"/>				
+			</metainf>
+			<fileset dir="${project.war.dir}" includes="*.jar,*.war"/>			
+		</ear>
+	</target>
+
+	<target name="all" depends="info, init, clean, prepare, compile, buildWar, buildEar" description="Build all"/>
+
+	<!-- deploy EAR files-->
+	<target name="deploy" depends="info" description="Deploiement maitiere EAR">
+		<delete dir="${project.deploy.dir}/${project.application.name}.ear/${project.application.name}.war"/>
+		<unjar src="${project.ear.dir}/${project.application.name}.ear" dest="${project.deploy.dir}/${project.application.name}.ear"/>
+		<move file="${project.deploy.dir}/${project.application.name}.ear/${project.application.name}.war" tofile="${project.deploy.dir}/${project.application.name}.ear/${project.application.name}.jar"/>
+		<unjar src="${project.deploy.dir}/${project.application.name}.ear/${project.application.name}.jar" dest="${project.deploy.dir}/${project.application.name}.ear/${project.application.name}.war/"/>
+		<delete file="${project.deploy.dir}/${project.application.name}.ear/${project.application.name}.jar"/>		
+		<delete file="${websphere.webxml.dir}/web.xml"/>		
+		<copy file="${project.deploy.dir}/${project.application.name}.ear/${project.application.name}.war/WEB-INF/web.xml" todir="${websphere.webxml.dir}"/>		
+	</target>
+
+</project>

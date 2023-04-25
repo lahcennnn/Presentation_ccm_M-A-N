@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+	<f:view>
+		<a4j:region id="regionRegroupementsEmetteur">
+		<div style="height: 50%%; overflow: auto; ">
+			<table style="margin-left: 0;">
+				<tr class="listheader">
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Regroupement émetteur">
+								<a4j:support event="onsubmit" reRender="regionRegroupementsEmetteur"></a4j:support>
+							</h:commandButton>	
+							<input type="hidden" name="listName" value="regroupements.emetteurs" />
+							<input type="hidden" name="propertyName" value="libelle" />
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Référence comptable">
+								<a4j:support event="onsubmit" reRender="regionRegroupementsEmetteur"></a4j:support>
+							</h:commandButton>		
+							<input type="hidden" name="listName" value="regroupements.emetteurs" />
+							<input type="hidden" name="propertyName" value="referenceComptable" />
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Zone rapprochement">
+								<a4j:support event="onsubmit" reRender="regionRegroupementsEmetteur"></a4j:support>
+							</h:commandButton>		
+							<input type="hidden" name="listName" value="regroupements.emetteurs" />
+							<input type="hidden" name="propertyName" value="zoneRapprochement" />
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Id fichier échange">
+								<a4j:support event="onsubmit" reRender="regionRegroupementsEmetteur"></a4j:support>
+							</h:commandButton>		
+							<input type="hidden" name="listName" value="regroupements.emetteurs" />
+							<input type="hidden" name="propertyName" value="idFicherEchange" />
+						</h:form>
+					</td>
+				</tr>
+				<c:forEach var="regroupement" items="#{ suivibean.regroupementsEmetteur}" >
+					<c:set var="odd" value="#{suivibean.oddEven }"/>
+					<c:set var="trstyle" value=""/>
+					<c:if test="#{odd}"><c:set var="trstyle" value='background-color: rgb(234, 243, 255);'/></c:if>
+					<tr style="#{trstyle}">
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{regroupement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{regroupement.libelle }" action="#{suivibean.selectRegroupement}">
+									<a4j:support event="onsubmit" reRender="regionDetails"></a4j:support>
+								</h:commandButton>
+							</h:form>
+						</td>
+	
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{regroupement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{regroupement.referenceComptable}" action="#{suivibean.selectRegroupement}">
+									<a4j:support event="onsubmit" reRender="regionDetails"></a4j:support>
+								</h:commandButton>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{regroupement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{regroupement.zoneRapprochement}" action="#{suivibean.selectRegroupement}">
+									<a4j:support event="onsubmit" reRender="regionDetails"></a4j:support>
+								</h:commandButton>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{regroupement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{regroupement.idFicherEchange}" action="#{suivibean.selectRegroupement}">
+									<a4j:support event="onsubmit" reRender="regionDetails"></a4j:support>
+								</h:commandButton>
+							</h:form>
+						</td>
+					</tr>
+				</c:forEach>
+								
+			</table>
+		</div>
+		</a4j:region>
+		<a4j:region id="regionRegroupementsDestinataire">
+		<div style="height: 50%%; overflow: auto; border-top: solid #cccccc 1px; ">
+			<table style="margin-left: 0;">
+				<tr class="listheader">
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Regroupement destinataire">
+								<a4j:support event="onsubmit" reRender="regionRegroupementsDestinataire"></a4j:support>
+							</h:commandButton>	
+							<input type="hidden" name="listName" value="regroupements.destinataires" />
+							<input type="hidden" name="propertyName" value="libelle" />
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Référence comptable">
+								<a4j:support event="onsubmit" reRender="regionRegroupementsDestinataire"></a4j:support>
+							</h:commandButton>		
+							<input type="hidden" name="listName" value="regroupements.destinataires" />
+							<input type="hidden" name="propertyName" value="referenceComptable" />
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Zone rapprochement">
+								<a4j:support event="onsubmit" reRender="regionRegroupementsDestinataire"></a4j:support>
+							</h:commandButton>		
+							<input type="hidden" name="listName" value="regroupements.destinataires" />
+							<input type="hidden" name="propertyName" value="zoneRapprochement" />
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Id fichier échange">
+								<a4j:support event="onsubmit" reRender="regionRegroupementsDestinataire"></a4j:support>
+							</h:commandButton>		
+							<input type="hidden" name="listName" value="regroupements.destinataires" />
+							<input type="hidden" name="propertyName" value="idFicherEchange" />
+						</h:form>
+					</td>
+				</tr>
+				<c:forEach var="regroupement" items="#{suivibean.regroupementsDestinataire}" >
+					<c:set var="odd" value="#{suivibean.oddEven }"/>
+					<c:set var="trstyle" value=""/>
+					<c:if test="#{odd}"><c:set var="trstyle" value='background-color: rgb(234, 243, 255);'/></c:if>
+					<tr style="#{trstyle}">
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{regroupement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{regroupement.libelle }" action="#{suivibean.selectRegroupement}">
+									<a4j:support event="onsubmit" reRender="regionDetails"></a4j:support>
+								</h:commandButton>
+							</h:form>
+						</td>
+	
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{regroupement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{regroupement.referenceComptable}" action="#{suivibean.selectRegroupement}">
+									<a4j:support event="onsubmit" reRender="regionDetails"></a4j:support>
+								</h:commandButton>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{regroupement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{regroupement.zoneRapprochement}" action="#{suivibean.selectRegroupement}">
+									<a4j:support event="onsubmit" reRender="regionDetails"></a4j:support>
+								</h:commandButton>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{regroupement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{regroupement.idFicherEchange}" action="#{suivibean.selectRegroupement}">
+									<a4j:support event="onsubmit" reRender="regionDetails"></a4j:support>
+								</h:commandButton>
+							</h:form>
+						</td>
+					</tr>
+				</c:forEach>
+								
+			</table>
+		</div>
+		</a4j:region>
+	</f:view>
+</jsp:root>

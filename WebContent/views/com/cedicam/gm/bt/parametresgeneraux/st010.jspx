@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<f:view>
+		<ui:composition template="/themes/cedicam/template/conteneur.jspx">
+			<ui:param name="dataBean" value="#{st010}" />
+
+			<ui:define name="titre_ecran">
+				<h:outputText value="#{msg['wn.st010.el001']}" />
+			</ui:define>
+
+			<ui:define name="code_ecran">
+				<h:outputText value="ST010" />
+			</ui:define>
+
+			<ui:define name="date_application">
+				<h:outputText value="#{st010.dateApplication}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+				</h:outputText>
+			</ui:define>
+
+			<ui:define name="contenu_ecran">
+				<h:form>
+					<rich:panel>
+						<f:facet name="header">#{msg['gm.st010.el000']}</f:facet>
+						<h:panelGrid columns="5">
+							<h:outputLabel value="#{msg['gm.st010.el001-a']}" />
+							<h:outputLabel value=":"/>
+							<rich:calendar value="#{st010.parap001}" datePattern="dd/MM/yyyy  HH:mm:ss"
+								enableManualInput="#{true}" valueChangeListener="#{st010.chgSaisie}"
+								label="#{msg['gm.st010.el001-a']}"
+								maxlength="#{champ['commun.date.maxLength']}"
+								monthLabels="#{msg['wn.commun.mois.calendrier']}">
+								<rich:ajaxValidator event="onblur" />
+							</rich:calendar>
+							<h:outputLabel value="" />
+							<h:outputLabel value="#{msg['wn.commun.formatdate']}"
+								styleClass="wn-rappel-date" />
+
+							<h:outputLabel value="#{msg['gm.st010.el002']}" />
+							<h:outputLabel value=":"/>
+							<h:inputText value="#{st010.parap002}"
+								label="#{msg['gm.st010.el002']}"
+								valueChangeListener="#{st010.chgSaisie}"
+								maxlength="#{champ['parametresGeneraux.decalageDateTraitement.maxLength']}">
+								<f:converter converterId="Integer" />
+								<rich:ajaxValidator event="onblur" />
+							</h:inputText>
+							<h:outputLabel value="" />
+							<h:outputLabel value="" />
+
+							<h:outputLabel value="#{msg['gm.st010.el003']}" />
+							<h:outputLabel value=":"/>
+							<h:inputText value="#{st010.parap003}"
+								label="#{msg['gm.st010.el003']}"
+								valueChangeListener="#{st010.chgSaisie}"
+								maxlength="#{champ['parametresGeneraux.entite.maxLength']}">
+								<f:converter converterId="Integer" />
+								<rich:ajaxValidator event="onblur" />
+							</h:inputText>
+							<h:outputLabel value="*" styleClass="wn-couleur-obligatoire" />
+							<h:outputLabel value="" />
+
+							<h:outputLabel value="#{msg['gm.st010.el004']}" />
+							<h:outputLabel value=":"/>
+							<h:inputText value="#{st010.parap004}" required="true"
+								label="#{msg['gm.st010.el004']}"
+								valueChangeListener="#{st010.chgSaisie}"
+								maxlength="#{champ['parametresGeneraux.idBanque.maxLength']}">
+								<f:converter converterId="Integer" />
+								<rich:ajaxValidator event="onblur" />
+							</h:inputText>
+							<h:outputLabel value="*" styleClass="wn-couleur-obligatoire" />
+							<h:outputLabel value="" />
+
+							<h:outputLabel value="#{msg['gm.st010.el005']}" />
+							<h:outputLabel value=":"/>
+							<h:inputText value="#{st010.parap005}" required="true"
+								label="#{msg['gm.st010.el005']}"
+								valueChangeListener="#{st010.chgSaisie}"
+								maxlength="#{champ['parametresGeneraux.codeBoa.maxLength']}">
+								<f:converter converterId="Integer" />
+								<rich:ajaxValidator event="onblur" />
+							</h:inputText>
+							<h:outputLabel value="*" styleClass="wn-couleur-obligatoire" />
+							<h:outputLabel value="" />
+
+							<h:outputLabel value="#{msg['gm.st010.el006']}" />
+							<h:outputLabel value=":"/>
+							<h:inputText value="#{st010.parap006}" required="true"
+								label="#{msg['gm.st010.el006']}"
+								valueChangeListener="#{st010.chgSaisie}"
+								maxlength="#{champ['parametresGeneraux.codeBoe.maxLength']}">
+								<f:converter converterId="Integer" />
+								<rich:ajaxValidator event="onblur" />
+							</h:inputText>
+							<h:outputLabel value="*" styleClass="wn-couleur-obligatoire" />
+							<h:outputLabel value="" />
+
+							<h:outputLabel value="#{msg['gm.st010.el007']}" />
+							<h:outputLabel value=":"/>
+							<h:inputText value="#{st010.parap007}" required="true"
+								label="#{msg['gm.st010.el007']}"
+								valueChangeListener="#{st010.chgSaisie}"
+								maxlength="#{champ['parametresGeneraux.delaiAvantHoraire.maxLength']}">
+								<f:converter converterId="Integer" />
+								<rich:ajaxValidator event="onblur" />
+							</h:inputText>
+							<h:outputLabel value="*" styleClass="wn-couleur-obligatoire" />
+							<h:outputLabel value="#{msg['gm.st010.el007-a']}"
+								styleClass="wn-rappel-guide" />
+
+							<h:outputLabel value="#{msg['gm.st010.el008']}" />
+							<h:outputLabel value=":"/>
+							<h:inputText value="#{st010.parap008}" required="true"
+								label="#{msg['gm.st010.el008']}"
+								valueChangeListener="#{st010.chgSaisie}"
+								maxlength="#{champ['parametresGeneraux.delaiEpuration2.maxLength']}">
+								<f:converter converterId="Integer" />
+								<rich:ajaxValidator event="onblur" />
+							</h:inputText>
+							<h:outputLabel value="*" styleClass="wn-couleur-obligatoire" />
+							<h:outputLabel value="#{msg['gm.st010.el008-a']}"
+								styleClass="wn-rappel-guide" />
+						</h:panelGrid>
+					</rich:panel>
+
+					<rich:panel styleClass="wn-panel-no-border"
+						bodyClass="wn-btn-panel">
+						<h:commandButton value="#{msg['wn.st010.el014']}"
+							action="#{st010.valider}" styleClass="wn-btn-aspect" />
+						<h:commandButton value="#{msg['wn.st010.el015']}"
+							action="#{st010.fermer}" styleClass="wn-btn-fermer"
+							immediate="true" />
+					</rich:panel>
+
+				</h:form>
+
+				<rich:modalPanel id="popupvalider" resizeable="false" shadowDepth="0" moveable="false"
+					rendered="#{st010.confirmerModification}"
+					showWhenRendered="#{st010.confirmerModification}">
+					<f:facet name="header">
+						<h:panelGroup>
+							<h:outputText value="#{msg['wn.commun.label.confirmation']}"></h:outputText>
+						</h:panelGroup>
+					</f:facet>
+					<div class="wn-popup-text"><h:outputText value="#{st010.msgConfirmerModification}"></h:outputText></div>
+					<br />
+
+					<rich:panel bodyClass="wn-popup-footer" styleClass="wn-mpnl-footer">
+						<h:form>
+							<a4j:commandButton value="#{msg['wn.commun.action-o']}"
+								action="#{st010.validerModification}" styleClass="wn-popup-btn">
+								<rich:componentControl for="popupvalider" operation="hide"
+									event="onclick" />
+							</a4j:commandButton>
+
+							<a4j:commandButton value="#{msg['wn.commun.action-n']}"
+								action="#{st010.continuerSaisie}" styleClass="wn-popup-btn">
+								<rich:componentControl for="popupvalider" operation="hide"
+									event="onclick" />
+							</a4j:commandButton>
+						</h:form>
+					</rich:panel>
+				</rich:modalPanel>
+
+				<rich:modalPanel id="popupfermer" resizeable="false" shadowDepth="0" moveable="false"
+					rendered="#{st010.confirmerAbandon}"
+					showWhenRendered="#{st010.confirmerAbandon}">
+					<f:facet name="header">
+						<h:panelGroup>
+							<h:outputText value="#{msg['wn.commun.label.confirmation']}"></h:outputText>
+						</h:panelGroup>
+					</f:facet>
+					<div class="wn-popup-text"><h:outputText value="#{st010.msgConfirmerAbandon}"></h:outputText></div>
+					<br />
+
+					<rich:panel bodyClass="wn-popup-footer" styleClass="wn-mpnl-footer">
+						<h:form>
+							<a4j:commandButton value="#{msg['wn.commun.action-o']}"
+								action="#{st010.validerFermeture}" styleClass="wn-popup-btn">
+								<rich:componentControl for="popupfermer" operation="hide"
+									event="onclick" />
+							</a4j:commandButton>
+
+							<a4j:commandButton value="#{msg['wn.commun.action-n']}"
+								action="#{st010.continuerSaisie}" styleClass="wn-popup-btn">
+								<rich:componentControl for="popupfermer" operation="hide"
+									event="onclick" />
+							</a4j:commandButton>
+						</h:form>
+					</rich:panel>
+				</rich:modalPanel>
+
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</jsp:root>

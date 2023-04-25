@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+	<f:view>
+		<c:set var="reglist" value="#{regManager}"/>
+		<h:form id="form-regroupements-#{reg}">
+			<rich:panel>
+				<c:choose>
+					<c:when test="#{modeAffichage == 'print'}">
+						<!-- pas de colonne action (loupe) si on est en mode Print -->
+						<c:set var="myColumnClasses" value="colTypeCre, colRefCompta, colZoneRap, colIdFichier, colNbOpe, colDevise, colSigne, colMontant, colDevise, colSigne, colMontant, colTopCompta, colSigne, colDate, colProcess, colTypeImpaye"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="myColumnClasses" value="colAction, colTypeCre, colRefCompta, colZoneRap, colIdFichier, colNbOpe, colDevise, colSigne, colMontant, colDevise, colSigne, colMontant, colTopCompta, colSigne, colDate, colProcess, colTypeImpaye"/>
+					</c:otherwise>
+				</c:choose>
+				<rich:extendedDataTable id="table-#{reg}" value="#{regManager.datatableModel}" selection="#{regManager.selection}"
+						enableContextMenu="false" var="occurrence" sortMode="single" selectionMode="single" rowClasses="wn-ligne-impaire-bis, wn-ligne-paire-bis" noDataLabel="#{msg['wn.commun.nodata']}"
+						columnClasses="#{myColumnClasses}">
+					<f:facet name="header">
+						<rich:columnGroup>
+							<c:choose>
+								<c:when test="#{modeAffichage == 'print'}">
+									<!-- pas de colonne action (loupe) si on est en mode Print -->
+								</c:when>
+								<c:otherwise>
+									<rich:column rowspan="2" id="colLoupRgp#{reg}"></rich:column>
+								</c:otherwise>
+							</c:choose>
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el001'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'typeCre' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'typeCre' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="typeCre" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el002'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'refComptable' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'refComptable' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="refComptable" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+
+							</rich:column>
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el003'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'zoneRapprochement' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'zoneRapprochement' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="zoneRapprochement" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+
+							</rich:column>
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el004'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'refFicOpeEcrin' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'refFicOpeEcrin' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="refFicOpeEcrin" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el005'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'nbOperations' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'nbOperations' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="nbOperations" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+
+							</rich:column>
+							<rich:column colspan="3"><h:outputText value="#{msg['gm.ec062.el006'] }" /></rich:column>
+							<rich:column colspan="3"><h:outputText value="#{msg['gm.ec062.el007'] }" /></rich:column>
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el008'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'topCompta' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'topCompta' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="topCompta" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el009'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'dateRglmt' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'dateRglmt' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="dateRglmt" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el010'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'processingCode' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'processingCode' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="processingCode" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column rowspan="2" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el011'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'typeImpaye' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'typeImpaye' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="typeImpaye" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column breakBefore="true" styleClass="headerWithSort" >
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el006-a'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'deviseRglmt' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'deviseRglmt' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="deviseRglmt" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column sortable="true" styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el006-b'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'signeRglmt' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'signeRglmt' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="signeRglmt" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el006-c'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'sommeMontantRglmt' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'sommeMontantRglmt' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="sommeMontantRglmt" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el007-a'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'deviseTrans' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'deviseTrans' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="deviseTrans" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el007-b'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'signeTrans' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'signeTrans' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="signeTrans" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+							</rich:column>
+							<rich:column styleClass="headerWithSort">
+								<a4j:commandLink actionListener="#{suivibean.trier}" reRender="table-#{reg}">
+									<h:outputText styleClass="colSortableTitle" value="#{msg['gm.ec062.el007-c'] }" />
+									<br/>
+									<c:choose>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'sommeMontantTrans' and regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/ascending.png" alt="#{msg['gm.alt.tri.ascending'] }" />
+										</c:when>
+										<c:when test="#{regManager.dataProvider.sort.sortProperty eq 'sommeMontantTrans' and not regManager.dataProvider.sort.sortAscending }">
+											<h:graphicImage value="/themes/cedicam/template/img/descending.png" alt="#{msg['gm.alt.tri.descending'] }" />
+										</c:when>
+										<c:otherwise>
+											<h:graphicImage value="/themes/cedicam/template/img/nosort.png" alt="#{msg['gm.alt.tri.nosort'] }" />
+										</c:otherwise>
+									</c:choose>
+									<f:attribute name="sortPropertyName" value="sommeMontantTrans" />
+									<f:attribute name="dt" value="reg#{reg}" />
+								</a4j:commandLink>
+							</rich:column>
+						</rich:columnGroup>
+					</f:facet>
+
+
+					<c:if test="#{modeAffichage != 'print'}">
+					<rich:column id="lineLoupRgp#{reg}" width="3%" name="loupeName">
+						<h:commandLink actionListener="#{suivibean.detaillerRegroupement}" action="#{suivibean.detaillerRegroupement}">
+							
+							<h:graphicImage id="loupe" value="/themes/cedicam/template/img/loupe16.png" alt="Detail"><rich:toolTip for="loupe" direction="top-right" showDelay="300" layout="block"><h:outputText value="Détailler" /></rich:toolTip></h:graphicImage>
+							<f:attribute name="reg" value="#{reg}"/>
+							<f:attribute name="regId" value="#{occurrence.idRegroupement}"/>
+						</h:commandLink>
+					</rich:column>
+					</c:if>
+					<rich:column width="6%">
+						<h:outputText value="#{occurrence.typeCre}"  styleClass="tab_val_code" />
+						<span class="debug-info"><h:outputText value="#{occurrence.idRegroupement}" /></span>
+					</rich:column>
+					<rich:column width="9%"><h:outputText value="#{occurrence.refComptable}"/></rich:column>
+					<rich:column width="8%"><h:outputText value="#{occurrence.zoneRapprochement}" /></rich:column>
+					<rich:column width="10%"><h:outputText value="#{occurrence.refFicOpeEcrin}" /></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.nbOperations}" /></rich:column>
+					<rich:column width="5%"><h:outputText value="#{occurrence.deviseRglmt}" ><f:converter converterId="deviseConverter" /></h:outputText></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.signeRglmt}" /></rich:column>
+					
+					<rich:column width="11%"><h:outputText value="#{occurrence.sommeMontantRglmt}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+					
+					<!--<rich:column width="11%">
+					<h:outputText value="#{occurrence.sommeMontantRglmt}" rendered="#{fn:contains(occurrence.deviseRglmt, '978')}">
+								<f:converter converterId="montantConverter" />
+					</h:outputText>
+  					<h:outputText value="#{occurrence.sommeMontantRglmt}" rendered="#{!fn:contains(occurrence.deviseRglmt, '978')}">
+					</h:outputText>
+					</rich:column>
+					-->
+					<rich:column width="5%"><h:outputText value="#{occurrence.deviseTrans}" ><f:converter converterId="deviseConverter" /></h:outputText></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.signeTrans}" /></rich:column>
+					
+					<rich:column width="11%"><h:outputText value="#{occurrence.sommeMontantTrans}" ><f:converter converterId="montantConverter" /></h:outputText></rich:column>
+						
+				<!--	<rich:column width="11%">
+					<h:outputText value="#{occurrence.sommeMontantTrans}" rendered="#{fn:contains(occurrence.deviseTrans, '978')}">
+								<f:converter converterId="montantConverter" />
+					</h:outputText>
+  					<h:outputText value="#{occurrence.sommeMontantTrans}" rendered="#{!fn:contains(occurrence.deviseTrans, '978')}">
+					</h:outputText>
+					
+					</rich:column>-->
+					<rich:column width="4%"><h:outputText value="#{occurrence.topCompta}" /></rich:column>
+					<rich:column width="6%"><h:outputText value="#{occurrence.dateRglmt}"  ><f:converter converterId="dateConverter" /></h:outputText></rich:column>
+					<rich:column width="7%"><h:outputText value="#{occurrence.processingCode}" /></rich:column>
+					<rich:column width="4%"><h:outputText value="#{occurrence.typeImpaye}" /></rich:column>
+
+					<a4j:support reRender="panelBoutons" id="extended_table_bean_take_selection" action="#{regManager.selectRow}" event="onselectionchange" />
+				</rich:extendedDataTable>
+			</rich:panel>
+		</h:form>
+		<div id="debuglist-#{reg}" class="debug-info">
+			<div id="RA-#{reg}"><c:forEach items="#{regManager.dataProvider.fullData}" var="dto"><h:outputText value="#{dto.idRegroupement}, " rendered="#{dto.type eq 'RA' }"/></c:forEach></div>
+			<div id="RR-#{reg}"><c:forEach items="#{regManager.dataProvider.fullData}" var="dto"><h:outputText value="#{dto.idRegroupement}, " rendered="#{dto.type eq 'RR' }"/></c:forEach></div>
+			<div id="ECRIN-#{reg}"><c:forEach items="#{regManager.dataProvider.fullData}" var="dto"><h:outputText value="#{dto.idRegroupement}, " rendered="#{dto.type eq 'ECRIN' }"/></c:forEach></div>
+			<div id="CRBECRIN-#{reg}"><c:forEach items="#{regManager.dataProvider.fullData}" var="dto"><h:outputText value="#{dto.idRegroupement}, " rendered="#{dto.type eq 'CRBECRIN' }"/></c:forEach></div>
+			<div id="RCVLA-#{reg}"><c:forEach items="#{regManager.dataProvider.fullData}" var="dto"><h:outputText value="#{dto.idRegroupement}, " rendered="#{dto.type eq 'RCVLA' }"/></c:forEach></div>
+			<div id="OTHERS-ERROR-#{reg}">
+				<c:forEach items="#{regManager.dataProvider.fullData}" var="dto">
+					<h:outputText value="#{dto.idRegroupement}, " rendered="#{empty dto.type or (!dto.type eq 'RA' and !dto.type eq 'RR' and !dto.type eq 'ECRIN' and !dto.type eq 'CRBECRIN' and !dto.type eq 'RCVLA')}"/>
+				</c:forEach>
+			</div>
+		</div>
+	</f:view>
+</jsp:root>

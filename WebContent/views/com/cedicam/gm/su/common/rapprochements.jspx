@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+	<f:view>
+			<c:set var="voidvalue" value=" - "/>
+			<table>
+				<colgroup>
+					<col style="width: 40px;" />
+					
+					<col style="width: 50px;" />
+					<col style="width: 80px;" />
+					<col style="width: 40px;" />
+					<col style="width: 80px;" />
+					
+					<col style="width: 50px;" />
+					<col style="width: 80px;" />
+					<col style="width: 40px;" />
+					<col style="width: 80px;" />
+					
+					<col style="width: 80px;" />
+					<col style="width: 40px;" />
+					<col style="width: 80px;" />
+					
+					<col style="width: 80px;" />
+					<col style="width: 40px;" />
+					<col style="width: 80px;" />
+					
+					<col style="width: 40px;" />
+				</colgroup>
+				
+				<tr class="listheader">
+					<td rowspan="2">
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Cd Opé"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="codeOperation" />
+						</h:form>					
+					</td>
+					<td rowspan="2">
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Entité Emet"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="emission.entite" />
+						</h:form>					
+					</td>
+					<td colspan="3">Regrpmt Emission</td>
+					<td rowspan="2">
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Entité Dest"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="reception.entite" />
+						</h:form>					
+					</td>
+					<td colspan="3">Regrpmt Dest</td>
+					<td colspan="3">Ecart</td>
+					<td colspan="3">Règlement réalisé</td>
+					<td rowspan="2">
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Statut"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="statut" />
+						</h:form>					
+					</td>
+				</tr>
+				<tr class="listheader">
+
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Nombre"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="emission.nbOperations" />
+						</h:form>					
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Signe"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="emission.signe" />
+						</h:form>					
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Montant"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="emission.montant" />
+						</h:form>					
+					</td>
+
+
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Nombre"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="reception.nbOperations" />
+						</h:form>					
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Signe"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="reception.signe" />
+						</h:form>					
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Montant"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="reception.montant" />
+						</h:form>					
+					</td>
+
+
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Nombre"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="ecart.nbOperations" />
+						</h:form>					
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Signe"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="ecart.signe" />
+						</h:form>					
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Montant"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="ecart.montant" />
+						</h:form>					
+					</td>
+
+
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Nombre"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="reglement.nbOperations" />
+						</h:form>					
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Signe"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="reglement.signe" />
+						</h:form>					
+					</td>
+					<td>
+						<h:form>
+							<h:commandButton styleClass="menubouton" action="#{suivibean.trier}" value="Montant"/>	
+							<input type="hidden" name="listName" value="rapprochements" />
+							<input type="hidden" name="propertyName" value="reglement.montant" />
+						</h:form>					
+					</td>
+
+
+				</tr>
+				<c:forEach var="rapprochement" items="#{suivibean.rapprochements}"  >
+					<c:set var="odd" value="#{suivibean.oddEven }"/>
+					<c:set var="trstyle" value=""/>
+					<c:if test="#{odd}"><c:set var="trstyle" value='background-color: rgb(234, 243, 255);'/></c:if>
+					<tr style="#{trstyle}">
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.codeOperation }" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+	
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.emission eq null ? voidvalue : rapprochement.emission.entite}" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.emission eq null ? voidvalue : rapprochement.emission.nbOperationsFormated }" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.emission eq null ? voidvalue : rapprochement.emission.signe}" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.emission eq null ? voidvalue : rapprochement.emission.montantFormated }" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+	
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.reception eq null ? voidvalue : rapprochement.reception.entite}" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.reception eq null ? voidvalue : rapprochement.reception.nbOperationsFormated }" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.reception eq null ? voidvalue : rapprochement.reception.signe}" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.reception eq null ? voidvalue : rapprochement.reception.montantFormated }" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+	
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.ecart eq null ? voidvalue : rapprochement.ecart.nbOperationsFormated }" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.ecart eq null ? voidvalue : rapprochement.ecart.signe}" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.ecart eq null ? voidvalue : rapprochement.ecart.montantFormated }" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+	
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.reglement eq null ? voidvalue : rapprochement.reglement.nbOperationsFormated }" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.reglement eq null ? voidvalue : rapprochement.reglement.signe}" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.reglement eq null ? voidvalue : rapprochement.reglement.montantFormated }" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+	
+						<td>
+							<h:form>
+								<input type="hidden" name="id" value="#{rapprochement.id }"/>
+								<h:commandButton styleClass="cellbouton" value="#{rapprochement.statut }" action="#{suivibean.selectRapprochement}"/>
+							</h:form>
+						</td>
+					</tr>
+				</c:forEach>
+								
+			</table>
+	</f:view>
+</jsp:root>

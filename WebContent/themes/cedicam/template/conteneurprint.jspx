@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" style="height: 100%;">
+    <head>
+      <title>#{st000.applicationNom} - #{st000.applicationEnvironnementExecution} - <ui:insert name="titre_ecran" /></title>
+      <meta content="CA-CP: Centre Comptable Monetique" name="keywords" />
+           <meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Cache-Control" content="no-cache" />
+		<meta http-equiv="Cache-Control" content="no-store" />
+		<meta http-equiv="Cache-Control" content="must-revalidate" />
+		<meta http-equiv="Expires" content="Mon, 8 Aug 2006 10:00:00 GMT" />
+      <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8"/>
+      <link rel="stylesheet" type="text/css" href="${facesContext.externalContext.requestContextPath}/themes/cedicam/template/css/bandeau.css" />
+      <link rel="stylesheet" type="text/css" href="${facesContext.externalContext.requestContextPath}/themes/cedicam/template/css/base.css" />
+      <!-- 
+      <link rel="stylesheet" type="text/css" href="${facesContext.externalContext.requestContextPath}/themes/cedicam/template/css/cedicam.css" />
+       -->
+       <link rel="stylesheet" type="text/css" href="${facesContext.externalContext.requestContextPath}/themes/cedicam/template/css/jquery-utils.css" />
+      <link rel="stylesheet" type="text/css" href="${facesContext.externalContext.requestContextPath}/themes/cedicam/template/css/cedicamprint.css" />
+      <link rel="stylesheet" type="text/css" media="print" href="${facesContext.externalContext.requestContextPath}/themes/cedicam/template/css/cedicamprint.css" />
+<script type="text/javascript">
+      
+		  function addLoadEvent(func) {
+			  var oldonload = window.onload;
+			  if (typeof window.onload != 'function') {
+		    	  window.onload = func;
+		  	  } else {
+		    	  window.onload = function() {
+		     		  if (oldonload) {
+		        		  oldonload();
+		      		  }
+		    		  func();
+		  		  };
+			  }
+		  }
+		  
+		  function addEventHandler(elem, eventType, handler) {
+			  if (elem.addEventListener) {
+			     elem.addEventListener (eventType, handler, false);
+			  } else if (elem.attachEvent) {
+			     elem.attachEvent ('on'+eventType, handler); 
+			  }
+		  }
+		  
+		  function removeEventHandler(elem, eventType, handler) {
+			  if (elem.removeEventListener) {
+			     elem.removeEventListener (eventType, handler, false);
+			  } else if (elem.detachEvent) {
+			     elem.detachEvent ('on'+eventType, handler); 
+			  }
+		  }
+      
+          function appelerAideWN(){// Ecran de l'aide
+              window.open("${facesContext.externalContext.requestContextPath}#{msg['gm.bandeau.fichierAide']}#<ui:insert name='code_ecran' />", "aide");
+          }
+          
+          function confirmerDeconnexion(){// boite de confirmation de deconnexion. Si confirmation: deconnexion
+        	  var msgConfirm = "#{msg['gm.bandeau.sortie.msgConfirm']}";
+        	  if (msgConfirm == "") {
+      			msgConfirm = "Etes-vous sur de vouloir vous deconnecter de CCM ? Choisissez OK pour confirmer ou choisissez Annuler pour revenir.";
+        	  }
+        	  return confirm(msgConfirm);
+          }
+          
+          //<![CDATA[
+	          function addTitleOnTruncatedData() {
+	        	  //les entetes de tableau
+	        	  var headers = document.getElementsByClassName('extdt-headercell');
+	        	  for (var i=0; i<headers.length; i++) {
+	        		  var header = headers[i];
+	        		  if (header.offsetWidth<header.scrollWidth) {
+	        			  var text = header.childNodes[0];
+	        			  while (text.childNodes[0] != null && typeof(text.childNodes[0].innerHTML) != "undefined") {
+	        				  text = text.childNodes[0];
+	        			  }
+	        			  if (typeof(text.innerHTML) != "undefined") {
+	            		  	header.title = text.innerHTML;
+	        			  } else {
+	        				header.title = header.innerHTML;
+	        			  }
+	        		  } else {
+	        			  header.title = '';
+	        		  }
+	        	  }
+	        	  //les cellules de tableau
+	        	  var cells = document.getElementsByClassName('extdt-cell-div');
+	        	  for (var i=0; i<cells.length; i++) {
+	        		  var cell = cells[i];
+	        		  if (cell.parentNode.id.indexOf('Loup') == -1) {
+		        		  if (cell.offsetWidth<cell.scrollWidth) {
+							  if (cell.childNodes.length>1) {
+		            			  if (typeof(cell.childNodes[0].innerHTML) == 'string') {
+		            			  	cell.title = cell.childNodes[0].innerHTML;
+		            			  } else {
+		            				  cell.title = cell.innerHTML;
+		            			  }
+		            		  } else {
+		            			  if (typeof(cell.childNodes[0].innerHTML) == 'undefined') {
+		              			  	cell.title = cell.innerHTML;
+		              			  } else {
+		              				cell.title = cell.childNodes[0].innerHTML;
+		              			  }
+		            		  }
+		        		  } else {
+		        			  cell.title = '';
+		        		  }
+	        		  }
+	        	  }
+	          }
+          
+	        function onReturnPressed(event) {
+	        	if (event.preventDefault) {
+	        		  event.preventDefault();
+        		}
+        		event.returnValue = false;
+	        }
+  		//]]>	
+        
+          
+          window.onresize = function(event) {
+    			addTitleOnTruncatedData();
+    		};
+    	
+      </script>
+	<script type="text/javascript">
+	function printAndClose() {
+	      var browserName=navigator.appName;
+	      if (browserName=="Microsoft Internet Explorer") {
+		        // Internet Explorer
+		      	window.print();
+		      	var obj_window = window.open('', '_self');
+		        obj_window.opener = window;
+		        obj_window.focus();
+		        opener=self;
+		        self.close();
+	      }
+	      else 
+	      {
+	          //les autres navigateurs
+	      		window.print();
+	      		setTimeout(function(){window.close();}, 1);
+	      }
+	}
+	</script>
+    </head>
+
+    <body class="yui-skin-sam" onload="javascript:printAndClose();">
+     <c:set var="rooturi" value="${facesContext.externalContext.requestContextPath}"/>
+    <a4j:loadBundle basename="messagesJSF" var="msgJSF"/>
+    <a4j:loadBundle basename="rubriques" var="msg" />
+    <a4j:loadBundle basename="validationChamps" var="champ" />
+    <a4j:loadBundle basename="ariane" var="ariane" />
+      <div id="header">
+        <div id="header-cedicam">
+          <div id="logo-cedicam">
+            <img src="${rooturi}/themes/cedicam/template/img/LOGO-CA-CP-PNG.png" alt="Cedicam" />
+          </div>
+          <br />
+          <div><div id="logo-application">#{msg['wn.bandeau.codeappli']}</div><div id="logo-nom-application">#{msg['wn.bandeau.nomappli']}</div></div>
+        </div>
+
+        <div id="header-information">
+          <ui:include src="/views/com/cedicam/gm/ch/menus/st00b.jspx" /><br />
+          <c:if test="#{dataBean.afficheDateEtCode }">
+	          <div id="header-date-application">
+	            #{msg['wn.bandeau.date']}<rich:spacer height="1" width="4" />:<rich:spacer height="1" width="4" />
+	            <h:outputText value="#{dataBean.dateApplication}">
+	              <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+	            </h:outputText>
+	          </div>
+	          <br />
+	          <div id="header-date-heure-application">
+	            #{msg['wn.bandeau.dateGeneration']}<rich:spacer height="1" width="4" />:<rich:spacer height="1" width="4" />
+	            <h:outputText value="#{dataBean.dateGeneration}">
+	              <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="Europe/Paris" />
+	            </h:outputText>
+	          </div>
+	          <br />
+	          <div id="header-code-ecran">#{msg['wn.bandeau.ecran']}<rich:spacer height="1" width="4" />:<rich:spacer height="1" width="4" /><ui:insert name="code_ecran" /></div>
+          </c:if>
+        </div>
+
+        <div id="header-application">
+          <div id="page-title"><ui:insert name="titre_ecran" id="titre-ecran" /></div>
+          <br />
+
+
+
+
+
+
+
+		<div class="menuapplication">
+			<h:form>
+				<ul id="menuDeroulant">
+					<li class="menuTxt" style="display: #{st000.habF0010?'block':'none'}"><h:commandLink action="#{suivibean.resetBloc}" value="#{msg['wn.bandeau.menu.suivi']}" styleClass="menu-element #{view.viewId eq '/views/com/cedicam/gm/cm/ec030.jspx' or view.viewId eq '/views/com/cedicam/gm/cm/ec060.jspx' or view.viewId eq '/views/com/cedicam/gm/cm/ec070.jspx' ? 'menu-selected' : 'menu-not-selected'} "/></li>
+			 		<li class="menuTxt" style="display: #{st000.habF0040?'block':'none'}"><h:commandLink action="#{ecartsbean.resetBloc }" value="#{msg['wn.bandeau.menu.ecart']}" styleClass="menu-element #{view.viewId eq '/views/com/cedicam/gm/cm/ec090.jspx' ? 'menu-selected' : 'menu-not-selected'}"/></li>
+					<li class="menuTxt" style="display: #{st000.habF0050?'block':'none'}"><h:commandLink action="#{refentitebean.resetBloc}"  value="#{msg['wn.bandeau.menu.refentite']}" styleClass="menu-element #{view.viewId eq '/views/com/cedicam/gm/re/ec020.jspx' ? 'menu-selected' : 'menu-not-selected'}"/></li>
+					<li class="menuTxt"><h:outputLink value="javascript:appelerAideWN();" styleClass="menu-element">#{msg['wn.bandeau.menu.aide']}</h:outputLink></li>
+				</ul>
+			</h:form>
+		</div>
+          <div id="header-ariane"><ui:include src="/views/com/cedicam/gm/ch/menus/st00c.jspx" /></div>
+
+       </div>
+      </div>
+
+      <div id="main">
+            <a4j:outputPanel ajaxRendered="true" id="errorM">
+		        <h:messages errorClass="wn-msg-error" warnClass="wn-msg-warning" fatalClass="wn-msg-error" infoClass="wn-msg-information" styleClass="wn-msg-zone" showDetail="false" showSummary="true" />
+            </a4j:outputPanel>
+        <div id="contenu" style="height: 100%;">
+          <div id="main-contenu" style="height: 100%;"><ui:insert name="contenu_ecran" /></div>
+        </div>
+      </div>
+      <rich:jQuery name="setFocus" timing="onload" selector="input:not(:button):visible:enabled:first:not(.filterInput)" query="focus()" />
+
+    </body>
+  </html>
+</jsp:root>

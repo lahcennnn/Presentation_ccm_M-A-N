@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+	<f:view>
+		<c:set var="regroupement" value="#{suivibean.selectedRegroupement}" />
+		<table>
+			<tr class="listheader">
+				<td><h:outputText styleClass="selected-fieldname" value="Regroupement"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{regroupement.libelle }"/></td>
+				<td></td>
+				<td><h:outputText styleClass="selected-fieldname" value="Référence comptable"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{regroupement.referenceComptable }"/></td>
+			</tr>
+			<tr class="listheader">
+				<td><h:outputText styleClass="selected-fieldname" value="Zone rapprochement"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{regroupement.zoneRapprochement }"/></td>
+				<td></td>
+				<td><h:outputText styleClass="selected-fieldname" value="Id fichier échange"/></td>
+				<td><h:outputText styleClass="selected-value" value="#{regroupement.idFicherEchange }"/></td>
+			</tr>
+
+		</table>
+	</f:view>
+</jsp:root>

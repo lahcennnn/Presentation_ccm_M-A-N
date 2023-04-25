@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich" version="2.0">
+
+<f:view>
+	<c:set var="search" value="#{ecartsbean.searchManager}"/>
+	<h:form id="formrecherche">
+	
+		<h:panelGrid columns="7" columnClasses="ecartColGroup1, ecartColGroup2,ecartColGroup3,
+				ecartColGroup4,ecartColGroup5,ecartColGroup6,ecartColGroup7">
+		
+			<h:outputLabel value="#{msg['gm.ec100.el002-a']}" for="debutEch"/>
+			<h:outputLabel value=":" for="debutEch"/>
+			<h:panelGroup>
+				<h:panelGrid columns="2" columnClasses="ecartColGroup31,ecartColGroup32">
+					<rich:calendar id="debutEch" value="#{search.criteres.dateDebutEchange}" datePattern="dd/MM/yyyy"
+						enableManualInput="#{true}" label="#{msg['gm.ec100.el002-a']}" maxlength="#{champ['commun.date.maxLength']}"
+						monthLabels="#{msg['gm.commun.mois.calendrier']}" todayControlMode="hidden" title="#{msg['gm.commun.formatdate'] }"
+						required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.datedebutechange'] } - #{msg['gm.error.datenull'] }">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+							<f:converter converterId="dateConverter" />
+							<a4j:support immediate="true" event="oninputchange" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+							<a4j:support immediate="true" event="onchanged" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+					</rich:calendar>
+					<h:panelGroup>
+						<h:inputText id="heureDebut" value="#{search.heureEchangeDebut}" size="5" label="#{msg['gm.ec100.el002-a']}"  maxlength="5" title="HH:MM"
+						required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.heuredebutechange'] } - #{msg['gm.error.datenull'] }">
+							<f:validator validatorId="ccmHeureValidator"/>
+							<a4j:support immediate="true" event="onchange" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+						</h:inputText>
+						<rich:spacer height="1" width="15" />
+						<h:outputLabel styleClass="wn-couleur-obligatoire" for="debutEch" >&#10041;</h:outputLabel>
+					</h:panelGroup>
+				</h:panelGrid>
+			</h:panelGroup>
+			<h:outputText value="" />
+			<h:outputLabel value="#{msg['gm.ec100.el004-a']}" for="debutDateConv"/>
+			<h:outputLabel value=":" for="debutDateConv"/>
+			<h:panelGroup>
+				<h:panelGrid columns="4" columnClasses="ecartColGroup71,ecartColGroup72,ecartColGroup73,ecartColGroup74">
+					<rich:calendar id="debutDateConv" value="#{search.criteres.dateDebutConvRef}" datePattern="dd/MM/yyyy"
+						enableManualInput="#{true}" label="#{msg['gm.ec100.el004-a']}" maxlength="#{champ['commun.date.maxLength']}"
+						monthLabels="#{msg['gm.commun.mois.calendrier']}"  todayControlMode="hidden" title="#{msg['gm.commun.formatdate'] }">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+							<f:converter converterId="dateConverter" />
+							<a4j:support immediate="true" event="oninputchange" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+							<a4j:support immediate="true" event="onchanged" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+					</rich:calendar>
+					<h:outputLabel value="#{msg['gm.ec100.el004-b']}" for="finDateConv"/>
+					<h:outputLabel value=":" for="finDateConv"/>
+					<rich:calendar id="finDateConv" value="#{search.criteres.dateFinConvRef}" datePattern="dd/MM/yyyy"
+						enableManualInput="#{true}" label="#{msg['gm.ec100.el004-b-long']}" maxlength="#{champ['commun.date.maxLength']}"
+						monthLabels="#{msg['gm.commun.mois.calendrier']}"  todayControlMode="hidden" title="#{msg['gm.commun.formatdate'] }" >
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+							<f:converter converterId="dateConverter" />
+							<a4j:support immediate="true" event="oninputchange" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+							<a4j:support immediate="true" event="onchanged" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+					</rich:calendar>
+				</h:panelGrid>
+			</h:panelGroup>
+			
+			<h:outputText value="" />
+			<h:outputText value="" />
+			<h:panelGroup>
+				<h:panelGrid columns="2" columnClasses="ecartColGroup31,ecartColGroup32">
+					<h:outputText styleClass="gm-rappel-date" value="#{msg['gm.commun.formatdate'] }"/>
+					<h:outputText styleClass="gm-rappel-date" value="#{msg['gm.commun.formatheure'] }"/>
+				</h:panelGrid>
+			</h:panelGroup>
+			<h:outputText value="" />
+			<h:outputText value="" />
+			<h:outputText value="" />
+			<h:panelGroup>
+				<h:panelGrid columns="4" columnClasses="ecartColGroup71,ecartColGroup72,ecartColGroup73,ecartColGroup74">
+					<h:outputText styleClass="gm-rappel-date" value="#{msg['gm.commun.formatdate'] }"/>
+					<h:outputText value=""/>
+					<h:outputText value=""/>
+					<h:outputText styleClass="gm-rappel-date" value="#{msg['gm.commun.formatdate'] }"/>
+				</h:panelGrid>
+			</h:panelGroup>
+				
+			
+			<h:outputLabel value="#{msg['gm.ec100.el002-b']}" for="finEch"/>
+			<h:outputLabel value=":" for="finEch"/>
+			<h:panelGroup>
+				<h:panelGrid columns="2" columnClasses="ecartColGroup31,ecartColGroup32">
+					<rich:calendar id="finEch" value="#{search.criteres.dateFinEchange}" datePattern="dd/MM/yyyy"
+						enableManualInput="#{true}" label="#{msg['gm.ec100.el002-b-long']}" maxlength="#{champ['commun.date.maxLength']}"
+						monthLabels="#{msg['gm.commun.mois.calendrier']}"  todayControlMode="hidden" title="#{msg['gm.commun.formatdate'] }"
+						required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.datefinechange'] } - #{msg['gm.error.datenull'] }">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+							<f:converter converterId="dateConverter" />
+							<a4j:support immediate="true" event="oninputchange" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+							<a4j:support immediate="true" event="onchanged" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+					</rich:calendar>
+					<h:panelGroup>
+						<h:inputText id="heureFin" value="#{search.heureEchangeFin}" size="5" label="#{msg['gm.ec100.el002-b-long']}"  maxlength="5" title="HH:MM"
+						required="true" requiredMessage="#{msg['gm.error.titleprefix'] } : #{msg['gm.error.field.heurefinechange'] } - #{msg['gm.error.datenull'] }">
+							<f:validator validatorId="ccmHeureValidator"/>
+							<a4j:support immediate="true" event="onchange" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+						</h:inputText>
+						<rich:spacer height="1" width="15" />
+						<h:outputLabel styleClass="wn-couleur-obligatoire" for="finEch" >&#10041;</h:outputLabel>
+					</h:panelGroup>
+				</h:panelGrid>
+			</h:panelGroup>
+			<h:outputText value="" />
+			<h:outputLabel value="#{msg['gm.ec100.el005-a']}" for="debutDateReg"/>
+			<h:outputLabel value=":" for="debutDateReg"/>
+			<h:panelGroup>
+				<h:panelGrid columns="4" columnClasses="ecartColGroup71,ecartColGroup72,ecartColGroup73,ecartColGroup74">
+					<rich:calendar id="debutDateReg" value="#{search.criteres.dateDebutReglement}" datePattern="dd/MM/yyyy"
+						enableManualInput="#{true}" label="#{msg['gm.ec100.el005-a']}" maxlength="#{champ['commun.date.maxLength']}"
+						monthLabels="#{msg['gm.commun.mois.calendrier']}"  todayControlMode="hidden" title="#{msg['gm.commun.formatdate'] }" >
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+							<f:converter converterId="dateConverter" />
+							<a4j:support immediate="true" event="oninputchange" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+							<a4j:support immediate="true" event="onchanged" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+					</rich:calendar>
+					<h:outputLabel value="#{msg['gm.ec100.el005-b']}" for="finDateReg"/>
+					<h:outputLabel value=":" for="finDateReg"/>
+					<rich:calendar id="finDateReg" value="#{search.criteres.dateFinReglement}" datePattern="dd/MM/yyyy"
+						enableManualInput="#{true}" label="#{msg['gm.ec100.el005-b-long']}" maxlength="#{champ['commun.date.maxLength']}"
+						monthLabels="#{msg['gm.commun.mois.calendrier']}"  todayControlMode="hidden" title="#{msg['gm.commun.formatdate'] }">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+							<f:converter converterId="dateConverter" />
+							<a4j:support immediate="true" event="oninputchange" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+							<a4j:support immediate="true" event="onchanged" actionListener="#{ecartsbean.changeCritPrimaires}" reRender="panelEcarts" />
+					</rich:calendar>
+				</h:panelGrid>
+			</h:panelGroup>
+				
+				
+			<h:outputLabel value="#{msg['gm.ec100.el006']}" for="selectChef"/>
+			<h:outputLabel value=":" for="selectChef"/>
+			<h:selectOneMenu value="#{search.criteres.chefDeFile}" id="selectChef" label="#{msg['gm.ec100.el006']}">
+				<f:selectItems value="#{search.listChefDeFile}" />
+					<a4j:support immediate="true" actionListener="#{ecartsbean.changeCritPrimaires}" event="onchange"
+						 reRender="panelEcarts" />
+			</h:selectOneMenu>
+			<h:outputText value=""/>
+			<h:outputLabel value="#{msg['gm.ec100.el003']}" for="selectDevise"/>
+			<h:outputLabel value=":" for="selectDevise"/>
+			<h:selectOneMenu value="#{search.criteres.devRegCompt}" id="selectDevise" label="#{msg['gm.ec100.el003']}">
+				<f:selectItems value="#{search.listDevise}" />
+					<a4j:support immediate="true" actionListener="#{ecartsbean.changeCritPrimaires}" event="onchange"
+						 reRender="panelEcarts" />
+			</h:selectOneMenu>
+		</h:panelGrid>
+	
+		<rich:panel id="btCrit" styleClass="search_buttons_panel_no_margin">
+			<h:panelGroup styleClass="form-buttons">
+				<a4j:commandButton id="initialiser" value="#{msg['gm.ec100.el012']}" action="#{ecartsbean.initialiser}" immediate="true" reRender="formrecherche, panelEcarts"
+						styleClass="gm-btn-aspect" />
+				<h:commandButton id="rechercher" value="#{msg['gm.ec100.el013']}" action="#{ecartsbean.rechercher}" disabled="#{not ecartsbean.autoriseRechercher}"
+						styleClass="gm-btn-aspect" />
+			</h:panelGroup>
+		</rich:panel>
+	</h:form>
+</f:view>
+</jsp:root>

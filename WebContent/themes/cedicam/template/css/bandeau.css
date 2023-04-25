@@ -1,0 +1,24 @@
+#menuDeroulant { text-decoration: underline; width: 644px; list-style-type: none; margin: 0; padding: 0; border: 0; position: absolute; top: 0; left: 0;}
+#menuDeroulant li { float: left;  padding: 0; border: 0;}
+#menuDeroulant li a:link, #menuDeroulant li a:visited {
+	display: block;
+	height: 1%;
+	color: #FFF;
+	background: #3B4E77;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 5px;
+	margin-right: 5px;
+	border-right: 1px solid #fff;
+	text-decoration: none;}
+#menuDeroulant li a:hover { background-color: #F2462E; }
+#menuDeroulant li a:active { background-color: #148; }
+#menuDeroulant li:hover > .sousMenu { display: block; }
+#menuDeroulant .menuTxt {
+	text-decoration: underline;
+
+}
+.menuapplication {position: relative; margin-top: -15px; height: 25px;}
+
+.menu-selected {font-weight: bold;}
+.menu-not-selected {}

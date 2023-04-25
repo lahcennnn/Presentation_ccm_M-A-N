@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" style="height: 100%;">
+    <head>
+      <title>Vous avez &eacute;t&eacute; d&eacute;connect&eacute; de l'application Centre de Comptabilit&eacute; Mon&eacute;tique</title>
+      <script type="text/javascript">
+    	function closeMe() {
+    		try {
+    			// Si appel en mode POPUP : appel de la fonction principale de fermeture
+    			javascript:closeWindow();
+    		} catch (e) {
+    			try {
+    			window.open('','_parent','');
+    			window.close();
+				} catch (ee) {
+				// Sinon mode normal : on essaie de fermer la fenêtre
+    	  	      var browserName=navigator.appName;
+    	  	      if (browserName=="Microsoft Internet Explorer") {
+    	  	          // Internet Explorer
+    	        	  var obj_window = window.open('blank', '_self');
+    	  	          obj_window.opener = window;
+    	  	          obj_window.focus();
+    	  	          opener=self;
+    	  	          self.close(); 
+    	  	      }
+    	  	      else 
+    	  	      {
+    	  	          //les autres navigateurs
+    	  	      		setTimeout(function(){window.close();}, 1);
+    	  	      }
+    	  	      // fin mode normal
+    	  	      }
+			}
+  	}
+
+    	// fermeture automatique de la fenêtre
+      	closeMe();
+      </script>
+    </head>
+
+    <body>
+	<div class="decomsgbody">
+		<p>Vous avez &eacute;t&eacute; d&eacute;connect&eacute; de l'application Centre de Comptabilit&eacute; Mon&eacute;tique.<p/>
+		<br/><br/>
+		<p>Vous pouvez maintenant fermer votre navigateur en cliquant sur la croix en haut &agrave; droite.<p/>
+	</div>
+    </body>
+  </html>

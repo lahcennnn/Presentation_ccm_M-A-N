@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<!-- CH -->
+
+	<!-- BT -->
+
+	<bean id="dateWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.cedicam.gm.bt.core.webservice.DateWebService" />
+		<property name="wsdlDocumentUrl" value="${serveur.business.urlRootWebService}/services/dateWebService?wsdl" />
+		<property name="namespaceUri" value="http://webservice.core.bt.gm.cedicam.com/" />
+		<property name="serviceName" value="dateWebService" />
+		<property name="portName" value="dateWebServicePort" />
+	</bean>
+	
+	<bean id="codeDeviseWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.cedicam.gm.ri.core.webservice.CodeDeviseWebService" />
+		<property name="wsdlDocumentUrl" value="${serveur.business.urlRootWebService}/services/codeDeviseWebService?wsdl" />
+		<property name="namespaceUri" value="http://webservice.core.ri.gm.cedicam.com/" />
+		<property name="serviceName" value="codeDeviseWebService" />
+		<property name="portName" value="codeDeviseWebServicePort" />
+	</bean>
+
+	<bean id="parametreWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.cedicam.gm.bt.core.webservice.ParametreWebService" />
+		<property name="wsdlDocumentUrl" value="${serveur.business.urlRootWebService}/services/parametreWebService?wsdl" />
+		<property name="namespaceUri" value="http://webservice.core.bt.gm.cedicam.com/" />
+		<property name="serviceName" value="parametreWebService" />
+		<property name="portName" value="parametreWebServicePort" />
+	</bean>
+
+	<bean id="habilitationProfilFonctionWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.cedicam.gm.ch.core.webservice.HabilitationProfilFonctionWebService" />
+		<property name="wsdlDocumentUrl" value="${serveur.business.urlRootWebService}/services/habilitationProfilFonctionWebService?wsdl" />
+		<property name="namespaceUri" value="http://webservice.core.ch.gm.cedicam.com/" />
+		<property name="serviceName" value="habilitationProfilFonctionWebService" />
+		<property name="portName" value="habilitationProfilFonctionWebServicePort" />
+	</bean>
+
+	<bean id="entiteWebService"	class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.cedicam.gm.re.core.webservice.EntiteWebService" />
+		<property name="wsdlDocumentUrl" value="${serveur.business.urlRootWebService}/services/entiteWebService?wsdl" />
+		<property name="namespaceUri" value="http://webservice.core.re.gm.cedicam.com/" />
+		<property name="serviceName" value="entiteWebService" />
+		<property name="portName" value="entiteWebServicePort" />
+	</bean>
+
+	<bean id="rapprochementWebService"	class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.cedicam.gm.cm.core.webservice.RapprochementWebService" />
+		<property name="wsdlDocumentUrl" value="${serveur.business.urlRootWebService}/services/rapprochementWebService?wsdl" />
+		<property name="namespaceUri" value="http://webservice.core.cm.gm.cedicam.com/" />
+		<property name="serviceName" value="rapprochementWebService" />
+		<property name="portName" value="rapprochementWebServicePort" />
+	</bean>
+
+	<bean id="regroupementWebService"	class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.cedicam.gm.cm.core.webservice.RegroupementWebService" />
+		<property name="wsdlDocumentUrl" value="${serveur.business.urlRootWebService}/services/regroupementWebService?wsdl" />
+		<property name="namespaceUri" value="http://webservice.core.cm.gm.cedicam.com/" />
+		<property name="serviceName" value="regroupementWebService" />
+		<property name="portName" value="regroupementWebServicePort" />
+	</bean>
+</beans>

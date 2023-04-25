@@ -1,0 +1,79 @@
+@CHARSET "ISO-8859-15";
+/***************************************/
+/*** COMPOSANTS ADDITIONNELS jQUERY ****/
+/***************************************/
+
+/* Image affichant le calendrier */
+.rich-calendar-button {
+    margin-left: 5px;
+}
+
+/**************/
+/* Calendrier */
+/**************/
+
+#main .rich-panel table .rich-calendar-popup {
+  background-color: #fff;
+  border: 2px solid #2449aa;
+}
+#main .rich-panel table .rich-calendar-popup td{
+  padding: 2px 4px;
+}
+
+/* Header */
+#main .rich-panel table .rich-calendar-popup td.rich-calendar-header table td{
+  border:0 !important;
+}
+#main .rich-panel table .rich-calendar-popup td.rich-calendar-header table td.rich-calendar-month{
+  text-transform: capitalize;
+}
+#main .rich-panel table .rich-calendar-popup td.rich-calendar-header table td.rich-calendar-tool-close{
+  color: #f00;
+  font-weight: bold;
+  top: 5px;
+  right: 5px;
+}
+
+/* Body */
+#main .rich-panel table .rich-calendar-popup td.rich-calendar-week {
+  background-color: #9abeda;
+  color: #fff;
+  font-weight: bold;
+}
+#main .rich-panel table .rich-calendar-popup td.rich-calendar-holly {
+  background-color: #9abeda;
+  color: #fff;
+}
+#main .rich-panel table .rich-calendar-popup td.rich-calendar-today {
+  background-color: inherit;
+  color: inherit;
+  font-weight: normal;
+}
+#main .rich-panel table .rich-calendar-popup td.rich-calendar-select {
+  background-color: #2449aa;
+}
+#main .rich-panel table .rich-calendar-popup td.rich-calendar-days {
+  color: #fff;
+  font-weight: bold;
+}
+/** Ligne sélectionnée */
+#main .rich-panel table .rich-calendar-popup tr:hover{
+  background-color: #2449aa;
+  color: #fff;
+}
+#main .rich-panel table .rich-calendar-popup tr:hover td.rich-calendar-cell{
+  background-color: #2449aa;
+  color: #fff;
+}
+/** Ligne sélectionnée */
+#main .rich-panel table .rich-calendar-popup td:hover{
+  background-color: #2449aa;
+  color: #9abeda;
+  font-weight: bold;
+}
+
+/* Footer */
+#main .rich-panel table .rich-calendar-popup td.rich-calendar-footer table td{
+  border:0 !important;
+  color: #fff;
+}
